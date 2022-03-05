@@ -1,0 +1,31 @@
+.header-img{
+    background-image: url("../../../../../assets/common-img/carlos-muza-hpjSkU2UYSU-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content-img{
+      color: #ffffff;    
+      background-color: #1f3361cc;
+      width: 666px;
+      height: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      box-shadow: -123px 0 0 40px #ffffff3b;
+      h2{
+        font-size: 34px;
+        font-weight: bold;
+  
+        padding-bottom: 20px;
+      }
+      span{
+        padding: 0px 100px;
+        text-align: justify;
+      }
+    }
+  }
