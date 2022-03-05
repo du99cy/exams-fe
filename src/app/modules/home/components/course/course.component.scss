@@ -1,0 +1,47 @@
+.course-container{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap:10px;
+    padding-top: 10px;
+    .course-content{
+        display: flex;
+        flex-direction: column;
+        .course-name{
+            font-weight: bold;
+            font-size: 16px;
+            padding-top: 10px;
+            padding: 5px 0px;
+        }
+        .teacher-name{
+            font-weight: 300;
+            font-size: 14px;
+            padding: 5px 0px;
+        }
+        .star{
+            display: flex;
+            align-items: center;
+            padding: 5px 0px;
+            .star-number{
+                color: #b4690e;
+                padding-right: 5px;
+                font-size: 16px;
+            }
+            mat-icon{
+                color: #e59819;
+                height: 16px;
+                width: 16px;
+                font-size: 16px;
+            }
+            .rate{
+                padding-left: 5px;
+                font-size: 14px;
+                font-weight: 300;
+            }
+        }
+        .cost{
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px 0px;
+        }
+    }
+}
