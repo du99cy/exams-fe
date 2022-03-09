@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./course.component.scss']
 })
 export class CourseComponent implements OnInit {
-
+  like:boolean =true;
   constructor(private router: Router) {
-    
+
    }
 
   ngOnInit(): void {

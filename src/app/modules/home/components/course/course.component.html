@@ -16,30 +16,46 @@
     </div>
     <span class="cost">$84.99</span>
     <div class="course-box">
-        <div class="course-infor">
-            <span class="course-name">
-              Web Design for Beginners: Real World Coding in HTML & CSS 1</span
-            >
-            <span class="course-des"
-              >Master the foundations of digital drawing and illustration and create
-              art like a pro</span
-            >
-            <ul>
-              <li>Create any website layout you can imagine</li>
-              <li>
-                Support any device size with Responsive (mobile-friendly) Design
-              </li>
-              <li>Add tasteful animations and effects with CSS3</li>
-            </ul>
-            <button class="add-card">Thêm vào giỏ</button>
+      <div class="course-infor">
+        <span class="course-name">
+          Web Design for Beginners: Real World Coding in HTML & CSS 1</span
+        >
+        <span class="course-des"
+          >Master the foundations of digital drawing and illustration and create
+          art like a pro</span
+        >
+        <ul>
+          <li>Create any website layout you can imagine</li>
+          <li>
+            Support any device size with Responsive (mobile-friendly) Design
+          </li>
+          <li>Add tasteful animations and effects with CSS3</li>
+        </ul>
+        <div class="tool-btns">
+          <button mat-flat-button class="add-card" color="primary">
+            Thêm vào giỏ
+          </button>
+          <div class="favourite-btn">
+            <ng-template [ngIf]="like" [ngIfElse]="notLikeBtn">
+              <button mat-icon-button class="">
+                <mat-icon> favorite </mat-icon>
+              </button>
+            </ng-template>
+            <ng-template #notLikeBtn>
+              <button mat-icon-button class="">
+                <mat-icon> favorite_border </mat-icon>
+              </button>
+            </ng-template>
           </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="course-content">
     <img src="../../../../../assets/common-img/355212_948a_10 (1).jpg" alt="" />
     <span class="course-name"
-      >Web Design for Beginners: Real World Coding in HTML & CSS 2 </span
-    >
+      >Web Design for Beginners: Real World Coding in HTML & CSS 2
+    </span>
     <span class="teacher-name">Brad Schiff</span>
     <div class="star">
       <span class="star-number">5</span>
@@ -52,23 +68,25 @@
     </div>
     <span class="cost">$84.99</span>
     <div class="course-box">
-        <div class="course-infor">
-            <span class="course-name">
-              Web Design for Beginners: Real World Coding in HTML & CSS 2</span
-            >
-            <span class="course-des"
-              >Master the foundations of digital drawing and illustration and create
-              art like a pro</span
-            >
-            <ul>
-              <li>Create any website layout you can imagine</li>
-              <li>
-                Support any device size with Responsive (mobile-friendly) Design
-              </li>
-              <li>Add tasteful animations and effects with CSS3</li>
-            </ul>
-            <button class="add-card">Thêm vào giỏ</button>
-          </div>
+      <div class="course-infor">
+        <span class="course-name">
+          Web Design for Beginners: Real World Coding in HTML & CSS 2</span
+        >
+        <span class="course-des"
+          >Master the foundations of digital drawing and illustration and create
+          art like a pro</span
+        >
+        <ul>
+          <li>Create any website layout you can imagine</li>
+          <li>
+            Support any device size with Responsive (mobile-friendly) Design
+          </li>
+          <li>Add tasteful animations and effects with CSS3</li>
+        </ul>
+        <button mat-flat-button class="add-card" color="primary">
+          Thêm vào giỏ
+        </button>
+      </div>
     </div>
   </div>
   <div class="course-content">
@@ -88,23 +106,25 @@
     </div>
     <span class="cost">$84.99</span>
     <div class="course-box">
-        <div class="course-infor">
-            <span class="course-name">
-              Web Design for Beginners: Real World Coding in HTML & CSS 3</span
-            >
-            <span class="course-des"
-              >Master the foundations of digital drawing and illustration and create
-              art like a pro</span
-            >
-            <ul>
-              <li>Create any website layout you can imagine</li>
-              <li>
-                Support any device size with Responsive (mobile-friendly) Design
-              </li>
-              <li>Add tasteful animations and effects with CSS3</li>
-            </ul>
-            <button class="add-card">Thêm vào giỏ</button>
-          </div>
+      <div class="course-infor">
+        <span class="course-name">
+          Web Design for Beginners: Real World Coding in HTML & CSS 3</span
+        >
+        <span class="course-des"
+          >Master the foundations of digital drawing and illustration and create
+          art like a pro</span
+        >
+        <ul>
+          <li>Create any website layout you can imagine</li>
+          <li>
+            Support any device size with Responsive (mobile-friendly) Design
+          </li>
+          <li>Add tasteful animations and effects with CSS3</li>
+        </ul>
+        <button mat-flat-button class="add-card" color="primary">
+          Thêm vào giỏ
+        </button>
+      </div>
     </div>
   </div>
   <div class="course-content">
@@ -124,24 +144,25 @@
     </div>
     <span class="cost">$84.99</span>
     <div class="course-box">
-        <div class="course-infor">
-            <span class="course-name">
-              Web Design for Beginners: Real World Coding in HTML & CSS 4</span
-            >
-            <span class="course-des"
-              >Master the foundations of digital drawing and illustration and create
-              art like a pro</span
-            >
-            <ul>
-              <li>Create any website layout you can imagine</li>
-              <li>
-                Support any device size with Responsive (mobile-friendly) Design
-              </li>
-              <li>Add tasteful animations and effects with CSS3</li>
-            </ul>
-            <button class="add-card">Thêm vào giỏ</button>
-          </div>
+      <div class="course-infor">
+        <span class="course-name">
+          Web Design for Beginners: Real World Coding in HTML & CSS 4</span
+        >
+        <span class="course-des"
+          >Master the foundations of digital drawing and illustration and create
+          art like a pro</span
+        >
+        <ul>
+          <li>Create any website layout you can imagine</li>
+          <li>
+            Support any device size with Responsive (mobile-friendly) Design
+          </li>
+          <li>Add tasteful animations and effects with CSS3</li>
+        </ul>
+        <button mat-flat-button class="add-card" color="primary">
+          Thêm vào giỏ
+        </button>
+      </div>
     </div>
   </div>
-  
 </div>
