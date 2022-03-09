@@ -1,0 +1,94 @@
+.course-title {
+  background-color: #1c1d1f;
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+    h1 {
+      color: #ffffff;
+      font-size: 32px;
+      font-weight: bold;
+    }
+    span {
+      color: #ffffff;
+      font-size: 19px;
+      padding: 5px 0px;
+    }
+    .teacher-name {
+      font-weight: 300;
+      font-size: 14px;
+    }
+    .star {
+      display: flex;
+      align-items: center;
+      padding: 5px 0px;
+      .star-number {
+        color: #b4690e;
+        padding-right: 5px;
+        font-size: 16px;
+      }
+      mat-icon {
+        color: #e59819;
+        height: 16px;
+        width: 16px;
+        font-size: 16px;
+      }
+      .rate {
+        padding-left: 5px;
+        font-size: 14px;
+        font-weight: 300;
+      }
+    }
+    .cost {
+      font-size: 16px;
+      font-weight: bold;
+      padding: 5px 0px;
+    }
+  }
+}
+.will-learn{
+    border: 1px solid #d1d7dc;
+    padding: 30px;
+    h2{
+        font-weight: bold;
+        font-size: 24px;
+    }
+    .course-result{
+        display: grid;
+        grid-template-columns: auto auto;
+        span{
+            display: flex;
+            align-items: center;
+            padding: 20px 0px;
+            mat-icon{
+                font-size: 16px;
+            }
+        }
+    }
+}
+.description{
+    border: 1px solid #d1d7dc;
+    margin-top: 40px;
+    padding: 30px;
+    h2{
+        font-weight: bold;
+        font-size: 24px;
+    }
+    p{
+        font-size: 14px;
+        text-align: justify;
+    }
+}
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  .course-content{
+    border: 1px solid #d1d7dc;
+    margin-top: 40px;
+    padding: 30px;
+    margin-bottom: 40px;
+    h2{
+        font-weight: bold;
+        font-size: 24px;
+    }
+  }
