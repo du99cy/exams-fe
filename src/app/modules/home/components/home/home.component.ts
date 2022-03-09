@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { content } from '@modules/home/models/content';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  data : any=[];
+  constructor() {
+    this.data= content
+    console.log(this.data)
+   }
 
   ngOnInit(): void {
+    this.data= content
   }
 
 }

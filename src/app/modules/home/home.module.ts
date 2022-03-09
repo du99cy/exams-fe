@@ -4,9 +4,11 @@ import { ListCoursesComponent } from './components/list-courses/list-courses.com
 import { HomeComponent } from './components/home/home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import {MatIconModule} from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  imports: [ HomeRoutingModule ,MatIconModule ],
+  imports: [ HomeRoutingModule ,MatIconModule,FormsModule,CommonModule],
   declarations: [  
     CourseComponent, ListCoursesComponent, HomeComponent
   ],
