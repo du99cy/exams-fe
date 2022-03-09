@@ -1,0 +1,11 @@
+.app_layout_wrapper
+{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  app-footer{
+    margin-top:auto;
+  }
+}
+
