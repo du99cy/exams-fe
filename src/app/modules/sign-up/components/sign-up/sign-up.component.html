@@ -1,0 +1,129 @@
+<div class="signup_page_wrapper">
+  <div class="signup-wrapper">
+    <div class="signup-header">Đăng kí và bắt đầu học thôi nào !!!</div>
+
+    <div class="signup-content">
+      <form>
+        <div fxFlex>
+          <!-- fullname Form control -->
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Fullname</mat-label>
+
+            <input matInput placeholder="Fullname" />
+          </mat-form-field>
+          <!-- Email form control -->
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Email</mat-label>
+
+            <input matInput placeholder="Email" />
+          </mat-form-field>
+          <!-- password form control -->
+          <mat-slide-toggle #toggle>Hiển thị chi tiết quy tắc đặt Password</mat-slide-toggle>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Password</mat-label>
+            <mat-pass-toggle-visibility
+              #toggleVisibilityPassword
+              matSuffix
+            ></mat-pass-toggle-visibility>
+            <input
+              matInput
+              #passwordWithValidation
+              required
+              placeholder="Password"
+              [type]="toggleVisibilityPassword.type"
+            />
+            <mat-hint align="end" aria-live="polite">
+              {{ passwordWithValidation.value.length }} / 25
+            </mat-hint>
+            <mat-error
+              *ngIf="
+                passwordComponentWithValidation.passwordFormControl.hasError(
+                  'required'
+                )
+              "
+            >
+              Password is required
+            </mat-error>
+            <mat-error
+              *ngIf="
+                passwordComponentWithValidation.passwordFormControl.hasError(
+                  'pattern'
+                )
+              "
+            >
+              Password is not valid
+            </mat-error>
+          </mat-form-field>
+          <mat-password-strength
+            class="green"
+            #passwordComponentWithValidation
+            [password]="passwordWithValidation.value"
+          >
+          </mat-password-strength>
+          <!--Password's strength info-->
+          <mat-password-strength-info
+            *ngIf="this.toggle.checked"
+            [passwordComponent]="passwordComponentWithValidation"
+            lowerCaseCriteriaMsg="Chứa ít nhất 1 kí tự thường"
+            upperCaseCriteriaMsg="Chứa ít nhất 1 kí tự viết hoa"
+            digitsCriteriaMsg="Chứa ít nhất 1 kí tự chữ số"
+            specialCharsCriteriaMsg="Chứa ít nhất 1 kí tự đặc biệt"
+            minCharsCriteriaMsg="Chiều dài nhỏ nhất là 8 kí tự"
+          >
+          </mat-password-strength-info>
+          <!-- confirm password form control -->
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Confirm Password</mat-label>
+            <mat-pass-toggle-visibility
+              #toggleVisibilityConfirmPassword
+              matSuffix
+            ></mat-pass-toggle-visibility>
+            <input
+              matInput
+              #passwordWithValidation
+              required
+              placeholder="Password"
+              [type]="toggleVisibilityConfirmPassword.type"
+            />
+            <mat-hint align="end" aria-live="polite">
+              {{ passwordWithValidation.value.length }} / 25
+            </mat-hint>
+            <mat-error
+              *ngIf="
+                passwordComponentWithValidation.passwordFormControl.hasError(
+                  'required'
+                )
+              "
+            >
+              Password is required
+            </mat-error>
+            <mat-error
+              *ngIf="
+                passwordComponentWithValidation.passwordFormControl.hasError(
+                  'pattern'
+                )
+              "
+            >
+              Password is not valid
+            </mat-error>
+          </mat-form-field>
+          <ng-template [ngIf]="!loading" [ngIfElse]="loadingBtn">
+            <button mat-flat-button color="primary" (click)="signUp()">
+              Đăng kí
+            </button>
+          </ng-template>
+          <ng-template #loadingBtn>
+            <button class="loading" mat-stroked-button >Loading ...</button>
+          </ng-template>
+        </div>
+      </form>
+
+      <div class="login">
+        <span>
+          Nếu bạn đã có tài khoản ?
+          <a routerLink="/login"> Hãy đăng nhập</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
