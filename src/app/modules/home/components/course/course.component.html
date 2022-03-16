@@ -35,14 +35,14 @@
           <button mat-flat-button class="add-card" color="primary">
             Thêm vào giỏ
           </button>
-          <div class="favourite-btn">
+          <div class="favorite-btn">
             <ng-template [ngIf]="like" [ngIfElse]="notLikeBtn">
-              <button mat-icon-button class="">
+              <button mat-icon-button class="favorite">
                 <mat-icon> favorite </mat-icon>
               </button>
             </ng-template>
             <ng-template #notLikeBtn>
-              <button mat-icon-button class="">
+              <button mat-icon-button class="favorite">
                 <mat-icon> favorite_border </mat-icon>
               </button>
             </ng-template>
