@@ -53,6 +53,28 @@
           text-decoration: none;
         }
       }
+
+      .error,.send_email_success
+      {
+        width: 100%;
+
+
+        border-color: transparent;
+        color: #000;
+        margin: 8px 0;
+        text-align: center;
+      }
+      .error
+      {
+        height: 50px;
+        line-height: 50px;
+        background-color: #fcaea0;
+      }
+      .send_email_success
+      {
+        background-color: greenyellow;
+        padding: 20px;
+      }
     }
   }
 }

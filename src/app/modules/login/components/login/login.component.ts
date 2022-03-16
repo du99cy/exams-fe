@@ -20,11 +20,11 @@ export class LoginComponent implements OnInit {
     title: string;
   }> = [
     {
-      icon_path: '../../../../../assets/common-img/facebook-icon.jpg',
+      icon_path: 'assets/common-img/facebook-icon.jpg',
       title: 'Đăng nhập với tài khoản Facebook',
     },
     {
-      icon_path: '../../../../../assets/common-img/google-icon.png',
+      icon_path: 'assets/common-img/google-icon.png',
       title: 'Đăng nhập với tài khoản Google',
     },
   ];

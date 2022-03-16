@@ -3,22 +3,38 @@
     <div class="signup-header">Đăng kí và bắt đầu học thôi nào !!!</div>
 
     <div class="signup-content">
-      <form>
+      <form [formGroup]="signUpFormGroup">
         <div fxFlex>
-          <!-- fullname Form control -->
+          <!-- first name Form control -->
           <mat-form-field appearance="outline" style="width: 100%">
-            <mat-label>Fullname</mat-label>
+            <mat-label>First Name</mat-label>
 
-            <input matInput placeholder="Fullname" />
+            <input
+              matInput
+              placeholder="First Name"
+              formControlName="firstName"
+            />
+          </mat-form-field>
+          <!-- last name Form control -->
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Last Name</mat-label>
+
+            <input
+              matInput
+              placeholder="Last Name"
+              formControlName="lastName"
+            />
           </mat-form-field>
           <!-- Email form control -->
           <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Email</mat-label>
 
-            <input matInput placeholder="Email" />
+            <input matInput placeholder="Email" formControlName="email" />
           </mat-form-field>
           <!-- password form control -->
-          <mat-slide-toggle #toggle>Hiển thị chi tiết quy tắc đặt Password</mat-slide-toggle>
+          <mat-slide-toggle #toggle
+            >Hiển thị chi tiết quy tắc đặt Password</mat-slide-toggle
+          >
           <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Password</mat-label>
             <mat-pass-toggle-visibility
@@ -28,31 +44,27 @@
             <input
               matInput
               #passwordWithValidation
-              required
               placeholder="Password"
               [type]="toggleVisibilityPassword.type"
+              formControlName="password"
             />
             <mat-hint align="end" aria-live="polite">
               {{ passwordWithValidation.value.length }} / 25
             </mat-hint>
-            <mat-error
+            <!-- <mat-error
               *ngIf="
-                passwordComponentWithValidation.passwordFormControl.hasError(
-                  'required'
-                )
+                isError('password','required')
               "
             >
-              Password is required
-            </mat-error>
-            <mat-error
+              {{ValidationsMessages['password'].required}}
+            </mat-error> -->
+            <!-- <mat-error
               *ngIf="
-                passwordComponentWithValidation.passwordFormControl.hasError(
-                  'pattern'
-                )
+                isError('password','pattern')
               "
             >
-              Password is not valid
-            </mat-error>
+            {{ValidationsMessages['password'].invalid}}
+            </mat-error> -->
           </mat-form-field>
           <mat-password-strength
             class="green"
@@ -81,39 +93,35 @@
             <input
               matInput
               #passwordWithValidation
-              required
-              placeholder="Password"
+              placeholder="Confirm Password"
               [type]="toggleVisibilityConfirmPassword.type"
+              formControlName="confirmPassword"
             />
             <mat-hint align="end" aria-live="polite">
               {{ passwordWithValidation.value.length }} / 25
             </mat-hint>
-            <mat-error
-              *ngIf="
-                passwordComponentWithValidation.passwordFormControl.hasError(
-                  'required'
-                )
-              "
-            >
-              Password is required
-            </mat-error>
-            <mat-error
-              *ngIf="
-                passwordComponentWithValidation.passwordFormControl.hasError(
-                  'pattern'
-                )
-              "
-            >
-              Password is not valid
-            </mat-error>
+            <!-- <mat-error *ngIf='isError("confirmPassword","mismatch")'></mat-error> -->
           </mat-form-field>
+
           <ng-template [ngIf]="!loading" [ngIfElse]="loadingBtn">
-            <button mat-flat-button color="primary" (click)="signUp()">
+            <div *ngIf="is_error" class="error">{{ error_message }}</div>
+
+            <button
+              [disabled]="signUpFormGroup.invalid"
+              mat-flat-button
+              color="primary"
+              (click)="signUp()"
+            >
               Đăng kí
             </button>
+
+            <div *ngIf="email_is_sent" class="send_email_success">
+              Hệ thống đã gửi email đến bạn . Vui lòng vào email để kích hoạt
+              tài khoản .
+            </div>
           </ng-template>
           <ng-template #loadingBtn>
-            <button class="loading" mat-stroked-button >Loading ...</button>
+            <button class="loading" mat-stroked-button>Loading ...</button>
           </ng-template>
         </div>
       </form>
