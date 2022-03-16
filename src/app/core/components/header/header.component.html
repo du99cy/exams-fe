@@ -1,71 +1,163 @@
-
 <div class="header-my-layout">
-    <a routerLink="/">
-      <img
-        src="../../../assets/common-img/logo.png"
-        alt="logo"
-        class="img-response"
-        height="66px"
-      />
-    </a>
-    <div class="search">
-      <div class="search-icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-search"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-          />
-        </svg>
-      </div>
-      <div>
-        <input placeholder="Tìm kiếm ... " type="text" />
-      </div>
-    </div>
-    <div>
-      <a class="a-blue" href="" style="font-weight: bolder; text-decoration: none"
-        >Hệ thống kiểm tra đánh giá AI</a
-      >
-    </div>
-    <mat-icon style="color:#0d4579 ;" matBadge="8" matBadgePosition="after" matBadgeColor="warn">shopping_cart</mat-icon>
-    <div>
-      <a
-      routerLink="/login"
-        role="button"
-        class="btn btn-log-in"
-        style="color: #fff; background-color: #0d4579"
-
-      >
-        Đăng Nhập
-    </a>
-    </div>
-    
-  </div>
-  <ng-template #icon let-height="height">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="30"
-      height="22"
-      fill="currentColor"
-      class="bi bi-person-fill"
-      viewBox="0 0 16 16"
-    >
-      <path
-        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
-      />
-    </svg>
-  </ng-template>
-  <ng-template #img let-user="user" let-height="height">
+  <a routerLink="/">
     <img
-      height="{{ height }}"
-      style="border-radius: 50%"
-      [src]="user.picture.data.url"
-      alt=""
+      src="../../../assets/common-img/logo.png"
+      alt="logo"
+      class="img-response"
+      height="66px"
     />
-  </ng-template>
-
+  </a>
+  <div class="category">
+    <a class="a-blue" href="" style="font-weight: bolder; text-decoration: none"
+      >Thể loại</a
+    >
+    <div class="category-box">
+      <ul>
+        <li>
+          AI cơ bản
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </li>
+        <li>
+          AI cơ bản
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </li>
+        <li>
+          AI cơ bản
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </li>
+        <li>
+          AI cơ bản
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="search">
+    <div class="search-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-search"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+        />
+      </svg>
+    </div>
+    <div>
+      <input placeholder="Tìm kiếm ... " type="text" />
+    </div>
+  </div>
+  <!-- <div>
+    <a class="a-blue" href="" style="font-weight: bolder; text-decoration: none"
+      >Hệ thống kiểm tra đánh giá AI</a
+    >
+  </div> -->
+  <div>
+    <a class="a-blue" href="" style="font-weight: bolder; text-decoration: none"
+      >Tạo khóa học</a
+    >
+  </div>
+  <div class="category">
+    <a class="a-blue" href="" style="font-weight: bolder; text-decoration: none"
+      >Khóa học của tôi</a
+    >
+    <div class="category-box">
+    </div>
+  </div>
+  <div class="category">
+    <mat-icon style="color: #0d4579 ; cursor: pointer;">favorite_border</mat-icon>
+    <div class="category-box">
+      <div class="shoping">
+        <div class="shopping-cart">
+          <img class="img-response" src="../../../../assets/common-img/355212_948a_10 (1).jpg" alt="">
+          <div class="shoping-cart-content">
+            <span class="name">Web Design for Beginners: Real World Coding in HTML & CSS 1</span>
+            <span class="author">Brad Schiff</span>
+            <span class="cost">$84.99</span>
+          </div>
+        </div>
+        <div>
+          <a
+            routerLink="/login"
+            role="button"
+            class="btn"
+            style="color: #0d4579; background-color: #fff; border: 1px solid #0d4579; width: 100%; margin: 10px 0px;"
+          >
+            Đăng kí
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="category">
+    <mat-icon
+      style="color: #0d4579;cursor: pointer;"
+      matBadge="8"
+      matBadgePosition="after"
+      matBadgeColor="warn"
+      >shopping_cart</mat-icon
+    >
+    <div class="category-box">
+      <div class="shoping">
+        <div class="shopping-cart">
+          <img class="img-response" src="../../../../assets/common-img/355212_948a_10 (1).jpg" alt="">
+          <div class="shoping-cart-content">
+            <span class="name">Web Design for Beginners: Real World Coding in HTML & CSS 1</span>
+            <span class="author">Brad Schiff</span>
+            <span class="cost">$84.99</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="category">
+    <mat-icon style="color: #0d4579;cursor: pointer;">notifications</mat-icon>
+    <div class="category-box"></div>
+  </div>
+  <div>
+    <a
+      routerLink="/login"
+      role="button"
+      class="btn btn-log-in"
+      style="color: #0d4579; background-color: #fff; border: 1px solid #0d4579"
+    >
+      Đăng kí
+    </a>
+  </div>
+  <div>
+    <a
+      routerLink="/login"
+      role="button"
+      class="btn btn-log-in"
+      style="color: #fff; background-color: #0d4579"
+    >
+      Đăng Nhập
+    </a>
+  </div>
+</div>
+<ng-template #icon let-height="height">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="30"
+    height="22"
+    fill="currentColor"
+    class="bi bi-person-fill"
+    viewBox="0 0 16 16"
+  >
+    <path
+      d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+    />
+  </svg>
+</ng-template>
+<ng-template #img let-user="user" let-height="height">
+  <img
+    height="{{ height }}"
+    style="border-radius: 50%"
+    [src]="user.picture.data.url"
+    alt=""
+  />
+</ng-template>
