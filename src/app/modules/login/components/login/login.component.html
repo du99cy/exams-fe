@@ -15,14 +15,14 @@
           tạo tài khoản mới .
         </div>
       </ng-template>
-      <form action="">
+      <form action="" [formGroup]="loginForm">
         <div class="form-container">
           <div class="form-input-wrapper">
             <div class="icon">
               <i class="fa fa-envelope-o" aria-hidden="true"></i>
             </div>
             <span>
-              <input type="email" placeholder="Email" />
+              <input type="email" placeholder="Email"  formControlName='username'/>
             </span>
           </div>
 
@@ -31,7 +31,7 @@
               <i class="fa fa-lock" aria-hidden="true"></i>
             </div>
             <span>
-              <input type="password" />
+              <input type="password" formControlName='password'/>
             </span>
           </div>
 
@@ -45,7 +45,7 @@
       </form>
 
       <div class="forgot-password">
-        <a href="#">Quên mật khẩu</a>
+        <a routerLink="#" (click)="forgotPassword()">Quên mật khẩu</a>
       </div>
 
       <div class="sign-up">

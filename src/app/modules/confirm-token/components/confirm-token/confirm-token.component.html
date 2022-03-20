@@ -1,0 +1,15 @@
+<div class="confirm-token-wrappper">
+  <h3>{{ message }}</h3>
+
+  <div class="action">
+    <ng-template [ngIf]="is_success" [ngIfElse]="error_temp">
+      Quay lại để đăng nhập vào hệ thống
+
+      <a routerLink="/login">Đăng nhập</a>
+    </ng-template>
+    <ng-template #error_temp>
+      <a routerLink="/sign-up">Đăng kí lại</a>
+
+    </ng-template>
+  </div>
+</div>
