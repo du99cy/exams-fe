@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CourseService } from '@modules/home/services/course.service';
 
 @Component({
   selector: 'app-course',
@@ -8,13 +9,19 @@ import { Router } from '@angular/router';
 })
 export class CourseComponent implements OnInit {
   like:boolean =false;
-  constructor(private router: Router) {
+  dataSource:any
+
+  constructor(private router: Router, private courseService: CourseService ) {
 
    }
 
   ngOnInit(): void {
+    this.courseService.getClassList().subscribe((data)=> {
+      this.dataSource= data
+      console.log(this.dataSource)
+    })
   }
-  goToDetail() {
-    this.router.navigateByUrl(`/course-detail`)
+  goToDetail(id_mon_hoc:string) {
+    this.router.navigateByUrl(`/course-detail?id_mon_hoc=${id_mon_hoc}`)
   }
 }

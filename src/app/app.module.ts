@@ -23,9 +23,6 @@ import { BrowserModule } from '@angular/platform-browser';
     MatBadgeModule,
 
   ],
-  providers: [
-
-  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
