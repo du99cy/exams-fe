@@ -1,29 +1,35 @@
-<div class="container">
+<div>
   <div class="header-img">
     <div class="content-img">
       <h2>CHƯƠNG TRÌNH ĐÀO TẠO</h2>
       <span>
         Chúng tôi gồm các nhà nghiên cứu, giảng viên, chuyên gia ngành, doanh
         nghiệp kết hợp lại nhằm tạo dựng môi trường học tập và ứng dụng Trí tuệ
-        nhân tạo để cùng sáng tạo và đổi mới. Chúng tôi xây dựng các khóa học, tư
-        vấn giải pháp công nghệ, trực tiếp phát triển các sản phẩm AI và đưa vào
-        áp dụng triển khai thực tế.
+        nhân tạo để cùng sáng tạo và đổi mới. Chúng tôi xây dựng các khóa học,
+        tư vấn giải pháp công nghệ, trực tiếp phát triển các sản phẩm AI và đưa
+        vào áp dụng triển khai thực tế.
       </span>
     </div>
   </div>
-  <app-list-courses></app-list-courses>
-  <div *ngFor="let item of data" class="training-course">
-    <div class="training-content">
-      <div class="name-img">
-        <img [src]="'../../../../../assets/common-img/' + item.logo" alt="" />
-        <h1>{{ item.name }}</h1>
+  <div class="container">
+    <app-list-courses></app-list-courses>
+    <div *ngFor="let item of data" class="training-course">
+      <div class="training-content">
+        <div class="name-img">
+          <img [src]="'../../../../../assets/common-img/' + item.logo" alt="" />
+          <h1>{{ item.name }}</h1>
+        </div>
+        <div class="text">
+          <span *ngFor="let text of item.description">
+            {{ text }}
+          </span>
+        </div>
       </div>
-      <div class="text">
-        <span *ngFor="let text of item.description">
-          {{ text }}
-        </span>
-      </div>
+      <img
+        [src]="'../../../../../assets/common-img/' + item.img"
+        alt=""
+        class="img"
+      />
     </div>
-    <img [src]="'../../../../../assets/common-img/' + item.img" alt=""  class="img"/>
   </div>
 </div>

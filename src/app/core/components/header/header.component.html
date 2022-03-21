@@ -110,53 +110,61 @@
     <mat-icon style="color: #0d4579; cursor: pointer">notifications</mat-icon>
     <div class="category-box"></div>
   </div>
-  <div class="category">
-    <img
-      src="../../../../assets/common-img/355212_948a_10 (1).jpg"
-      alt=""
-      class="user-img"
-    />
-    <div class="category-box">
-      <div class="infor-user">
-        <div class="user-infor">
-          <img
-            src="../../../../assets/common-img/355212_948a_10 (1).jpg"
-            alt=""
-            class="user-img-box"
-          />
-          <div class="name">
-            <span class="full-name">Hà Quang Huy</span>
-            <span class="email">haquanghuy13@gmail</span>
+  <ng-template [ngIf]="this.userData" [ngIfElse]="login_signup_temp">
+    <div class="category">
+      <img
+        src="../../../../assets/common-img/355212_948a_10 (1).jpg"
+        alt=""
+        class="user-img"
+      />
+      <div class="category-box">
+        <div class="infor-user">
+          <div class="user-infor">
+            <img
+              src="../../../../assets/common-img/355212_948a_10 (1).jpg"
+              alt=""
+              class="user-img-box"
+            />
+            <div class="name">
+              <span class="full-name">Hà Quang Huy</span>
+              <span class="email">haquanghuy13@gmail</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="tools">
-        <span>Khóa học của tôi</span>
-        <span>Giỏ hàng</span>
-        <span>Cài đặt</span>
+        <div class="tools">
+          <span>Khóa học của tôi</span>
+          <span>Giỏ hàng</span>
+          <span>Cài đặt</span>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- <div>
-    <a
-      routerLink="/sign-up"
-      role="button"
-      class="btn btn-log-in"
-      style="color: #0d4579; background-color: #fff; border: 1px solid #0d4579"
-    >
-      Đăng kí
-    </a>
-  </div>
-  <div>
-    <a
-      routerLink="/login"
-      role="button"
-      class="btn btn-log-in"
-      style="color: #fff; background-color: #0d4579"
-    >
-      Đăng Nhập
-    </a>
-  </div> -->
+  </ng-template>
+  <ng-template #login_signup_temp>
+    <div>
+      <a
+        routerLink="/sign-up"
+        role="button"
+        class="btn btn-log-in"
+        style="
+          color: #0d4579;
+          background-color: #fff;
+          border: 1px solid #0d4579;
+        "
+      >
+        Đăng kí
+      </a>
+    </div>
+    <div>
+      <a
+        routerLink="/login"
+        role="button"
+        class="btn btn-log-in"
+        style="color: #fff; background-color: #0d4579"
+      >
+        Đăng Nhập
+      </a>
+    </div>
+  </ng-template>
 </div>
 <ng-template #icon let-height="height">
   <svg
