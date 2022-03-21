@@ -34,11 +34,11 @@ import { BrowserModule } from '@angular/platform-browser';
     //   multi: true,
     //   deps: [],
     // },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiPrefixInterceptor,
-      multi: true
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ApiPrefixInterceptor,
+    //   multi: true
+    // },
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: JwtInterceptor,

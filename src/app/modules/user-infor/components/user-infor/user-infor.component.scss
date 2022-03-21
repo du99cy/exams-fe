@@ -1,0 +1,34 @@
+h1{
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 100px;
+    font-family: SuisseWorks,Georgia,Times,times new roman,serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+}
+.user-infor{
+    .infor{
+        display: flex;
+        flex-direction: column;
+        span{
+            font-weight: bold;
+            padding: 10px 0px;
+        }
+        input{
+            outline: none;
+            padding: 10px;
+        }
+        .password{
+            display: flex;
+            input{
+                flex: 1;
+            }
+            button{
+                margin-left: 10px;
+            }
+        }
+    }
+    .btn{
+        display: flex;
+        justify-content: center;
+        margin: 30px;
+    }
+}

@@ -10,8 +10,15 @@ const routes: Routes = [
   {
     path: 'course-detail',
     loadChildren: () =>
-      import('../../src/app/modules/course-detail/course-detail.module').then(
+      import('@modules/course-detail/course-detail.module').then(
         (m) => m.CourseDetailModule
+      ),
+  },
+  {
+    path: 'user-infor',
+    loadChildren: () =>
+      import('@modules/user-infor/user-infor.module').then(
+        (m) => m.UserInforModule
       ),
   },
   {
