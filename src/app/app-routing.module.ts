@@ -31,6 +31,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('@modules/sign-up/sign-up.module').then((m) => m.signUpModule),
   },
+  {
+    path: 'confirm-token',
+    loadChildren: () =>
+      import('@modules/confirm-token/confirm-token.module').then((m) => m.ConfirmTokenModule),
+  }
 ];
 
 @NgModule({

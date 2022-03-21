@@ -1,61 +1,24 @@
+import { Router } from '@angular/router';
+import { AuthService } from '@core/authentication/auth.service';
 
+export function appInitializer(authService: AuthService, router: Router) {
+  //get access token from localStorage
+  let accessToken = authService.getAccesTokenFromLocalStorage();
 
+  //if not null get refresh token and get user infor
 
-export function appInitializer() {
-
-
-    return () => new Promise((resolve) => {
-        // wait for facebook sdk to initialize before starting the angular app
-        // window['fbAsyncInit'] = function () {
-        //     FB.init({
-        //         appId: environment.facebookAppId,
-        //         cookie: true,
-        //         xfbml: true,
-        //         version: 'v12.0'
-        //     });
-
-
-        //     //auto authenticate with the api if already logged in with facebook
-        //     FB.getLoginStatus((response) => {
-
-        //         if (response.status == 'connected') {
-
-        //             authenticationService.apiAuthenticate(response.authResponse.accessToken)
-        //                 .subscribe()
-        //                 .add(resolve);
-        //         } else {
-        //             //     // attempt to refresh token on app start up to auto authenticate
-        //             var current_user_data = JSON.parse(localStorage.getItem(MOODLE_CURRENT_USE)!)
-        //             authenticationService.setUser(current_user_data)
-
-        //             authenticationService.refreshToken()
-        //                 .subscribe()
-        //                 .add(resolve);
-        //         }
-        //         resolve('')
-        //     });
-
-
-
-
-
-
-
-        // };
-
-        // load facebook sdk script
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            (js as any).src = "https://connect.facebook.net/en_US/sdk.js";
-            (fjs as any).parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+  return () =>
+    new Promise((resolve: any) => {
+      if (accessToken) {
+        //get new token
+        authService
+          .refreshToken()
+          .subscribe((res) => {
+            //get user information
+            authService.userInfor().subscribe();
+          })
+          .add(resolve);
+      }
+      resolve();
     });
-    // return () => new Promise(resolve => {
-    //     // attempt to refresh token on app start up to auto authenticate
-    //     authenticationService.refreshToken()
-    //         .subscribe()
-    //         .add(resolve);
-    // });
 }

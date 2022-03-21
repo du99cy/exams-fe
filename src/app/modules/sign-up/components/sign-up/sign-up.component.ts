@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {
@@ -96,9 +97,13 @@ export class SignUpComponent implements OnInit {
       let userDataModel = this.parseUserData(this.singUpFormValue)
       //send user data
 
-      this.singUpService.signUp(userDataModel).subscribe(data=>{
-        this.email_is_sent  = true;
+      this.singUpService.signUp(userDataModel).subscribe(res=>{
+
+        this.email_is_sent  = res.status_code == 200 ? true : false;
         this.loading = false;
+      },
+      (err:HttpErrorResponse)=>{
+
       })
     }
 
