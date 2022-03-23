@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit,OnDestroy {
 
-  userData!:User | null
+  userData:any
   userSubs = new Subscription();
   constructor(private authService: AuthService) { }
 
@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
 
   getUserData(){
-    let userSub = this.authService.UserObservable.subscribe((res:User)=>{
+    let userSub = this.authService.UserObservable.subscribe((res:any)=>{
       this.userData = res
 
     })

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { InjectionToken } from '@angular/core';\nexport const APP_CONFIG = new InjectionToken('APP_CONFIG_PARAMS');","map":null,"metadata":{},"sourceType":"module"}

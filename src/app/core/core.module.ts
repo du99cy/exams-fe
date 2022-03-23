@@ -6,7 +6,7 @@ import {
   Optional,
   SkipSelf,
 } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { AuthService } from './authentication/auth.service';
 import { AppConfig, APP_CONFIG } from './config';
 import { AuthGuard } from './guards/auth.guard';
@@ -21,7 +21,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
       multi: true,
-      deps: [AuthService,Router],
+      deps: [AuthService],
     },
     {
       provide: HTTP_INTERCEPTORS,

@@ -35,6 +35,11 @@ const routes: Routes = [
     path: 'confirm-token',
     loadChildren: () =>
       import('@modules/confirm-token/confirm-token.module').then((m) => m.ConfirmTokenModule),
+  },
+  {
+    path: 'test',
+    loadChildren: () =>
+      import('@modules/test/test.module').then((m) => m.TestModule),
   }
 ];
 
