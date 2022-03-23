@@ -34,6 +34,26 @@ const routes: Routes = [
   {
     path: 'confirm-token',
     loadChildren: () =>
+
+      import('@modules/confirm-token/confirm-token.module').then(
+        (m) => m.ConfirmTokenModule
+      ),
+  },
+  {
+    path: 'instructor',
+    loadChildren: () =>
+      import('@modules/create-course/create-course.module').then(
+        (m) => m.CreateCourseModule
+      ),
+  },
+  {
+    path: 'manage',
+    loadChildren: () =>
+      import('@modules/course-manage/course-manage.module').then(
+        (m) => m.CourseManageModule
+      ),
+  },
+
       import('@modules/confirm-token/confirm-token.module').then((m) => m.ConfirmTokenModule),
   },
   {
@@ -41,6 +61,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('@modules/test/test.module').then((m) => m.TestModule),
   }
+
 ];
 
 @NgModule({
