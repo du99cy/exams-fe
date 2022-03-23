@@ -54,8 +54,6 @@ const routes: Routes = [
       ),
   },
 
-      import('@modules/confirm-token/confirm-token.module').then((m) => m.ConfirmTokenModule),
-  },
   {
     path: 'test',
     loadChildren: () =>

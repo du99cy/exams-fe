@@ -70,11 +70,20 @@ export class AuthService implements OnDestroy {
   }
 
   logout() {
+
+    //if facebook account
+    if(this.User.account_type == 'facebook'){
+
+      this.logoutFBAccount()
+    }
+
     this.User = null;
 
     this.stopRefreshTokenTimer();
 
     localStorage.removeItem(ACCESS_TOKEN);
+
+
 
     //this.router.navigateByUrl('/login');
   }

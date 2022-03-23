@@ -31,18 +31,68 @@
       >Hệ thống kiểm tra đánh giá AI</a
     >
   </div> -->
-<div class="user-interface">
-  <ng-template [ngIf]="this.userData">
-    <div  class="category">
-      <a class="a-blue" href="" style="font-weight: bolder; text-decoration: none"
-        >Khóa học của tôi</a
-      >
-    </div>
-  </ng-template>
-  
-  <ng-template [ngIf]="this.userData">
+  <div class="user-interface">
+    <ng-template [ngIf]="this.userData">
+      <div class="category">
+        <a
+          class="a-blue"
+          href=""
+          style="font-weight: bolder; text-decoration: none"
+          >Khóa học của tôi</a
+        >
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="this.userData">
+      <div class="category">
+        <mat-icon style="color: #0d4579; cursor: pointer"
+          >favorite_border</mat-icon
+        >
+        <div class="category-box">
+          <div class="shoping">
+            <div class="shopping-cart">
+              <img
+                class="img-response"
+                src="../../../../assets/common-img/355212_948a_10 (1).jpg"
+                alt=""
+              />
+              <div class="shoping-cart-content">
+                <span class="name"
+                  >Web Design for Beginners: Real World Coding in HTML & CSS
+                  1</span
+                >
+                <span class="author">Brad Schiff</span>
+                <span class="cost">$84.99</span>
+              </div>
+            </div>
+            <div>
+              <a
+                routerLink="#"
+                role="button"
+                class="btn"
+                style="
+                  color: #0d4579;
+                  background-color: #fff;
+                  border: 1px solid #0d4579;
+                  width: 100%;
+                  margin: 10px 0px;
+                "
+              >
+                Đăng kí
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
     <div class="category">
-      <mat-icon style="color: #0d4579; cursor: pointer">favorite_border</mat-icon>
+      <mat-icon
+        style="color: #0d4579; cursor: pointer"
+        matBadge="8"
+        matBadgePosition="after"
+        matBadgeColor="warn"
+        >shopping_cart</mat-icon
+      >
       <div class="category-box">
         <div class="shoping">
           <div class="shopping-cart">
@@ -53,122 +103,80 @@
             />
             <div class="shoping-cart-content">
               <span class="name"
-                >Web Design for Beginners: Real World Coding in HTML & CSS 1</span
+                >Web Design for Beginners: Real World Coding in HTML & CSS
+                1</span
               >
               <span class="author">Brad Schiff</span>
               <span class="cost">$84.99</span>
             </div>
           </div>
-          <div>
-            <a
-              routerLink="#"
-              role="button"
-              class="btn"
-              style="
-                color: #0d4579;
-                background-color: #fff;
-                border: 1px solid #0d4579;
-                width: 100%;
-                margin: 10px 0px;
-              "
-            >
-              Đăng kí
-            </a>
-          </div>
         </div>
       </div>
     </div>
-  </ng-template>
-  <div class="category">
-    <mat-icon
-      style="color: #0d4579; cursor: pointer"
-      matBadge="8"
-      matBadgePosition="after"
-      matBadgeColor="warn"
-      >shopping_cart</mat-icon
-    >
-    <div class="category-box">
-      <div class="shoping">
-        <div class="shopping-cart">
-          <img
-            class="img-response"
-            src="../../../../assets/common-img/355212_948a_10 (1).jpg"
-            alt=""
-          />
-          <div class="shoping-cart-content">
-            <span class="name"
-              >Web Design for Beginners: Real World Coding in HTML & CSS 1</span
-            >
-            <span class="author">Brad Schiff</span>
-            <span class="cost">$84.99</span>
-          </div>
-        </div>
+    <ng-template [ngIf]="this.userData">
+      <div class="category">
+        <mat-icon style="color: #0d4579; cursor: pointer"
+          >notifications</mat-icon
+        >
+        <div class="category-box"></div>
       </div>
-    </div>
-  </div>
-  <ng-template [ngIf]="this.userData">
-    <div class="category">
-      <mat-icon style="color: #0d4579; cursor: pointer">notifications</mat-icon>
-      <div class="category-box"></div>
-    </div>
-  </ng-template>
-  <ng-template [ngIf]="this.userData" [ngIfElse]="login_signup_temp">
-    <div class="category user">
-      <img
-        src="../../../../assets/common-img/355212_948a_10 (1).jpg"
-        alt=""
-        class="user-img"
-      />
-      <div class="category-box">
-        <div class="infor-user">
-          <div class="user-infor">
-            <img
-              src="../../../../assets/common-img/355212_948a_10 (1).jpg"
-              alt=""
-              class="user-img-box"
-            />
-            <div class="name">
-              <span class="full-name">{{this.userData.first_name}} {{this.userData.last_name}}</span>
-              <span class="email">{{this.userData.email}}</span>
+    </ng-template>
+    <ng-template [ngIf]="this.userData" [ngIfElse]="login_signup_temp">
+      <div class="category user">
+        <img [src]="this.userData.avatar_pic" alt="" class="user-img" />
+        <div class="category-box">
+          <div class="infor-user">
+            <div class="user-infor">
+              <img
+                [src]="this.userData.avatar_pic"
+                alt=""
+                class="user-img-box"
+              />
+              <div class="name">
+                <span class="full-name"
+                  >{{ this.userData.first_name }}
+                  {{ this.userData.last_name }}</span
+                >
+                <span class="email">{{ this.userData.email }}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="tools">
-          <span>Khóa học của tôi</span>
-          <span>Giỏ hàng</span>
-          <span>Cài đặt</span>
-          <span (click)="logOutUser()">Đăng xuất</span>
+          <div class="tools">
+            <span>Khóa học của tôi</span>
+            <span>Giỏ hàng</span>
+            <span>Cài đặt</span>
+            <span (click)="logOutUser()">Đăng xuất</span>
+          </div>
         </div>
       </div>
-    </div>
-  </ng-template>
-  <ng-template #login_signup_temp>
-    <div>
-      <a
-        routerLink="/sign-up"
-        role="button"
-        class="btn btn-log-in"
-        style="
-          color: #0d4579;
-          background-color: #fff;
-          border: 1px solid #0d4579;
-        "
-      >
-        Đăng kí
-      </a>
-    </div>
-    <div>
-      <a
-        routerLink="/login"
-        role="button"
-        class="btn btn-log-in"
-        style="color: #fff; background-color: #0d4579"
-      >
-        Đăng Nhập
-      </a>
-    </div>
-  </ng-template>
-</div>
+    </ng-template>
+    <ng-template #login_signup_temp>
+      <div>
+        <a
+          routerLink="/sign-up"
+          role="button"
+          class="btn btn-log-in"
+          style="
+            color: #0d4579;
+            background-color: #fff;
+            border: 1px solid #0d4579;
+          "
+        >
+          Đăng kí
+        </a>
+      </div>
+      <div>
+        <a
+          routerLink="/login"
+          role="button"
+          class="btn btn-log-in"
+          style="color: #fff; background-color: #0d4579"
+        >
+          Đăng Nhập
+        </a>
+      </div>
+    </ng-template>
+  </div>
 </div>
 <ng-template #icon let-height="height">
   <svg
