@@ -1,12 +1,17 @@
 <div class="course-container">
   <div
     class="course-content"
-    (click)="goToDetail(item.id_mon_hoc)"
-    *ngFor="let item of dataSource; index as i;let f = first;"
+    *ngFor="let item of dataSource; index as i; let f = first"
   >
-    <img [src]="item.avatar" alt="" class="img-response" height="200px" />
-    <span class="course-name">{{ item.ten_mon_hoc }}</span>
-    <span class="teacher-name">{{ item.mo_ta }}</span>
+    <div (click)="goToDetail(item.id_mon_hoc)" style="display: flex; flex-direction: column;">
+      <img
+        [src]="item.avatar"
+        alt=""
+        class="img-response"
+      />
+      <span class="course-name">{{ item.ten_mon_hoc }}</span>
+      <span class="teacher-name">{{ item.mo_ta }}</span>
+    </div>
     <div class="star">
       <span class="star-number">5</span>
       <mat-icon>star</mat-icon>
@@ -14,14 +19,23 @@
       <mat-icon>star</mat-icon>
       <mat-icon>star</mat-icon>
       <mat-icon>star</mat-icon>
-      <span class="date">({{item.thoi_gian_bat_dau*1000 |date:"MM/dd/yyyy" }} - {{item.thoi_gian_ket_thuc*1000 |date:"MM/dd/yyyy" }})</span>
+      <span class="date"
+        >({{ item.thoi_gian_bat_dau * 1000 | date: "MM/dd/yyyy" }} -
+        {{ item.thoi_gian_ket_thuc * 1000 | date: "MM/dd/yyyy" }})</span
+      >
     </div>
     <div class="course-box" [ngClass]="f ? 'active' : ''">
       <div class="course-infor">
         <span class="course-name"> {{ item.ten_mon_hoc }}</span>
         <span class="course-des">{{ item.mo_ta }}</span>
-        <span class="course-des"> Thời gian bắt đầu: {{item.thoi_gian_bat_dau*1000 |date:"MM/dd/yyyy" }}</span>
-        <span class="course-des"> Thời gian kết thúc: {{item.thoi_gian_ket_thuc*1000 |date:"MM/dd/yyyy" }}</span>
+        <span class="course-des">
+          Thời gian bắt đầu:
+          {{ item.thoi_gian_bat_dau * 1000 | date: "MM/dd/yyyy" }}</span
+        >
+        <span class="course-des">
+          Thời gian kết thúc:
+          {{ item.thoi_gian_ket_thuc * 1000 | date: "MM/dd/yyyy" }}</span
+        >
         <div class="tool-btns">
           <button mat-flat-button class="add-card" color="#106ba3">
             Thêm vào giỏ

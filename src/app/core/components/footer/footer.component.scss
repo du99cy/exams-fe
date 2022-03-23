@@ -34,4 +34,45 @@
       justify-content: space-between;
     }
   }
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px){
+    .footer {
+      background-color: white;
+      box-shadow: 1px 1px 1px 1px gray;
+      .footer-content{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid gray;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .social{
+        display: none;
+      }
+      .footer-connect{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .phone-email{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding-top: 10px;
+          .email{
+            border: none;
+            padding-right: 0px;
+          }
+          .phone{
+            padding-left: 0px;
+          }
+        }
+      }
+      .infor{
+        padding-top: 0px;
+        padding-bottom: 0px;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
   
