@@ -3,15 +3,25 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { mapToFormData } from '@core/utilities/helpers';
 import { api_urls } from '@shared/configs/api_url';
-import { BehaviorSubject, first, map, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  concatMap,
+  EMPTY,
+  first,
+  from,
+  map,
+  Observable,
+  of,
+} from 'rxjs';
 import { ACCESS_TOKEN } from './constant';
-import { User } from './user';
+import { FacebookUser, MailUser } from './user';
 
 const BASE_URL = api_urls.LOCAL_API_URL;
 const routes = {
   login: `${BASE_URL}/auth/token`,
   refreshToken: `${BASE_URL}/auth/refresh-token`,
   userInfor: `${BASE_URL}/auth/users/me`,
+  facebookAuthentication: `${BASE_URL}/auth/facebook-authenticate`,
 };
 
 @Injectable()
@@ -22,12 +32,11 @@ export class AuthService implements OnDestroy {
   REMAIN_TIME_TO_REFRESH_TOKEN_SECONDS = 120;
   private userSubject = new BehaviorSubject<any>(null);
 
-
-  private refreshTokenTimeout: any
+  private refreshTokenTimeout: any;
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  set User(data: User | null) {
+  set User(data: MailUser | FacebookUser | null) {
     this.userSubject.next(data);
   }
 
@@ -35,7 +44,7 @@ export class AuthService implements OnDestroy {
     return this.userSubject.value;
   }
 
-  get UserObservable():Observable<any> {
+  get UserObservable(): Observable<any> {
     return this.userSubject.asObservable();
   }
 
@@ -87,9 +96,9 @@ export class AuthService implements OnDestroy {
       .get(routes.userInfor, { withCredentials: true })
       .pipe(
         first(),
-        map((res:any) => {
-          let userData = res.data
-          this.User = userData
+        map((res: any) => {
+          let userData = res.data;
+          this.User = userData;
         })
       );
   }
@@ -113,8 +122,6 @@ export class AuthService implements OnDestroy {
     return null;
   }
 
-
-
   private startRefreshTokenTimer() {
     //get new token when remain 2 mintutes
     const timeout =
@@ -130,6 +137,66 @@ export class AuthService implements OnDestroy {
   private stopRefreshTokenTimer() {
     clearTimeout(this.refreshTokenTimeout);
   }
+
+  //facebook login
+
+  loginByFacebookAccount(): Observable<any> {
+    // login with facebook then authenticate with the API to get a JWT auth token
+    return this.facebookLogin()
+      .pipe(concatMap((accessToken) => this.apiAuthenticateFB(accessToken)))
+      .pipe(first());
+  }
+
+  facebookLogin(): Observable<any> {
+    // login with facebook and return observable with fb access token on success
+    return from(
+      new Promise<fb.StatusResponse>((resolve) =>
+        FB.login(resolve, {
+          // scope: '',
+          // return_scopes:true,
+        })
+      )
+    ).pipe(
+      concatMap(({ authResponse }) => {
+        if (!authResponse) return EMPTY;
+        return of(authResponse.accessToken);
+      })
+    );
+  }
+
+  apiAuthenticateFB(accessToken: string): Observable<any> {
+    // authenticate with the api using a facebook access token,
+    // on success the api returns an account object with a JWT auth token
+    return this.httpClient
+      .post<any>(routes.facebookAuthentication, accessToken)
+      .pipe(
+        map((res) => {
+          if (res.status_code == 200) {
+            const res_data = res.data
+            //set user for global
+            this.User = res.status_code == 200 ? res_data.user_infor : null;
+            //set time to get new token(refresh token)
+            //save expire token time
+            this.EXPIRE_TOKEN_TIME_SECONDS =
+              res_data.expire_token_time_minutes * 60;
+            //encode acccess token
+            let accessToken = res_data.access_token;
+            this.saveAccessTokenInLocalStorage(accessToken);
+          }
+          return res;
+        })
+      );
+  }
+
+  logoutFBAccount() {
+    // revoke app permissions to logout completely because FB.logout() doesn't remove FB cookie
+    FB.api('/me/permissions', 'delete', null, () => FB.logout());
+    // this.stopAuthenticateTimer();
+    // this.accountSubject.next(null);
+    // this.router.navigate(['/login']);
+  }
+
+  //
 
   ngOnDestroy() {
     this.stopRefreshTokenTimer();

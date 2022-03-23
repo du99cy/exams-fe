@@ -10,31 +10,36 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/authentication/auth.service';
 import { Subscription } from 'rxjs';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
-
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit,OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   loginError: boolean = false;
   //use to redirect to returnUrl
-  returnUrl:string ='/'
+  returnUrl: string = '/';
 
-  routeSub:Subscription = new Subscription();
+  pageSubs: Subscription = new Subscription();
 
   social_btns: Array<{
     icon_path: string;
     title: string;
+    click(): void;
   }> = [
     {
       icon_path: 'assets/common-img/facebook-icon.jpg',
       title: 'Đăng nhập với tài khoản Facebook',
+      click: () => {
+        this.FBLogin();
+      },
     },
     {
       icon_path: 'assets/common-img/google-icon.png',
       title: 'Đăng nhập với tài khoản Google',
+      click: () => {},
     },
   ];
 
@@ -58,33 +63,65 @@ export class LoginComponent implements OnInit,OnDestroy {
     this.loginForm = formBuilder.group(this.loginAttributes);
   }
 
-  ngOnInit(): void {}
-  ngOnDestroy(){
-    this.routeSub.unsubscribe()
+  ngOnInit(): void {
+    this.getReturnUrl();
+    this.getUserData();
   }
-  get loginFormValue(){
+
+  ngOnDestroy() {
+    this.pageSubs.unsubscribe();
+  }
+
+  getUserData() {
+    let userSub = this.authService.UserObservable.subscribe((res: any) => {
+      if (res != null) {
+        this.router.navigateByUrl("/")
+      }
+    });
+    this.pageSubs.add(userSub);
+  }
+
+  get loginFormValue() {
     return this.loginForm.value;
   }
-  getReturnUrl(){
-    let queryParamsSub = this.activatedRoute.queryParams.subscribe((queryParamsObject:any)=>{
-      this.returnUrl = queryParamsObject ? queryParamsObject["returnUrl"] : this.returnUrl
-    })
-    this.routeSub.add(queryParamsSub)
+  getReturnUrl() {
+    let queryParamsSub = this.activatedRoute.queryParams.subscribe(
+      (queryParamsObject: any) => {
+        this.returnUrl = queryParamsObject
+          ? queryParamsObject['returnUrl']
+          : this.returnUrl;
+      }
+    );
+    this.pageSubs.add(queryParamsSub);
   }
 
   login() {
     if (this.loginForm.valid) {
       this.isLoading = true;
 
-      this.authService.login(this.loginFormValue).subscribe(()=>{
-        this.isLoading=false
-        this.router.navigateByUrl(this.returnUrl)
-      });
+      this.authService.login(this.loginFormValue).subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigateByUrl(this.returnUrl);
+        },
+        (err: HttpErrorResponse) => {
+          this.loginError = true;
+          this.isLoading = false;
+        }
+      );
     }
   }
   forgotPassword() {
     this.dialog.open(ForgotPasswordComponent, {
       width: '500px',
     });
+  }
+  FBLogin(): void {
+    this.authService.loginByFacebookAccount().subscribe(() => {
+      this.router.navigateByUrl(this.returnUrl);
+    });
+  }
+  test() {
+    this.authService.logoutFBAccount();
   }
 }

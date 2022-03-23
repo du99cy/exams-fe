@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const api_urls = {\n  LOCAL_API_URL: 'http://118.70.48.144:1011'\n};","map":null,"metadata":{},"sourceType":"module"}

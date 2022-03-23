@@ -4,7 +4,7 @@
 
     <div class="login-content">
       <div class="login-social__container">
-        <div class="social-btn" *ngFor="let btn of social_btns">
+        <div class="social-btn" *ngFor="let btn of social_btns" (click)="btn.click()">
           <div class="icon"><img [src]="btn.icon_path" /></div>
           <span> {{ btn.title }} </span>
         </div>
@@ -54,3 +54,7 @@
     </div>
   </div>
 </div>
+
+<button type="button" (click)="test()">
+  Logout
+</button>
