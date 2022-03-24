@@ -21,13 +21,9 @@ export class CourseComponent implements OnInit {
       console.log(this.dataSource)
     })
   }
-  
+
   goToDetail(id_mon_hoc:string) {
     this.router.navigateByUrl(`/course-detail?id_mon_hoc=${id_mon_hoc}`)
   }
 
-  convertHttps(str_:any) {
-    console.log(str_.replace('http://45.77.245.61:6868', 'https://course.aiacademy.edu.vn/images'))
-    return str_.replace('http://45.77.245.61:6868', 'https://course.aiacademy.edu.vn/images')
-  }
 }

@@ -35,4 +35,9 @@ export class CourseDetailComponent implements OnInit {
         });
     });
   }
+
+  convertHttps(str_:any) {
+    return str_.replace('http://45.77.245.61:6868', 'https://course.aiacademy.edu.vn/images')
+  }
+
 }

@@ -7,15 +7,15 @@
       </span>
       <span class="time"
         >Thời gian bắt đầu:
-        {{ item.thoi_gian_bat_dau | date: "MM/dd/yyyy" }}</span
+        {{ item.thoi_gian_bat_dau * 1000 | date: "dd/MM/yyyy" }}</span
       >
       <span class="time"
         >Thời gian kết thúc:
-        {{ item.thoi_gian_ket_thuc | date: "MM/dd/yyyy" }}</span
+        {{ item.thoi_gian_ket_thuc * 1000 | date: "dd/MM/yyyy" }}</span
       >
       <button class="hightlight">Nổi bật</button>
       <span class="create-by">
-        Tạo bởi <a href="">Nguyễn Văn A</a>
+        Tạo bởi <a href="">Nguyễn Minh Sơn</a>
       </span>
       <div class="vote">
         <button>
@@ -65,7 +65,7 @@
       <!-- <span class="cost">$84.99</span> -->
     </div>
     <div class="course-review">
-      <img [src]="item.avatar" alt="" class="img-response">
+      <img [src]="item.avatar | https" alt="" class="img-response">
       <span class="number-people"> Số người tham gia</span>
       <button class="join">Tham gia</button>
       <button class="sub">Đăng kí</button>

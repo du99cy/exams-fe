@@ -5,7 +5,7 @@
   >
     <div (click)="goToDetail(item.id_mon_hoc)" style="display: flex; flex-direction: column;">
       <img
-        [src]="convertHttps(item.avatar)"
+        [src]="item.avatar | https"
         alt=""
         class="img-response"
       />
