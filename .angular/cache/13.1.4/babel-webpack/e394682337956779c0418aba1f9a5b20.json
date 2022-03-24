@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const environment = {\n  production: true,\n  apiUrl: \"https://course.aiacademy.edu.vn/api_cu\",\n  facebookAppId: '937553766936866'\n};","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const environment = {\n  production: true,\n  apiUrl: \"http://localhost:8000\",\n  facebookAppId: '937553766936866'\n};","map":null,"metadata":{},"sourceType":"module"}

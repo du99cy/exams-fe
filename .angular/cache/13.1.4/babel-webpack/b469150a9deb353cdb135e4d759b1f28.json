@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const api_urls = {\n  LOCAL_API_URL: 'https://course.aiacademy.edu.vn/api'\n};","map":null,"metadata":{},"sourceType":"module"}

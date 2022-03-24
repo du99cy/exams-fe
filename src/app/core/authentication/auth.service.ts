@@ -20,7 +20,7 @@ const BASE_URL = api_urls.LOCAL_API_URL;
 const routes = {
   login: `${BASE_URL}/auth/token`,
   refreshToken: `${BASE_URL}/auth/refresh-token`,
-  userInfor: `${BASE_URL}/auth/users/me`,
+  userInfor: `${BASE_URL}/auth/users/me/`,
   facebookAuthentication: `${BASE_URL}/auth/facebook-authenticate`,
 };
 
@@ -72,7 +72,7 @@ export class AuthService implements OnDestroy {
   logout() {
 
     //if facebook account
-    if(this.User.account_type == 'facebook'){
+    if(this.User?.account_type == 'facebook'){
 
       this.logoutFBAccount()
     }

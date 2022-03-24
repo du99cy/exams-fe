@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl:"http://localhost:8000",
-  facebookAppId: '493187802007311'
+  apiUrl:"https://course.aiacademy.edu.vn/api_cu",
+  facebookAppId: '937553766936866'
 };

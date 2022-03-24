@@ -3,7 +3,8 @@ import { environment } from '@environment/environment';
 
 export function appInitializer(authService: AuthService) {
   return () =>
-    new Promise((resolve) => {
+    new Promise((resolve:any) => {
+
       // wait for facebook sdk to initialize before starting the angular app
       window['fbAsyncInit'] = function () {
         FB.init({
@@ -17,21 +18,26 @@ export function appInitializer(authService: AuthService) {
         FB.getLoginStatus(({ authResponse }) => {
           //if previous facebook login then auto login with facebook access token
           if (authResponse) {
-            authService.apiAuthenticateFB(authResponse.accessToken).subscribe((res)=>{resolve(null)})
+
+            authService.apiAuthenticateFB(authResponse.accessToken).subscribe().add(resolve)
 
           } else {
 
             //else check previous mail login then check access token that saved in local storage
             //get access token from localStorage
             let accessToken = authService.getAccesTokenFromLocalStorage();
+
             //if not null get refresh token and get user infor
             if (accessToken) {
               //get new token
               authService.refreshToken().subscribe((res) => {
                 //get user information
-                authService.userInfor().subscribe(()=>{resolve(null);});
+                authService.userInfor().subscribe().add(resolve);
               });
             }
+            else
+              resolve()
+
 
           }
         });
@@ -49,5 +55,8 @@ export function appInitializer(authService: AuthService) {
         (js as any).src = 'https://connect.facebook.net/en_US/sdk.js';
         (fjs as any).parentNode.insertBefore(js, fjs);
       })(document, 'script', 'facebook-jssdk');
+
+      //resolve(null);
     });
+
 }
