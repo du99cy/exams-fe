@@ -36,4 +36,10 @@ export class TestComponent implements OnInit {
         console.log(this.prev_url);
       });
   }
+
+  getUser(){
+    this.httpClient.get( `${this.BASE_URL}/test/test_auth`).subscribe(res=>{
+      console.log(res);
+    })
+  }
 }
