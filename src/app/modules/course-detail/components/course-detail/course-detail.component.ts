@@ -1,6 +1,7 @@
 import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RegisterCourseService } from '@modules/course-detail/services/register-course.service';
 import { CourseService } from '@modules/home/services/course.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class CourseDetailComponent implements OnInit {
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private registerCourse: RegisterCourseService
   ) {}
 
   ngOnInit(): void {
@@ -25,12 +27,10 @@ export class CourseDetailComponent implements OnInit {
         .getClassById(queryParams['id_mon_hoc'])
         .subscribe((data) => {
           this.courses = data;
-          console.log(this.courses)
           this.courseService
             .getTopicByClassId(this.courses[0]._id)
             .subscribe((topics) => {
               this.listTopic = topics;
-              console.log(this.listTopic);
             });
         });
     });
@@ -39,5 +39,9 @@ export class CourseDetailComponent implements OnInit {
   convertHttps(str_:any) {
     return str_.replace('http://45.77.245.61:6868', 'https://course.aiacademy.edu.vn/images')
   }
-
+  register(){
+      this.registerCourse.registerCourse(this.courses[0]._id).subscribe((course)=>{
+        console.log(course)
+      })
+    }
 }
