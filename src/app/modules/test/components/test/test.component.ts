@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { fmt, mapToFormData } from '@core/utilities/helpers';
+import { environment } from '@environment/environment';
 import { api_urls } from '@shared/configs/api_url';
 
 @Component({
@@ -18,7 +19,9 @@ export class TestComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.testAuth()
+  }
 
   changeFile(event: any) {
     this.file = event.target.files[0];
@@ -39,6 +42,12 @@ export class TestComponent implements OnInit {
 
   getUser(){
     this.httpClient.get( `${this.BASE_URL}/test/test_auth`).subscribe(res=>{
+      console.log(res);
+    })
+  }
+
+  testAuth(){
+    return this.httpClient.get( `${environment.apiUrl}/topic/ma_lop/620a139ebf18cbd12b894684`).subscribe(res=>{
       console.log(res);
     })
   }

@@ -1,1 +1,7 @@
-node_modules
+#dependencies
+/node_modules
+#build
+/dist
+#cache
+/.angular/cache
+/.vscode

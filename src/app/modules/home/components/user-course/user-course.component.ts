@@ -14,25 +14,34 @@ export class UserCourseComponent implements OnInit {
   listCourseUser:any = []
   userSubs = new Subscription();
   userData: any;
-  constructor(private userCourse: UserCourseService, private authService: AuthService,private router: Router) { 
+
+  constructor(private userCourse: UserCourseService, private authService: AuthService,private router: Router) {
   }
+
   ngOnInit(): void {
     this.getUserData()
-    this.userCourse.getListCourseByUserId(this.userData._id).subscribe((data)=>{
-      this.listCourseUser =data
-      console.log(this.listCourseUser)
-    })
   }
+
   ngOnDestroy(){
     this.userSubs.unsubscribe()
   }
+
   getUserData(){
     let userSub = this.authService.UserObservable.subscribe((res:any)=>{
       this.userData = res
-      console.log(res)
+      //get my courses
+      this.getMyCourses(this.userData.id)
     })
     this.userSubs.add(userSub);
   }
+
+  getMyCourses(user_id:string){
+    this.userCourse.getListCourseByUserId(user_id).subscribe((res)=>{
+      this.listCourseUser =res
+
+    })
+  }
+
   goToDetail(id_mon_hoc:string) {
     this.router.navigateByUrl(`/course-detail?id_mon_hoc=${id_mon_hoc}`)
   }
