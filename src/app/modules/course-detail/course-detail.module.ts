@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpsModule } from '@shared/modules/https.module';
 
+
 @NgModule({
   imports: [
     CourseDetailRoutingModule,

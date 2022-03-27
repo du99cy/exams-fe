@@ -75,7 +75,7 @@
       <img [src]="item.avatar | https" alt="" class="img-response">
       <span class="number-people"> Số người tham gia</span>
       <button class="join">Tham gia</button>
-      <button class="sub" (click)="register()">Đăng kí</button>
+      <button class="sub" (click)="register()" *ngIf="openRegister">Đăng kí</button>
     </div>
   </div>
   
@@ -147,6 +147,9 @@
           <mat-panel-title> {{ topic.tieu_de }} </mat-panel-title>
         </mat-expansion-panel-header>
         <p>Bạn cần đang kí để xem nội dung khóa học</p>
+        <div class="div">
+          
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

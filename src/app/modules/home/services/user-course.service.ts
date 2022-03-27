@@ -6,8 +6,8 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CourseService {
-  url = `${environment.apiUrl}/nguoithamgialop`;
+export class UserCourseService {
+  url = `${environment.apiUrl}/nguoithamgialop/ListLop`;
   Course: any;
   constructor(private http: HttpClient) {}
   private _refresh$ = new Subject<void>();
@@ -15,11 +15,8 @@ export class CourseService {
   get refresh$() {
     return this._refresh$;
   }
-  getClassList():Observable<any>{
-    return this.http.get<any>(`${this.url}/ListMon`);
-  }
-  getClassById(id_mon_hoc:any):Observable<any>{
-    return this.http.get<any>(`${this.url}/MonHoc?id_mon_hoc=${id_mon_hoc}`);
+  getListCourseByUserId(id_nguoi_dung:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/?id_nguoi_dung=${id_nguoi_dung}`);
   }
  
 }
