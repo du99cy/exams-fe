@@ -13,13 +13,18 @@
         >Thời gian kết thúc:
         {{ item.thoi_gian_ket_thuc * 1000 | date: "dd/MM/yyyy" }}</span
       >
+     <div class="hightlight-sub">
       <button class="hightlight">Nổi bật</button>
+      <button class="sub">Đăng kí</button>
+     </div>
       <span class="create-by">
         Tạo bởi <a href="">Nguyễn Minh Sơn</a>
       </span>
       <div class="vote">
         <button>
-          Yêu thích
+          <span class="title">
+            Yêu thích
+           </span>
           <svg
             width="23"
             height="21"
@@ -38,7 +43,9 @@
           </svg>
         </button>
         <button>
+         <span class="title">
           Chia sẻ
+         </span>
           <svg
             width="26"
             height="21"
@@ -68,7 +75,7 @@
       <img [src]="item.avatar | https" alt="" class="img-response">
       <span class="number-people"> Số người tham gia</span>
       <button class="join">Tham gia</button>
-      <button class="sub">Đăng kí</button>
+      <button class="sub" (click)="register()" *ngIf="openRegister">Đăng kí</button>
     </div>
   </div>
   
@@ -140,6 +147,9 @@
           <mat-panel-title> {{ topic.tieu_de }} </mat-panel-title>
         </mat-expansion-panel-header>
         <p>Bạn cần đang kí để xem nội dung khóa học</p>
+        <div class="div">
+          
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpsModule } from '@shared/modules/https.module';
+import { UserCourseComponent } from './components/user-course/user-course.component';
 
 
 @NgModule({
@@ -19,6 +20,6 @@ import { HttpsModule } from '@shared/modules/https.module';
     MatButtonModule,
     HttpsModule
   ],
-  declarations: [CourseComponent, ListCoursesComponent, HomeComponent],
+  declarations: [CourseComponent, ListCoursesComponent, HomeComponent, UserCourseComponent],
 })
 export class HomeModule {}
