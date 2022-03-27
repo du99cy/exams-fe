@@ -23,6 +23,6 @@ export class CourseService {
     return this.http.get<any>(`${this.url}/MonHoc?id_mon_hoc=${id_mon_hoc}`);
   }
   getTopicByClassId(_id:any):Observable<any>{
-    return this.http.get<any>(`${this.url1}/ma_lop_chuadk?ma_lop_hoc=${_id}`)
+    return this.http.get<any>(`${this.url1}/ma_lop/${_id}`)
   }
 }

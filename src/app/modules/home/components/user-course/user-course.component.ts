@@ -43,6 +43,6 @@ export class UserCourseComponent implements OnInit {
   }
 
   goToDetail(id_mon_hoc:string) {
-    this.router.navigateByUrl(`/course-detail?id_mon_hoc=${id_mon_hoc}`)
+    this.router.navigateByUrl(`/course-detail/${id_mon_hoc}`)
   }
 }

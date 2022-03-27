@@ -25,24 +25,20 @@ export class CourseDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activateRoute.queryParams.subscribe((queryParams) => {
+    this.activateRoute.params.subscribe((queryParams) => {
+      console.log(queryParams)
       this.courseService
-        .getClassById(queryParams['id_mon_hoc'])
+        .getClassById(queryParams['subject_id'])
         .subscribe((data) => {
           this.courses = data;
           this.courseService
             .getTopicByClassId(this.courses[0]._id)
             .subscribe((topics) => {
-              this.listTopic = topics;
+              this.listTopic = topics.data;
+              console.log(this.listTopic)
             });
         });
     });
-    this.activateRoute.queryParams.subscribe((res)=>{
-      this.courseDetailService.getTopicByClassId(res['id_mon_hoc']).subscribe((topic)=>{
-        this.listTopicUser =topic
-        console.log(this.listTopicUser)
-      })
-    })
   }
 
   convertHttps(str_:any) {

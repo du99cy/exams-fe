@@ -146,10 +146,22 @@
         <mat-expansion-panel-header>
           <mat-panel-title> {{ topic.tieu_de }} </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>Bạn cần đang kí để xem nội dung khóa học</p>
-        <div class="div">
-          
-        </div>
+        <ng-template  [ngIf]="topic.file" [ngIfElse]="nof">
+          <div class="file">
+            <p [innerHTML] = "topic.mo_ta"></p>
+            <ul *ngFor="let item of topic.file" style="list-style:none">
+              <li >
+                <a [href]="item.link" target="_blank" style="display: flex;align-items: center; ">
+                  {{item.display_name}}
+                  <mat-icon style="margin-left: 20px ;">{{item.icon.value}}</mat-icon>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </ng-template>
+        <ng-template #nof>
+          <p>Bạn cần đang kí để xem nội dung khóa học</p>
+        </ng-template>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

@@ -15,7 +15,7 @@ export class CourseDetailService {
   get refresh$() {
     return this._refresh$;
   }
-  getTopicByClassId(_id:any):Observable<any>{
-    return this.http.get<any>(`${this.url}/ma_lop?ma_lop_hoc=${_id}`)
-  }
+  // getTopicByClassId(_id:any):Observable<any>{
+  //   return this.http.get<any>(`${this.url}/ma_lop?ma_lop_hoc=${_id}`)
+  // }
 }

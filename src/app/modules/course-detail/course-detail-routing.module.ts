@@ -5,7 +5,7 @@ import { CourseDetailComponent } from './components/course-detail/course-detail.
 
 const routes: Routes = [
   {
-    path:'',
+    path:':subject_id',
     component: CourseDetailComponent,
     pathMatch: 'full'
   }
