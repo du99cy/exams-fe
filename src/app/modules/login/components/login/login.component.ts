@@ -39,7 +39,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     {
       icon_path: 'assets/common-img/google-icon.png',
       title: 'Đăng nhập với tài khoản Google',
-      click: () => {},
+      click: () => {
+        
+      },
     },
   ];
 

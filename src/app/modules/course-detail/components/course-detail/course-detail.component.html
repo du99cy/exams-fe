@@ -74,8 +74,9 @@
     <div class="course-review">
       <img [src]="item.avatar | https" alt="" class="img-response">
       <span class="number-people"> Số người tham gia</span>
-      <button class="join">Tham gia</button>
-      <button class="sub" (click)="register()" *ngIf="openRegister">Đăng kí</button>
+      <button class="join" (click)="this.button_dis.event()">{{this.button_dis.name}}</button>
+     
+      
     </div>
   </div>
   
