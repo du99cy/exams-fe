@@ -1,8 +1,8 @@
 <ng-template [ngIf]="this.userData">
   <h1>Khoá học của bạn</h1>
-  <div class="course-container">
+  <div class="course-container row">
     <div
-      class="course-content"
+      class="course-content col-12 col-md-4"
       *ngFor="let item of listCourseUser; index as i; let f = first"
     >
       <div style="display: flex; flex-direction: column" (click)="goToDetail(item.id_mon_hoc)">
