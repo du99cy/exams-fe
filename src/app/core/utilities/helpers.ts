@@ -1,4 +1,4 @@
-import { HttpParams } from "@angular/common/http";
+import { HttpParams } from '@angular/common/http';
 
 export function fmt(text: string, myHash: any) {
   let key;
@@ -19,7 +19,7 @@ export function isNotEmpty(args: any): boolean {
   return !isEmpty(args);
 }
 
-export function mapToHttpParamsQuery(params: any):HttpParams {
+export function mapToHttpParamsQuery(params: any): HttpParams {
   let httpParams: HttpParams = new HttpParams();
   for (const property in params) {
     if (params.hasOwnProperty(property) && isNotEmpty(params[property])) {
@@ -37,4 +37,12 @@ export function mapToFormData(body: any): FormData {
     }
   }
   return formData;
+}
+
+export function scrollToTopPage() {
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
 }

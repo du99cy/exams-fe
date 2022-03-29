@@ -16,7 +16,7 @@ export class UserCourseService {
     return this._refresh$;
   }
   getListCourseByUserId(id_nguoi_dung:any):Observable<any>{
-    return this.http.get<any>(`${this.url}/?id_nguoi_dung=${id_nguoi_dung}`);
+    return this.http.get<any>(`${this.url}?id_nguoi_dung=${id_nguoi_dung}`);
   }
- 
+
 }

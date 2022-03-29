@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
-
+import {mapToHttpParamsQuery} from '@core/utilities/helpers'
 @Injectable({
   providedIn: 'root'
 })
@@ -16,10 +16,10 @@ export class RegisterCourseService {
     return this._refresh$;
   }
   registerCourse(id_lop_hoc:any):Observable<any>{
+    let httParam = mapToHttpParamsQuery({id_lop_hoc:id_lop_hoc})
+
     return this.http.post<any>(
-      `${this.url}`,{
-        id_lop_hoc: id_lop_hoc
-      }
+      `${this.url}`,null,{params:httParam}
     ).pipe(
       tap(() =>{this._refresh$.next();}));
   }
