@@ -12,7 +12,9 @@
     </div>
   </div>
   <div class="container">
-    <app-user-course></app-user-course>
+    <ng-template [ngIf]="this.user_data">
+      <app-user-course></app-user-course>
+    </ng-template>
     <app-list-courses></app-list-courses>
     <div *ngFor="let item of data" class="training-course">
       <div class="training-content">

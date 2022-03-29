@@ -58,6 +58,7 @@ export class AuthService implements OnDestroy {
       .pipe(
         first(),
         map((res: any) => {
+
           //save user current
           this.User = res.user_infor;
           //save expire token time

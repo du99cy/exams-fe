@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@core/authentication/auth.service';
 import { content } from '@modules/home/models/content';
 
 @Component({
@@ -8,13 +9,14 @@ import { content } from '@modules/home/models/content';
 })
 export class HomeComponent implements OnInit {
   data : any=[];
-  constructor() {
-    this.data= content
-    console.log(this.data)
+  user_data:any
+  constructor(private authService: AuthService) {
+
    }
 
   ngOnInit(): void {
     this.data= content
+    this.user_data = this.authService.User
   }
 
 }
