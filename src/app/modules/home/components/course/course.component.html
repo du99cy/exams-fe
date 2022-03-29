@@ -1,6 +1,6 @@
-<div class="course-container">
+<div class="course-container row">
   <div
-    class="course-content"
+    class="course-content col-12 col-md-4"
     *ngFor="let item of dataSource; index as i; let f = first"
   >
     <div (click)="goToDetail(item.id_mon_hoc)" style="display: flex; flex-direction: column;">

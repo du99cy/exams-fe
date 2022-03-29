@@ -4,7 +4,7 @@
   background-size: cover;
   background-position: center;
   height: 780px;
-  
+
   .course-detail {
     display: flex;
     padding: 100px 242px;
@@ -19,6 +19,7 @@
         font-weight: bold;
         font-family: "Inter";
         font-style: normal;
+        line-height: 64px;
       }
       .des {
         color: #ffffff;
@@ -130,6 +131,7 @@
         outline: none;
         border: none;
         margin-bottom: 11px;
+        cursor: pointer;
       }
       .sub {
         font-size: 20px;
@@ -140,6 +142,28 @@
         background-color: #ffffff;
         border: 1px solid #092b4e;
         margin-bottom: 39px;
+        cursor: pointer;
+        position: relative;
+        transition-duration: 0.4s;
+        overflow: hidden;
+      }
+      .sub::after {
+        content: "";
+        background: rgb(241, 241, 241, 0.9);
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        transition: ease-in 0.3s;
+        opacity: 0;
+      }
+      .sub:active:after {
+        padding: 0;
+        margin: 0;
+        opacity: 1;
+        transition: 0s;
       }
     }
   }
