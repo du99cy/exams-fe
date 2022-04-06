@@ -7,7 +7,8 @@ import { Observable, Subject, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class CourseDetailService {
-  url = `${environment.apiUrl}/nguoithamgialop/class-registration`;
+  url = `${environment.apiUrl}/class`;
+  url1 =`${environment.apiUrl}/topic`
   Course: any;
   constructor(private http: HttpClient) {}
   private _refresh$ = new Subject<void>();
@@ -15,7 +16,10 @@ export class CourseDetailService {
   get refresh$() {
     return this._refresh$;
   }
-  // getTopicByClassId(_id:any):Observable<any>{
-  //   return this.http.get<any>(`${this.url}/ma_lop?ma_lop_hoc=${_id}`)
-  // }
+  getClassById(_id:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/LopHoc?id_lop_hoc=${_id}`);
+  }
+  getTopicByClassId(_id:any):Observable<any>{
+    return this.http.get<any>(`${this.url1}/ma_lop/${_id}`)
+  }
 }
