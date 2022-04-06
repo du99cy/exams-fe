@@ -17,7 +17,7 @@ export class CourseDetailComponent implements OnInit {
   panelOpenState = false;
   listTopic: any;
   listTopicUser: any;
-  sub: boolean;
+ 
   openRegister = true;
 
   button_dis: any;
@@ -51,27 +51,27 @@ export class CourseDetailComponent implements OnInit {
     //scroll to top page
     scrollToTopPage();
     this.activateRoute.params.subscribe((queryParams) => {
-      this.courseService
-        .getClassById(queryParams['subject_id'])
-        .subscribe((data:any) => {
-          this.courses = data;
-          let course = this.courses[0];
-          this.button_dis = this.assignBtnByStatus(course?.trang_thai)
 
-          this.courseService
-            .getTopicByClassId(course._id)
+      
+      this.courseDetailService
+        .getClassById(queryParams['class_id'])
+        .subscribe((data) => {
+          this.courses = data;
+          console.log("detail",data)
+          let course = this.courses[0];
+
+         
+          this.button_dis = this.assignBtnByStatus(course.trang_thai_dang_ki)
+          this.courseDetailService
+            .getTopicByClassId(queryParams['class_id'])
             .subscribe((topics) => {
 
               this.listTopic = topics.data;
+              console.log(this.listTopic)
             });
         });
     });
-    if (this.courses.trang_thai === 'CHUACHAPNHAN') {
-      this.sub = true;
-    }
-    if (this.courses.trang_thai === 'DONGY') {
-      this.sub = false;
-    }
+    
   }
 
   convertHttps(str_: any) {
