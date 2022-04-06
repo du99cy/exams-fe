@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   getUserData(){
     let userSub = this.authService.UserObservable.subscribe((res:any)=>{
       this.userData = res
-      console.log(res)
+
     })
     this.userSubs.add(userSub);
   }

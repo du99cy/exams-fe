@@ -53,15 +53,15 @@ export class CourseDetailComponent implements OnInit {
     this.activateRoute.params.subscribe((queryParams) => {
       this.courseService
         .getClassById(queryParams['subject_id'])
-        .subscribe((data) => {
+        .subscribe((data:any) => {
           this.courses = data;
           let course = this.courses[0];
-          this.button_dis = this.assignBtnByStatus(course.trang_thai)
-          
+          this.button_dis = this.assignBtnByStatus(course?.trang_thai)
+
           this.courseService
             .getTopicByClassId(course._id)
             .subscribe((topics) => {
-              console.log(topics);
+
               this.listTopic = topics.data;
             });
         });
