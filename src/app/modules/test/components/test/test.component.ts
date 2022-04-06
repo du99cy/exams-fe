@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { fmt, mapToFormData } from '@core/utilities/helpers';
 import { environment } from '@environment/environment';
 import { api_urls } from '@shared/configs/api_url';
@@ -11,6 +11,8 @@ import { api_urls } from '@shared/configs/api_url';
   styleUrls: ['./test.component.scss'],
 })
 export class TestComponent implements OnInit {
+  videoURL: SafeUrl;
+  video: Blob;
   prev_url: any;
   BASE_URL = api_urls.LOCAL_API_URL;
   file!: File;
@@ -20,35 +22,23 @@ export class TestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.testAuth()
+    this.getImage().subscribe((img) => {
+
+      this.video = img;
+      this.videoURL = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(this.video)
+      );
+    });
+    // this.getText()
   }
 
-  changeFile(event: any) {
-    this.file = event.target.files[0];
-    const formData = mapToFormData({ file: this.file });
-    return this.httpClient
-      .post(`${this.BASE_URL}/test/uploadfile`, formData)
-      .subscribe((res:any) => {
-        let file_ = res;
-
-        var URL = window.URL;
-
-        this.prev_url = this.sanitizer.bypassSecurityTrustUrl(
-          URL.createObjectURL(file_)
-        );
-        console.log(this.prev_url);
-      });
+  getImage() {
+    return this.httpClient.get('http://localhost:8000/video',{responseType:'blob'});
   }
 
-  getUser(){
-    this.httpClient.get( `${this.BASE_URL}/test/test_auth`).subscribe(res=>{
-      console.log(res);
-    })
+  getText(){
+    this.httpClient.get('http://127.0.0.1:8000/text').subscribe((res)=>{
+      console.log(res)
+    });
   }
-
-  testAuth(){
-    return this.httpClient.get( `${environment.apiUrl}/topic/ma_lop/620a139ebf18cbd12b894684`).subscribe(res=>{
-      console.log(res);
-    })
-  }
-}
+ }

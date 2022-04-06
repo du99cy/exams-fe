@@ -51,6 +51,7 @@ export class CourseDetailComponent implements OnInit {
     //scroll to top page
     scrollToTopPage();
     this.activateRoute.params.subscribe((queryParams) => {
+
       
       this.courseDetailService
         .getClassById(queryParams['class_id'])
@@ -58,11 +59,13 @@ export class CourseDetailComponent implements OnInit {
           this.courses = data;
           console.log("detail",data)
           let course = this.courses[0];
+
          
           this.button_dis = this.assignBtnByStatus(course.trang_thai_dang_ki)
           this.courseDetailService
             .getTopicByClassId(queryParams['class_id'])
             .subscribe((topics) => {
+
               this.listTopic = topics.data;
               console.log(this.listTopic)
             });
