@@ -3,8 +3,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 780px;
-
   .course-detail {
     display: flex;
     padding: 100px 242px;
@@ -213,6 +211,35 @@
     font-weight: bold;
     font-size: 24px;
   }
+}
+.start-rate{
+  border: 1px solid #d1d7dc;
+  .display1{
+    font-weight: bold;
+    margin: 20px 10px;
+  }
+  .row{
+    display: flex;
+    justify-content: center;
+    .rate-point{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .star{
+        padding-top: 15px;
+        mat-icon{
+          color: #e59819;
+        }
+      }
+    }
+  }
+}
+mat-icon{
+  color: #e59819;
+}
+.instructor{
+  border: 1px solid #d1d7dc;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .course-title {

@@ -8,7 +8,6 @@ import { Observable, Subject } from 'rxjs';
 })
 export class CourseService {
   url = `${environment.apiUrl}/class`;
-  url1 =`${environment.apiUrl}/topic`
   Course: any;
   constructor(private http: HttpClient) {}
   private _refresh$ = new Subject<void>();
@@ -18,11 +17,5 @@ export class CourseService {
   }
   getClassList():Observable<any>{
     return this.http.get<any>(`${this.url}/ListMon`);
-  }
-  getClassById(id_mon_hoc:any):Observable<any>{
-    return this.http.get<any>(`${this.url}/MonHoc?id_mon_hoc=${id_mon_hoc}`);
-  }
-  getTopicByClassId(_id:any):Observable<any>{
-    return this.http.get<any>(`${this.url1}/ma_lop/${_id}`)
   }
 }

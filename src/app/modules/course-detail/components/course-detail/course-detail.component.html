@@ -13,18 +13,14 @@
         >Thời gian kết thúc:
         {{ item.thoi_gian_ket_thuc * 1000 | date: "dd/MM/yyyy" }}</span
       >
-     <div class="hightlight-sub">
-      <button class="hightlight">Nổi bật</button>
-      <button class="sub">Đăng kí</button>
-     </div>
-      <span class="create-by">
-        Tạo bởi <a href="">Nguyễn Minh Sơn</a>
-      </span>
+      <div class="hightlight-sub">
+        <button class="hightlight">Nổi bật</button>
+        <button class="sub">Đăng kí</button>
+      </div>
+      <span class="create-by"> Tạo bởi <a href="">Nguyễn Minh Sơn</a> </span>
       <div class="vote">
         <button>
-          <span class="title">
-            Yêu thích
-           </span>
+          <span class="title"> Yêu thích </span>
           <svg
             width="23"
             height="21"
@@ -43,9 +39,7 @@
           </svg>
         </button>
         <button>
-         <span class="title">
-          Chia sẻ
-         </span>
+          <span class="title"> Chia sẻ </span>
           <svg
             width="26"
             height="21"
@@ -72,17 +66,16 @@
       <!-- <span class="cost">$84.99</span> -->
     </div>
     <div class="course-review">
-      <img [src]="item.avatar | https" alt="" class="img-response">
+      <img [src]="item.avatar | https" alt="" class="img-response" />
       <span class="number-people"> Số người tham gia</span>
-      <button class="join" (click)="this.button_dis.event()">{{this.button_dis.name}}</button>
-     
-      
+      <button class="join" (click)="this.button_dis.event()">
+        {{ this.button_dis.name }}
+      </button>
     </div>
   </div>
-  
 </div>
 <div class="container" style="margin-top: 40px">
-  <!-- <div class="will-learn">
+  <div class="will-learn">
     <h2>Bạn học được gì từ khóa học này?</h2>
     <div class="course-result">
       <span>
@@ -136,7 +129,7 @@
       would definitely recommend this course to most folks I know who want to
       learn web design."
     </p>
-  </div> -->
+  </div>
   <div class="course-content">
     <h2>Nội dung khóa học</h2>
     <mat-accordion *ngFor="let topic of listTopic">
@@ -147,14 +140,20 @@
         <mat-expansion-panel-header>
           <mat-panel-title> {{ topic.tieu_de }} </mat-panel-title>
         </mat-expansion-panel-header>
-        <ng-template  [ngIf]="topic.file" [ngIfElse]="nof">
+        <ng-template [ngIf]="topic.file" [ngIfElse]="nof">
           <div class="file">
-            <p [innerHTML] = "topic.mo_ta"></p>
-            <ul *ngFor="let item of topic.file" style="list-style:none">
-              <li >
-                <a [href]="item.link" target="_blank" style="display: flex;align-items: center; ">
-                  {{item.display_name}}
-                  <mat-icon style="margin-left: 20px ;">{{item.icon.value}}</mat-icon>
+            <p [innerHTML]="topic.mo_ta"></p>
+            <ul *ngFor="let item of topic.file" style="list-style: none">
+              <li>
+                <a
+                  [href]="item.link"
+                  target="_blank"
+                  style="display: flex; align-items: center"
+                >
+                  {{ item.display_name }}
+                  <mat-icon style="margin-left: 20px">{{
+                    item.icon.value
+                  }}</mat-icon>
                 </a>
               </li>
             </ul>
@@ -165,5 +164,102 @@
         </ng-template>
       </mat-expansion-panel>
     </mat-accordion>
+  </div>
+</div>
+<div class="container">
+  <div class="start-rate" style="min-height: 250px">
+    <h1 class="display1">Students Feedback</h1>
+    <div class="row">
+      <div class="col-lg-2 rate-point">
+        <h1 style="font-size: 100px; color: #b4690e">4.5</h1>
+        <div class="star">
+          <mat-icon>star</mat-icon>
+          <mat-icon>star</mat-icon>
+          <mat-icon>star</mat-icon>
+          <mat-icon>star</mat-icon>
+          <mat-icon>star</mat-icon>
+        </div>
+        <h5 style="color: #b4690e">Course Rating</h5>
+      </div>
+      <div class="col-lg-8">
+        <div class="progress">
+          <div class="progress-bar" style="width: 52%"></div>
+        </div>
+        <br />
+        <div class="progress">
+          <div class="progress-bar" style="width: 34%"></div>
+        </div>
+        <br />
+        <div class="progress">
+          <div class="progress-bar" style="width: 10%"></div>
+        </div>
+        <br />
+        <div class="progress">
+          <div class="progress-bar" style="width: 2%"></div>
+        </div>
+        <br />
+        <div class="progress">
+          <div class="progress-bar" style="width: 2%"></div>
+        </div>
+      </div>
+
+      <div class="col-lg-2">
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <br />
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <br />
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <br />
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <br />
+        <mat-icon>star</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div class="instructor" style="margin-top: 90px">
+    <h3 style="font-size: 32px; font-weight: bold; padding: 30px;" >Instructor</h3>
+
+    <h3 style="font-size: 20px; font-weight: bold; padding: 0px 30px;"><a href="#" style="text-decoration: underline">Rahuk Shetty</a></h3>
+
+    <p style=" padding:0px 30px;">Founder of RahulShettyAcademy.com|350k+ QA Students</p>
+
+    <div class="row" style=" padding: 30px;">
+      <div class="col-lg-2">
+        <img
+          src="../../../../../assets/common-img/AdobeStock_288304009 1.png"
+          alt=""
+          style="max-width: 150px; min-height: 150px; border-radius: 200px"
+        />
+      </div>
+      <div class="col-lg-10">
+        <p><i class="ti-star"> 4.6 Instrctor Rating</i></p>
+        <p><i class="ti-ticket"> 197,726 Reviews</i></p>
+        <p>
+          <img src="" alt="" style="max-width: 20px" />
+          492,106 Students
+        </p>
+        <p><i class="ti-control-play"> 26 Courses</i></p>
+      </div>
+    </div>
+
+    <p style=" padding: 0px 30px;">
+      Nothing is Impossible. It all depends on how we are Trained on it.
+      Teaching is my Passion. And it’s my Profession. The only Business I know
+      is Spreading the Knowledge. "Every QA Professional have a wish of learning
+      trending Automation courses but somehow 90% of them are giving up their
+      thoughts It’s not due to the lack of courses available in the Market, but
+      it’s about finding the right Mentor who can guide, teach and understand
+      student's pulse with their background education"
+    </p>
   </div>
 </div>

@@ -3,7 +3,7 @@
     class="course-content col-12 col-md-4"
     *ngFor="let item of dataSource; index as i; let f = first"
   >
-    <div (click)="goToDetail(item.id_mon_hoc)" style="display: flex; flex-direction: column;">
+    <div (click)="goToDetail(item._id)" style="display: flex; flex-direction: column;">
       <img
         [src]="item.avatar | https"
         alt=""
