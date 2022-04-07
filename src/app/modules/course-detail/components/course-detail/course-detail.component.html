@@ -143,17 +143,17 @@
         <ng-template [ngIf]="topic.file" [ngIfElse]="nof">
           <div class="file">
             <p [innerHTML]="topic.mo_ta"></p>
-            <ul *ngFor="let item of topic.file" style="list-style: none">
+            <ul *ngFor="let item of topic.file" style="list-style: none; padding: 0px;">
               <li>
                 <a
                   [href]="item.link"
                   target="_blank"
-                  style="display: flex; align-items: center"
+                  style="display: flex; align-items: center; text-decoration: none;"
                 >
-                  {{ item.display_name }}
-                  <mat-icon style="margin-left: 20px">{{
+                  <mat-icon style="margin-right: 20px">{{
                     item.icon.value
                   }}</mat-icon>
+                  {{ item.display_name }}
                 </a>
               </li>
             </ul>
@@ -168,7 +168,7 @@
 </div>
 <div class="container">
   <div class="start-rate" style="min-height: 250px">
-    <h1 class="display1">Students Feedback</h1>
+    <h1 class="display1">Đánh giá của người học</h1>
     <div class="row">
       <div class="col-lg-2 rate-point">
         <h1 style="font-size: 100px; color: #b4690e">4.5</h1>
@@ -227,13 +227,19 @@
     </div>
   </div>
   <div class="instructor" style="margin-top: 90px">
-    <h3 style="font-size: 32px; font-weight: bold; padding: 30px;" >Instructor</h3>
+    <h3 style="font-size: 24px; font-weight: bold; padding: 30px">
+      Giảng viên giảng dạy
+    </h3>
 
-    <h3 style="font-size: 20px; font-weight: bold; padding: 0px 30px;"><a href="#" style="text-decoration: underline">Rahuk Shetty</a></h3>
+    <h3 style="font-size: 20px; font-weight: bold; padding: 0px 30px">
+      <a href="#" style="text-decoration: underline">Rahuk Shetty</a>
+    </h3>
 
-    <p style=" padding:0px 30px;">Founder of RahulShettyAcademy.com|350k+ QA Students</p>
+    <p style="padding: 0px 30px">
+      Founder of RahulShettyAcademy.com|350k+ QA Students
+    </p>
 
-    <div class="row" style=" padding: 30px;">
+    <div class="row" style="padding: 30px">
       <div class="col-lg-2">
         <img
           src="../../../../../assets/common-img/AdobeStock_288304009 1.png"
@@ -252,7 +258,7 @@
       </div>
     </div>
 
-    <p style=" padding: 0px 30px;">
+    <p style="padding: 0px 30px">
       Nothing is Impossible. It all depends on how we are Trained on it.
       Teaching is my Passion. And it’s my Profession. The only Business I know
       is Spreading the Knowledge. "Every QA Professional have a wish of learning
