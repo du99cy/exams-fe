@@ -42,15 +42,8 @@ const routes: Routes = [
   {
     path: 'instructor',
     loadChildren: () =>
-      import('@modules/create-course/create-course.module').then(
-        (m) => m.CreateCourseModule
-      ),
-  },
-  {
-    path: 'manage',
-    loadChildren: () =>
-      import('@modules/course-manage/course-manage.module').then(
-        (m) => m.CourseManageModule
+      import('@modules/instructor/instructor.module').then(
+        (m) => m.InstructorModule
       ),
   },
 

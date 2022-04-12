@@ -1,0 +1,80 @@
+<div class="lecture-wrapper">
+  <div class="title">
+    <div class="title-left">
+      <div class="lecture-name">Bài học {{order}}: {{title}}</div>
+      <div class="action">
+        <div>
+          <a mat-icon-button>
+            <i class="material-icons">edit</i>
+          </a>
+        </div>
+        <div>
+          <a mat-icon-button>
+            <i class="material-icons">delete</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="title-right">
+      <ng-template [ngIf]="!expandMorePress" [ngIfElse]="expand_less_temp">
+        <div>
+          <button mat-icon-button (click)="expandMorePress = !expandMorePress">
+            <i class="material-icons"> expand_more </i>
+          </button>
+        </div>
+      </ng-template>
+      <ng-template #expand_less_temp>
+        <div>
+          <button mat-icon-button (click)="expandMorePress = !expandMorePress">
+            <i class="material-icons"> expand_less </i>
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="content" *ngIf="expandMorePress">
+    <ng-template [ngIf]="!videoUploadPress" [ngIfElse]="fileSelectTemp">
+      <div class="content-btn" (click)="videoUploadPress = true">
+        <i class="material-icons">add</i>
+        <span>Video</span>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="!descriptionUploadPress" [ngIfElse]="editorTemp">
+      <div class="content-btn" (click)="descriptionUploadPress = true">
+        <i class="material-icons">add</i>
+        <span>Mô tả</span>
+      </div>
+    </ng-template>
+    <ng-template #editorTemp>
+      <app-editor (btn-click)="editorClickHandler($event)"></app-editor>
+    </ng-template>
+    <ng-template [ngIf]="!resourseUploadPress" [ngIfElse]="fileSelectTemp">
+      <div class="content-btn" (click)="resourseUploadPress = true">
+        <i class="material-icons">add</i>
+        <span>Tài liệu</span>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<ng-template #fileSelectTemp>
+  <div class="my-4">
+    <div>
+      <label for="upload-photo">
+        <span class="upload-photo-box">
+          <span class="upload-photo-text"> No file selected </span>
+        </span>
+        <span class="upload-photo-btn">Select video</span>
+      </label>
+      <input type="file" name="photo" id="upload-photo" />
+    </div>
+    <div class="mt-3">
+      <button
+        (click)="videoUploadPress = false; resourseUploadPress = false"
+        class="cancel-btn btn"
+      >
+        Hủy
+      </button>
+    </div>
+  </div>
+</ng-template>

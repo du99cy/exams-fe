@@ -1,0 +1,14 @@
+<div class="lecture-creation-wrapper">
+  <form>
+    <div class="input-container" >
+      <span>Bài học mới :</span>
+      <div>
+        <input type="text" placeholder="Nhập tiêu đề ..." #input>
+      </div>
+    </div>
+    <div class="btns-container" align="end">
+      <button class="btn cancel-btn" (click)="btnClickHandler(0)" type="button">Huỷ</button>
+      <button class="btn save-btn" (click)="btnClickHandler(1,input.value)" type="button">Lưu</button>
+    </div>
+  </form>
+</div>

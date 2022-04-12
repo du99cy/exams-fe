@@ -1,0 +1,53 @@
+<div class="course-creation-wrapper">
+  <form [formGroup]="courseFormGroup">
+    <mat-stepper #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Tiêu đề khóa học</ng-template>
+        <ng-template matStepContent="">
+          <div class="title-container">
+            <h1>Tiêu đề của bạn là gì ?</h1>
+            <p>
+              Bạn có thể thay đổi tiêu đề sau này bất kì khi nào bạn muốn !!!
+            </p>
+            <mat-form-field appearance="fill">
+              <input
+                matInput
+                formControlName="title"
+                placeholder="Ví dụ:Mechine Learning cho người mới bắt đầu "
+                required
+              />
+            </mat-form-field>
+
+            <button mat-raised-button matStepperNext color="primary">
+              Tiếp theo
+            </button>
+          </div>
+        </ng-template>
+      </mat-step>
+      <mat-step label="Thể loại">
+        <ng-template matStepContent="">
+          <div class="title-container">
+            <h1>
+              Lựa chọn thể loại phù hợp với kiến thức bạn muốn chia sẻ nhất
+            </h1>
+            <p>Nếu bạn chưa chắc chắn , có thể thay đổi sau này</p>
+            <mat-form-field appearance="fill" >
+
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let cate of course_categories" [value]="cate">
+                  {{cate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div align="end">
+              <button mat-raised-button matStepperPrevious>Trở lại</button>
+              <button (click)="saveCourse()" mat-raised-button matStepperNext color="primary" [disabled]="this.courseFormGroup.invalid">
+                Tiếp theo
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </mat-step>
+    </mat-stepper>
+  </form>
+</div>

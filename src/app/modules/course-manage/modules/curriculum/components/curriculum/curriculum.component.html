@@ -1,0 +1,63 @@
+<div class="curriculum-wrapper">
+  <app-course-manage-header-content-layout>
+    <h1 header>Chương trình giảng dạy</h1>
+    <div content>
+      <div class="btns-list">
+        <div class="add-btn-container">
+          <ng-template [ngIf]="!BtnsMenuOpen" [ngIfElse]="clearBtnTemp">
+            <button class="add-btn" (click)="BtnsMenuOpen = true">
+              <i class="material-icons">add</i>
+            </button>
+          </ng-template>
+          <ng-template #clearBtnTemp>
+            <button class="delete-btn" (click)="BtnsMenuOpen = false">
+              <i class="material-icons">clear</i>
+            </button>
+          </ng-template>
+        </div>
+      </div>
+
+      <ng-template [ngIf]="BtnsMenuOpen">
+        <div class="content-type-btns" (click)="BtnsMenuOpen = false">
+          <button class="btn" (click)="lectureCreationOpen = true">
+            <span class="d-flex"
+              ><i class="material-icons">add_box</i>Bài học</span
+            ></button
+          ><button class="btn">
+            <span class="d-flex"
+              ><i class="material-icons">add_box</i>Câu hỏi trắc nghiệm</span
+            ></button
+          ><button class="btn">
+            <span class="d-flex"
+              ><i class="material-icons">add_box</i>Bài tập lập trình</span
+            >
+          </button>
+        </div>
+      </ng-template>
+      <ng-template [ngIf]="lectureCreationOpen">
+        <div class="lecture-creation-wrapper">
+          <app-lecture-creation
+            (btn-click)="lectureCreationClickEvent($event)"
+          ></app-lecture-creation>
+        </div>
+      </ng-template>
+
+      <ng-container *ngIf="ContentListObservable | async as contentList">
+        <div
+          cdkDropList
+          class="drag-drop-list"
+          (cdkDropListDropped)="drop($event,contentList)"
+        >
+          <app-lecture
+            [order]="i + 1"
+            [title]="content.title"
+            [lecture-id]="content.id"
+            class="drag-drop-box"
+            *ngFor="let content of contentList;trackBy:trackByFn;let i=index;"
+            cdkDrag
+          ></app-lecture>
+        </div>
+      </ng-container>
+    </div>
+  </app-course-manage-header-content-layout>
+</div>

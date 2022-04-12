@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -18,10 +18,10 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     AppRoutingModule,
     CoreModule.forRoot(),
+    NgHttpLoaderModule.forRoot(),
     BrowserAnimationsModule,
     MatIconModule,
     MatBadgeModule,
-
   ],
   bootstrap: [AppComponent],
 })

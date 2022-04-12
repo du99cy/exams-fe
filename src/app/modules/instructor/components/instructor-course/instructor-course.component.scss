@@ -1,0 +1,109 @@
+.list-course {
+  margin: 70px;
+  h1 {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 50px;
+  }
+  .search-add {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    .search {
+      display: flex;
+      align-items: center;
+      input {
+        height: 48px;
+        padding: 0px 16px;
+      }
+      mat-icon {
+        height: 48px;
+        width: 48px;
+        font-size: 48px;
+        color: #ffffff;
+        background-color: #111;
+      }
+    }
+    .add {
+      height: 48px;
+      padding: 0px 16px;
+      border: none;
+      background-color: #0d4579;
+      color: #ffffff;
+      font-weight: bold;
+    }
+  }
+  .course {
+    display: flex;
+    border: 1px solid #d1d7dc;
+    align-items: center;
+    margin-bottom: 50px;
+    .course-content {
+        display: flex;
+
+        flex: 1;
+        position: relative;
+        cursor: pointer;
+        .course-hover{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(255, 255, 255, 0.9);
+            display: none;
+            text-align: center;
+            margin: auto;
+
+           h3{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #0d4579;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+           }
+        }
+      .course-infor {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0px 20px;
+        span {
+          font-weight: bold;
+          padding: 20px 0px;
+        }
+      }
+      .course-process {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        padding: 0px 20px;
+        span {
+          width: 200px;
+          font-weight: bold;
+        }
+      }
+    }
+    .course-content:hover .course-hover{
+        display: block;
+    }
+  }
+  .user-manual {
+    display: flex;
+    border: 1px solid #d1d7dc;
+    align-items: center;
+    .user-manual-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      h3 {
+        font-size: 24px;
+      }
+      span {
+        margin-right: 70px;
+      }
+    }
+  }
+}

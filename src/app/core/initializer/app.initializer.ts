@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '@core/authentication/auth.service';
 import { environment } from '@environment/environment';
 
@@ -33,6 +34,9 @@ export function appInitializer(authService: AuthService) {
               authService.refreshToken().subscribe((res) => {
                 //get user information
                 authService.userInfor().subscribe().add(resolve);
+              },
+              (err:HttpErrorResponse)=>{
+                resolve()
               });
             }
             else

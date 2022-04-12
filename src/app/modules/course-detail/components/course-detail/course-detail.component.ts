@@ -58,7 +58,7 @@ export class CourseDetailComponent implements OnInit {
           this.courses = data;
           console.log("detail",data)
           let course = this.courses[0];
-          console.log(course)
+
           this.button_dis = this.assignBtnByStatus(course?.trang_thai_dang_ki)
           this.courseDetailService
             .getTopicByClassId(queryParams['class_id'])
