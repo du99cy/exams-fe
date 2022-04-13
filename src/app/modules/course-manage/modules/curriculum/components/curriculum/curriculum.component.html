@@ -1,6 +1,9 @@
 <div class="curriculum-wrapper">
   <app-course-manage-header-content-layout>
-    <h1 header>Chương trình giảng dạy</h1>
+    <div header class="header">
+      <h1>Chương trình giảng dạy</h1>
+      <button class="btn save-btn" >Xem trước</button>
+    </div>
     <div content>
       <div class="btns-list">
         <div class="add-btn-container">
@@ -51,7 +54,9 @@
           <app-lecture
             [order]="i + 1"
             [title]="content.title"
-            [lecture-id]="content.id"
+            [content-id]="content.id"
+            [course-id]="content.course_id"
+            [description]="content.description"
             class="drag-drop-box"
             *ngFor="let content of contentList;trackBy:trackByFn;let i=index;"
             cdkDrag

@@ -17,7 +17,6 @@ import { CurriculumService } from '../../services/curriculum.service';
   selector: 'app-curriculum',
   templateUrl: './curriculum.component.html',
   styleUrls: ['./curriculum.component.scss'],
-  providers: [CurriculumService,CourseCreationService],
 })
 export class CurriculumComponent implements OnInit, OnDestroy {
   ContentListObservable: Observable<Array<Content>>;
@@ -83,7 +82,7 @@ export class CurriculumComponent implements OnInit, OnDestroy {
         order_contents: contentIdOrderUpdate,
       };
       //update to database
-      this.courseService.updateCourse(this.course_id,courseModel).subscribe();
+      this.courseService.updateCourse(this.course_id, courseModel).subscribe();
     }
   }
 

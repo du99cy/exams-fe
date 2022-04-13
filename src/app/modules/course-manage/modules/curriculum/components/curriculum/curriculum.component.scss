@@ -1,4 +1,11 @@
 .curriculum-wrapper {
+  .header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+
+  }
   .drag-drop-list {
     width: 100%;
     max-width: 100%;

@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { EditorModule } from '@shared/modules/editor.module';
 import { LectureCreationComponent } from './components/lecture-creation/lecture-creation.component';
+import { CurriculumService } from './services/curriculum.service';
+import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
 
 @NgModule({
   imports: [
@@ -25,5 +27,6 @@ import { LectureCreationComponent } from './components/lecture-creation/lecture-
     LectureComponent,
     LectureCreationComponent,
   ],
+  providers: [CurriculumService,CourseCreationService],
 })
 export class CurriculumModule {}
