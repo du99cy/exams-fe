@@ -24,6 +24,7 @@
     "@kolkov/angular-editor": "^2.0.0",
     "@types/facebook-js-sdk": "^3.3.5",
     "ng-http-loader": "^11.0.1",
+    "ngx-image-cropper": "^6.1.0",
     "rxjs": "~7.4.0",
     "sweetalert2": "^11.4.7",
     "tslib": "^2.3.0",

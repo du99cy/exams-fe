@@ -51,6 +51,11 @@ const routes: Routes = [
     path: 'test',
     loadChildren: () =>
       import('@modules/test/test.module').then((m) => m.TestModule),
+  },
+  {
+    path: 'video',
+    loadChildren: () =>
+      import('@modules/course-video/course-video.module').then((m) => m.CourseVideoModule),
   }
 
 ];
