@@ -5,7 +5,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '@modules/new-course-creation/models/course';
 
 import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
@@ -61,7 +61,8 @@ export class CurriculumComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private curriculumService: CurriculumService,
-    private courseService: CourseCreationService
+    private courseService: CourseCreationService,
+    private router:Router
   ) {}
   ngOnInit(): void {
     this.route.parent.parent.params.subscribe((params) => {
@@ -92,5 +93,9 @@ export class CurriculumComponent implements OnInit, OnDestroy {
 
   trackByFn(index: number, item: any) {
     return item.id;
+  }
+
+  preview(){
+    this.router.navigateByUrl(`course/${this.course_id}/contents?mode=preview`)
   }
 }

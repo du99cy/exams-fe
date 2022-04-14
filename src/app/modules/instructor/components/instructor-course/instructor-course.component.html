@@ -7,14 +7,14 @@
     </div>
     <button (click)="createNewCourse()" class="add">Tạo khóa học mới</button>
   </div>
-  <div class="course">
+  <div class="course"  *ngFor="let course of CourseObs | async">
     <img
       src="../../../../../assets/create-course/placeholder.jpg"
       alt=""
       class="img-response"
       height="118px"
     />
-    <div class="course-content" *ngFor="let course of CourseObs | async">
+    <div class="course-content">
       <div class="course-infor">
         <span>{{ course.title }}</span>
         <span>{{ course.category }}</span>
