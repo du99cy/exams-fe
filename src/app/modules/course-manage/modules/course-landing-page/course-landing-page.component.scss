@@ -1,0 +1,26 @@
+.course-landing-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  .course-landing-item {
+    display: flex;
+    flex-direction: column;
+    span {
+      font-size: 16px;
+      font-weight: bold;
+      padding: 20px 0px;
+    }
+    input {
+      height: 48px;
+      outline: none;
+    }
+  }
+}
+h1 {
+    font-family: SuisseWorks, Georgia, Times, times new roman, serif,
+      apple color emoji, segoe ui emoji, segoe ui symbol;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.35;
+    letter-spacing: -0.02rem;
+  }
