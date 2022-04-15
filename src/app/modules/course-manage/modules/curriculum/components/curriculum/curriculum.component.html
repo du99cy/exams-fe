@@ -26,7 +26,7 @@
             <span class="d-flex"
               ><i class="material-icons">add_box</i>Bài học</span
             ></button
-          ><button class="btn">
+          ><button class="btn" (click)="quizCreationOpen=true">
             <span class="d-flex"
               ><i class="material-icons">add_box</i>Câu hỏi trắc nghiệm</span
             ></button
@@ -37,6 +37,7 @@
           </button>
         </div>
       </ng-template>
+      <!-- lecture-creation -->
       <ng-template [ngIf]="lectureCreationOpen">
         <div class="lecture-creation-wrapper">
           <app-lecture-creation
@@ -44,7 +45,14 @@
           ></app-lecture-creation>
         </div>
       </ng-template>
-
+      <!-- quiz -->
+      <ng-template [ngIf]="quizCreationOpen">
+        <div class="lecture-creation-wrapper">
+          <app-quiz-creation
+            (btn-click)="lectureCreationClickEvent($event)"
+          ></app-quiz-creation>
+        </div>
+      </ng-template>
       <ng-container *ngIf="ContentListObservable | async as contentList">
         <div
           cdkDropList

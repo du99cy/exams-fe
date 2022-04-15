@@ -23,6 +23,7 @@ export class CurriculumComponent implements OnInit, OnDestroy {
   course_id: string;
   BtnsMenuOpen = false;
   lectureCreationOpen = false;
+  quizCreationOpen = false;
   orderContentChange = false;
   contentListTrace: Array<Content> = [];
 
