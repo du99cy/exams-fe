@@ -15,6 +15,8 @@ import { QuizCreationComponent } from './components/quiz-creation/quiz-creation.
 import { QuizComponent } from './components/quiz/quiz.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AnswerOptionComponent } from './components/answer-option/answer-option.component';
+import { NormalEditorModule } from '@shared/modules/normal-editor.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -25,6 +27,7 @@ import { AnswerOptionComponent } from './components/answer-option/answer-option.
     MatButtonModule,
     MatExpansionModule,
     EditorModule,
+    NormalEditorModule,FormsModule
   ],
   declarations: [
     CurriculumComponent,

@@ -1,34 +1,38 @@
-.lecture-creation-wrapper{
+.lecture-creation-wrapper {
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  form {
     width: 100%;
-    height: auto;
-    border: 1px solid rgba(0,0,0,0.5);
-    padding:20px;
-    form{
+    padding: 20px;
+    .input-container {
       width: 100%;
-      .input-container{
-        width: 100%;
-        display:flex;
+      display: flex;
+      flex-direction: column;
+      
+      .title {
+        display: flex;
         align-items: center;
-        margin-left:10%;
-        span{
-          font-size:16px;
-          width:10%;
+        padding-bottom: 20px;
+        span {
+          font-size: 16px;
         }
-        div{
-          width: 80%;
-          height:40px;
-          input{
-            width: 100%;
-            height: 100%;
-            outline:none;
-          }
+        input {
+          flex: 1;
+          padding: 10px;
+          height: 100%;
+          outline: none;
+          font-size: 16px;
         }
-  
       }
-  
-      .btns-container{
-        margin-top:10px;
+      .desc{
+          display: flex;
+          flex-direction: column;
       }
     }
+
+    .btns-container {
+      margin-top: 10px;
+    }
   }
-  
+}

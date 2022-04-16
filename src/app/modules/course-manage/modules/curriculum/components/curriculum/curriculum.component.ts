@@ -21,6 +21,7 @@ import { CurriculumService } from '../../services/curriculum.service';
 export class CurriculumComponent implements OnInit, OnDestroy {
   ContentListObservable: Observable<Array<Content>>;
   course_id: string;
+  description: string
   BtnsMenuOpen = false;
   lectureCreationOpen = false;
   quizCreationOpen = false;
@@ -50,6 +51,28 @@ export class CurriculumComponent implements OnInit, OnDestroy {
       this.addContent(content).subscribe((res) => {
         //close menu and content creation form
         this.lectureCreationOpen = false;
+        //get content list
+        this.ContentListObservable =
+          this.curriculumService.getAllContentViaCourseId(this.course_id);
+      });
+    }
+    //close menu and content creation form
+    else this.lectureCreationOpen = false;
+  }
+  quizCreationClickEvent(event: any) {
+    if (event.status == 1) {
+      console.log(event)
+      //create content insert
+      let content: Content = {
+        title: event.data.title,
+        description: event.data.description,
+        type_status: 1,
+        course_id: this.course_id,
+      };
+
+      this.addContent(content).subscribe((res) => {
+        //close menu and content creation form
+        this.quizCreationOpen = false;
         //get content list
         this.ContentListObservable =
           this.curriculumService.getAllContentViaCourseId(this.course_id);

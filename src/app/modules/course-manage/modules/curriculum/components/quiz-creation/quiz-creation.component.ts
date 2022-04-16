@@ -13,9 +13,10 @@ export class QuizCreationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  btnClickHandler(status:number,data:string=''){
+  btnClickHandler(status:number,formValue:any){
     //status 0:cancel,1:save
-    this.btnClick.emit({status:status,data:data});
+    this.btnClick.emit({status:status,data:formValue});
+    
   }
   
 }

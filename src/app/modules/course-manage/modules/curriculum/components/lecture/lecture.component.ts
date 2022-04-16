@@ -15,13 +15,14 @@ export class LectureComponent implements OnInit {
   @Input('title') title: string = 'Introduction';
   @Input('content-id') content_id: string = '';
   @Input('course-id') course_id: string;
-
+  @Input('status-type') status:  number = 0 
   @Input('description') description: string;
   videoResourse: Array<ResourseFile> =[];
   fileResourse: Array<ResourseFile>=[];
 
   expandMorePress: boolean = false;
   videoUploadPress: boolean = false;
+  addQuestion: boolean =  false;
   descriptionUploadPress: boolean = false;
   resourseUploadPress: boolean = false;
 

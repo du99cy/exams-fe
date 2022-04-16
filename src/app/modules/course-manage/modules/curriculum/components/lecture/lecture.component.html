@@ -1,7 +1,7 @@
 <div class="lecture-wrapper">
   <div class="title">
     <div class="title-left">
-      <div class="lecture-name">Bài học {{ order }}: {{ title }}</div>
+      <div class="lecture-name">Nội dung ({{status===1?"Bài tập trắc nghiệm" : "Bài học"}}) {{ order }}: {{ title }}</div>
       <div class="action">
         <div>
           <a mat-icon-button>
@@ -107,6 +107,7 @@
       <span>Video</span>
     </div>
   </ng-template>
+  
   <ng-template #videoExistsTemp>
     <div class="resourse" *ngFor="let video of videoResourse;trackBy:trackByFn">
       {{video.name}}({{video.size/(1024*1024) | number }}MB)
@@ -124,4 +125,15 @@
     <i class="material-icons">add</i>
     <span>Tài liệu</span>
   </div>
+  <div>
+    Danh sách câu hỏi
+  </div>
+  <div class="content-btn" (click)="addQuestion =true">
+    <i class="material-icons">add</i>
+    <span>Thêm câu hỏi</span>
+  </div>
+  <ng-template ngIf="addQuestion">
+    <app-question></app-question>
+  </ng-template>
 </ng-template>
+  
