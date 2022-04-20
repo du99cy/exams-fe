@@ -20,7 +20,9 @@ import { ContentComponent } from './components/content/content.component';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { QuestionService } from './services/question.service';
+
 import { ExerciseCreationComponent } from './components/exercise-creation/exercise-creation.component';
+
 
 @NgModule({
   imports: [
@@ -44,6 +46,7 @@ import { ExerciseCreationComponent } from './components/exercise-creation/exerci
     QuestionComponent,
     AnswerOptionComponent,
     ContentComponent,
+    CreatCodingComponent,
   ],
   providers: [CurriculumService, CourseCreationService, QuestionService],
 })

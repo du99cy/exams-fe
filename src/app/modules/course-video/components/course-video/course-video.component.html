@@ -1,6 +1,12 @@
 <div class="layout">
   <div class="course-video">
-    <video [src]="videoURL" controls autoplay preload="auto" controlsList="nodownload"></video>
+    <video
+      [src]="videoURL"
+      controls
+      autoplay
+      preload="auto"
+      controlsList="nodownload"
+    ></video>
     <mat-tab-group mat-align-tabs="start">
       <mat-tab label="Mô tả"><p [innerHTML]="description"></p></mat-tab>
       <mat-tab label="Second">Content 2</mat-tab>
@@ -15,8 +21,19 @@
         trackBy: trackByFn
       "
     >
-      <mat-card (click)="getDetailContent(content)" class="d-flex"
-        ><i class="material-icons mr-2">play_circle_outline</i> {{ i + 1 }}.  {{ content.title }}</mat-card
+      <mat-card
+        (click)="getDetailContent(content)"
+        class="d-flex"
+        *ngIf="content.type_status === 0"
+        ><i class="material-icons mr-2">play_circle_outline</i> {{ i + 1 }}.
+        {{ content.title }}</mat-card
+      >
+      <mat-card
+        (click)="goToDetail(content.id)"
+        class="d-flex"
+        *ngIf="content.type_status === 1"
+        ><i class="material-icons mr-2">assignment</i> {{ i + 1 }}.
+        {{ content.title }}</mat-card
       >
     </ng-container>
   </div>
