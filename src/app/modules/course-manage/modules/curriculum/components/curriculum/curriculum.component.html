@@ -26,11 +26,26 @@
             <span class="d-flex"
               ><i class="material-icons">add_box</i>Bài học</span
             ></button
-          ><button class="btn" (click)="quizCreationOpen = true">
+          ><button
+            class="btn"
+            (click)="
+              quizCreationOpen = true;
+              content = {
+                type: 1,
+                creation_title: 'Tạo bài tập trắc nghiệm mới:'
+              }
+            "
+          >
             <span class="d-flex"
               ><i class="material-icons">add_box</i>Câu hỏi trắc nghiệm</span
             ></button
-          ><button class="btn">
+          ><button
+            class="btn"
+            (click)="
+              quizCreationOpen = true;
+              content = { type: 2, creation_title: 'Tạo bài tập coding mới:' }
+            "
+          >
             <span class="d-flex"
               ><i class="material-icons">add_box</i>Bài tập lập trình</span
             >
@@ -48,9 +63,10 @@
       <!-- quiz -->
       <ng-template [ngIf]="quizCreationOpen">
         <div class="lecture-creation-wrapper">
-          <app-quiz-creation
+          <app-exercise-creation
+            [title-creation]="content.creation_title"
             (btn-click)="quizCreationClickEvent($event)"
-          ></app-quiz-creation>
+          ></app-exercise-creation>
         </div>
       </ng-template>
       <ng-container *ngIf="ContentListObservable | async as contentList">
@@ -70,8 +86,18 @@
             "
             cdkDrag
           >
-            <div class="example-handle" cdkDragHandle dragIcon style="display: flex;align-items: center;">
-              <svg width="24px" fill="currentColor" viewBox="0 0 24 24" style="color:rgba(0,0,0,0.5)">
+            <div
+              class="example-handle"
+              cdkDragHandle
+              dragIcon
+              style="display: flex; align-items: center"
+            >
+              <svg
+                width="24px"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                style="color: rgba(0, 0, 0, 0.5)"
+              >
                 <path
                   d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
                 ></path>

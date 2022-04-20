@@ -11,7 +11,7 @@ import { EditorModule } from '@shared/modules/editor.module';
 import { LectureCreationComponent } from './components/lecture-creation/lecture-creation.component';
 import { CurriculumService } from './services/curriculum.service';
 import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
-import { QuizCreationComponent } from './components/quiz-creation/quiz-creation.component';
+
 import { QuizComponent } from './components/quiz/quiz.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AnswerOptionComponent } from './components/answer-option/answer-option.component';
@@ -20,7 +20,9 @@ import { ContentComponent } from './components/content/content.component';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { QuestionService } from './services/question.service';
-import { CreatCodingComponent } from './components/creat-coding/creat-coding.component';
+
+import { ExerciseCreationComponent } from './components/exercise-creation/exercise-creation.component';
+
 
 @NgModule({
   imports: [
@@ -39,7 +41,7 @@ import { CreatCodingComponent } from './components/creat-coding/creat-coding.com
     CurriculumComponent,
     LectureComponent,
     LectureCreationComponent,
-    QuizCreationComponent,
+    ExerciseCreationComponent,
     QuizComponent,
     QuestionComponent,
     AnswerOptionComponent,

@@ -5,6 +5,7 @@ export interface Question {
   name?: string
   description?: string
   answers?: Array<Answer>
+  answers_of_student?:Array<string>
   answers_right_id?: Array<string>
   question_type?: string
   content_id?: string
