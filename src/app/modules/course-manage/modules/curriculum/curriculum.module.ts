@@ -46,7 +46,7 @@ import { ExerciseCreationComponent } from './components/exercise-creation/exerci
     QuestionComponent,
     AnswerOptionComponent,
     ContentComponent,
-    CreatCodingComponent,
+
   ],
   providers: [CurriculumService, CourseCreationService, QuestionService],
 })
