@@ -20,6 +20,7 @@ import { ContentComponent } from './components/content/content.component';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { QuestionService } from './services/question.service';
+import { CreatCodingComponent } from './components/creat-coding/creat-coding.component';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { QuestionService } from './services/question.service';
     QuestionComponent,
     AnswerOptionComponent,
     ContentComponent,
+    CreatCodingComponent,
   ],
   providers: [CurriculumService, CourseCreationService, QuestionService],
 })

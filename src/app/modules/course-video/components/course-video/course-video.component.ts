@@ -4,7 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Content } from '@modules/course-manage/modules/curriculum/models/content';
 import { CurriculumService } from '@modules/course-manage/modules/curriculum/services/curriculum.service';
 import { CourseVideoService } from '@modules/course-video/services/course-video.service';
+import { content } from '@modules/home/models/content';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-video',
@@ -25,7 +27,8 @@ export class CourseVideoComponent implements OnInit,OnDestroy {
     private route: ActivatedRoute,
     private curriculumService: CurriculumService,
     private courseVideoService: CourseVideoService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,5 +67,8 @@ export class CourseVideoComponent implements OnInit,OnDestroy {
   }
   ngOnDestroy(){
     URL.revokeObjectURL(this.urlObject);
+  }
+  goToDetail(_id:string) {
+    this.router.navigateByUrl(`/multiple-choice/${_id}`)
   }
 }

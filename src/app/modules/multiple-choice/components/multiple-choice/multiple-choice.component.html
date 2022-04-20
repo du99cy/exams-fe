@@ -6,20 +6,20 @@
     <div class="row">
       <div class="question-content" *ngFor="let item of filteredQuestions">
         <span class="question-name">
-          Câu {{ pager.index + 1 }}: {{ item.questionText }}
+          Câu {{ pager.index + 1 }}: <span [innerHTML]="item.name"></span>
         </span>
         <br />
-        <div *ngFor="let op of item.options">
+        <div *ngFor="let op of item.answers">
           <input
-            [type]="item.questionType"
-            value="op.text"
+            [type]="item.question_type"
+            value="op.id"
             [checked]="op.checked"
-            (change)="updateStatusQuestion(op.text)"
+            (change)="updateStatusQuestion(op.name)"
             [(ngModel)]="op.checked"
             name="op.type"
-            id="{{op.text}}"
+            id="{{op.name}}"
           />
-          <label for="{{op.text}}">{{ op.text }}</label>
+          <label for="{{op.name}}" [innerHTML] = "op.name"></label>
         </div>
         <div class="btn-group">
           <button (click)="goTo(pager.index - 1)">Câu trước</button>
@@ -42,7 +42,7 @@
           <div
             [ngStyle]="{ 'background-color': i===pager.index ? '#73c7af' : '#fff' }"
             class="grid-item"
-            *ngFor="let qs of this.data; let i = index"
+            *ngFor="let qs of this.questionList; let i = index"
             (click)="goTo(i)"
           >
             {{ i + 1 }}

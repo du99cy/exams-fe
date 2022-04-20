@@ -5,8 +5,9 @@ import { MultipleChoiceComponent } from './components/multiple-choice/multiple-c
 
 const routes: Routes = [
   {
-    path: '',
-    component:MultipleChoiceComponent
+    path: ':content_id',
+    component:MultipleChoiceComponent,
+    pathMatch: 'full'
   }
 ];
 
