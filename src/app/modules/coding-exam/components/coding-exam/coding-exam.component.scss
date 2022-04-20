@@ -1,43 +1,31 @@
-
 :host {
-    --background_color: #1e1e1e;
-    --text_color: white;
-  }
-  .coding-wrapper {
-    height: 100%;
-    font-family: monospace;
-    overflow-x: hidden;
-    .header {
-      .row > div {
-        height: 100%;
-        width: 100%;
+  --background_color: #1e1e1e;
+  --text_color: white;
+}
+.coding-wrapper {
+  font-family: monospace;
+  overflow-x: hidden;
+  display: flex;
+    .user-tap {
+      display: flex;
+      .user-icon {
+        margin: 5px;
       }
-      background-color: #2b3b52;
-      height: 70px;
-  
-      .user-tap {
-        display: flex;
-        .user-icon {
-          margin: 5px;
-        }
-      } 
-      .back-tap {
-        display: flex;
-      }
-      color: aliceblue;
-      span {
-        font-size: 20px;
-        font-weight: 500;
-      }
+    } 
+    .back-tap {
+      display: flex;
     }
-  
+    color: aliceblue;
+    span {
+      font-size: 20px;
+      font-weight: 500;
+    }
     .split-screen {
       background-color: var(--background_color);
       color: var(--text_color);
-      height: 100%;
-      width: calc(100% + 30px);
+      flex: 1;
       .my-code-editor {
-        height: calc(100% - 50px);
+        height: calc(100% - 70px);
       }
       .editor {
         display: flex;
@@ -138,31 +126,33 @@
       }
     }
   }
+
   
-  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-    background-color: transparent !important;
-  }
-  ::ng-deep .mat-form-field-type-mat-native-select .mat-input-element {
-    background: #2b3b52 !important;
-  }
-  ::ng-deep .mat-select-value-text,
-  ::ng-deep.mat-select-arrow {
-    color: aliceblue !important;
-  }
-  ::ng-deep .mat-form-field-wrapper {
-    padding-top: 10px;
-  }
-  ::ng-deep .mat-expansion-indicator::after {
-    color: var(--text_color);
-  }
-  ::ng-deep .mat-progress-spinner > svg {
-    width: 50px !important;
-    height: 50px !important;
-  }
-  ::ng-deep .mat-select-panel{
-    position: relative;
-    top: 40px;
-    right: 10px;
-  }
-  
-  
+
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: transparent !important;
+}
+::ng-deep .mat-form-field-type-mat-native-select .mat-input-element {
+  background: #2b3b52 !important;
+}
+::ng-deep .mat-select-value-text,
+::ng-deep.mat-select-arrow {
+  color: aliceblue !important;
+}
+::ng-deep .mat-form-field-wrapper {
+  padding-top: 10px;
+}
+::ng-deep .mat-expansion-indicator::after {
+  color: var(--text_color);
+}
+::ng-deep .mat-progress-spinner > svg {
+  width: 50px !important;
+  height: 50px !important;
+}
+::ng-deep .mat-select-panel{
+  position: relative;
+  top: 40px;
+  right: 10px;
+}
+

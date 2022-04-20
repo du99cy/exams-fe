@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MonacoEditorModule } from 'ngx-monaco-editor';
+
 import { CodingExamRoutingModule } from './coding-exam-routing.module';
 import { CodingExamComponent } from './components/coding-exam/coding-exam.component';
 import { OptionCodingEditorComponent } from './components/option-coding-editor/option-coding-editor.component';
@@ -14,6 +14,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion'; 
 import {MatRadioModule} from '@angular/material/radio';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+
 
 
 
@@ -23,7 +25,7 @@ import {MatRadioModule} from '@angular/material/radio';
     CodingExamRoutingModule,
     FormsModule,
     MatIconModule,
-    MonacoEditorModule.forRoot(),
+    MonacoEditorModule,
     AngularSplitModule,
     MatButtonModule,
     MatDialogModule,
@@ -31,13 +33,18 @@ import {MatRadioModule} from '@angular/material/radio';
     MatExpansionModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatRadioModule
-    
+    MatRadioModule,
+    MonacoEditorModule.forRoot(),
+    CommonModule
   ],
   declarations: [
     CodingExamComponent,
     OptionCodingEditorComponent,
     DialogSubmitComponent
   ],
+  providers: [
+   
+  ],
+  bootstrap: [ CodingExamComponent],
 })
 export class CodingExamModule {}
