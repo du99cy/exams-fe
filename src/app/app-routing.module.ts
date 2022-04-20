@@ -60,6 +60,10 @@ const routes: Routes = [
   {
     path: 'course',
     loadChildren: () => import('@modules/course/course.module').then(m=>m.CourseModule)
+  },
+  {
+    path: 'multiple-choice',
+    loadChildren: () => import('@modules/multiple-choice/multiple-choice.module').then(m=>m.MultipleChoiceModule)
   }
 
 ];
