@@ -1,20 +1,55 @@
 <div class="container">
-    <div class="time">
-        <h1>Exam name</h1>
-    </div>
-    <div class="multiple-choice">
-        <div class="row">
-            <div class="question-content">
-
-            </div>
-            <div class="number-question">
-                <div class="user-infor">
-
-                </div>
-                <div class="number">
-                    
-                </div>
-            </div>
+  <div class="time">
+    <h1>Exam name</h1>
+  </div>
+  <div class="multiple-choice">
+    <div class="row">
+      <div class="question-content" *ngFor="let item of filteredQuestions">
+        <span class="question-name">
+          Câu {{ pager.index + 1 }}: {{ item.questionText }}
+        </span>
+        <br />
+        <div *ngFor="let op of item.options">
+          <input
+            [type]="item.questionType"
+            value="op.text"
+            [checked]="op.checked"
+            (change)="updateStatusQuestion(op.text)"
+            [(ngModel)]="op.checked"
+            name="op.type"
+            id="{{op.text}}"
+          />
+          <label for="{{op.text}}">{{ op.text }}</label>
         </div>
+        <div class="btn-group">
+          <button (click)="goTo(pager.index - 1)">Câu trước</button>
+          <button (click)="goTo(pager.index + 1)">Câu tiếp</button>
+        </div>
+      </div>
+      <div class="number-question">
+        <div class="user-infor">
+          <img
+            src="../../../../../assets/common-img/carlos-muza-hpjSkU2UYSU-unsplash.jpg"
+            alt=""
+          />
+          <div class="infor">
+            <span>Name: Ha Quang Huy</span>
+            <span>Id: 0123488121</span>
+          </div>
+        </div>
+        <h3>Thời gian còn lại: 15:30</h3>
+        <div class="number">
+          <div
+            [ngStyle]="{ 'background-color': i===pager.index ? '#73c7af' : '#fff' }"
+            class="grid-item"
+            *ngFor="let qs of this.data; let i = index"
+            (click)="goTo(i)"
+          >
+            {{ i + 1 }}
+          </div>
+        </div>
+        <button class="submit">Hoàn thành bài thi</button>
+      </div>
     </div>
+  </div>
 </div>

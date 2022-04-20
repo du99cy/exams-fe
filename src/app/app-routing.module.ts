@@ -64,6 +64,10 @@ const routes: Routes = [
   {
     path: 'multiple-choice',
     loadChildren: () => import('@modules/multiple-choice/multiple-choice.module').then(m=>m.MultipleChoiceModule)
+  },
+  {
+    path: 'coding-exam',
+    loadChildren: () => import('@modules/coding-exam/coding-exam.module').then(m=>m.CodingExamModule)
   }
 
 ];
