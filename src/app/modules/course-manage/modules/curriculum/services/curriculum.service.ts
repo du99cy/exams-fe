@@ -54,6 +54,7 @@ export class CurriculumService {
   getAllResourseViaContentId(content_id: string): Observable<any> {
     let uri = fmt(routes.getAllResourseViaContentId, { content_id });
     return this.httpClient.get(uri).pipe(map((res:any)=>{
+
       return res.status_code == 200?res.data:[]
     }),first());
   }

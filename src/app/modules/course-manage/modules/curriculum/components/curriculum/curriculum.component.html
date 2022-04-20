@@ -26,7 +26,7 @@
             <span class="d-flex"
               ><i class="material-icons">add_box</i>Bài học</span
             ></button
-          ><button class="btn" (click)="quizCreationOpen=true">
+          ><button class="btn" (click)="quizCreationOpen = true">
             <span class="d-flex"
               ><i class="material-icons">add_box</i>Câu hỏi trắc nghiệm</span
             ></button
@@ -57,19 +57,28 @@
         <div
           cdkDropList
           class="drag-drop-list"
-          (cdkDropListDropped)="drop($event,contentList)"
+          (cdkDropListDropped)="drop($event, contentList)"
         >
-          <app-lecture
+          <app-content
             [order]="i + 1"
-            [title]="content.title"
-            [content-id]="content.id"
-            [course-id]="content.course_id"
-            [description]="content.description"
-            [status-type]="content.type_status"
+            [content]="content"
             class="drag-drop-box"
-            *ngFor="let content of contentList;trackBy:trackByFn;let i=index;"
+            *ngFor="
+              let content of contentList;
+              trackBy: trackByFn;
+              let i = index
+            "
             cdkDrag
-          ></app-lecture>
+          >
+            <div class="example-handle" cdkDragHandle dragIcon style="display: flex;align-items: center;">
+              <svg width="24px" fill="currentColor" viewBox="0 0 24 24" style="color:rgba(0,0,0,0.5)">
+                <path
+                  d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+                ></path>
+                <path d="M0 0h24v24H0z" fill="none"></path>
+              </svg>
+            </div>
+          </app-content>
         </div>
       </ng-container>
     </div>

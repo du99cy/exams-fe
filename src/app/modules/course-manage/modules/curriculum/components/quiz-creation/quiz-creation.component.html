@@ -1,19 +1,21 @@
-<div class="lecture-creation-wrapper">
-  <form #formQuizCreation = "ngForm">
-    <div class="input-container">
-      <div class="title">
-        <span>Bài tập trắc nghiệm :</span>
-        <input name="title" ngModel type="text" placeholder="Nhập tiêu đề ..." #input />
-      </div>
-      <div class="desc">
-        <span>Mô tả</span>
-        <app-normal-editor name="description" ngModel></app-normal-editor>
+<div class="quiz-creation-wrapper">
+  <form #form = "ngForm">
+    <div class="title">Tạo bài tập trắc nghiệm mới:</div>
+    <div class="content">
+      <input type="text" placeholder="Tiêu đề" name="title" ngModel/>
+      <app-normal-editor name="description" ngModel></app-normal-editor>
+      <input type="number" placeholder="Thời gian làm bài(phút)" name="timeForQuiz" ngModel/>
+
+      <div class="btns-container" align="end">
+        <button
+          class="btn cancel-btn"
+          (click)="btnClickHandler(0)"
+          type="button"
+        >
+          Huỷ
+        </button>
+        <button class="btn save-btn" type="button" (click)="btnClickHandler(1,form.value)">Lưu</button>
       </div>
     </div>
-
-    <div class="btns-container" align="end">
-        <button class="btn cancel-btn" (click)="btnClickHandler(0,'')" type="button">Huỷ</button>
-        <button class="btn save-btn" (click)="btnClickHandler(1,formQuizCreation.value)" type="button">Lưu</button>
-      </div>
   </form>
 </div>

@@ -16,7 +16,10 @@ import { QuizComponent } from './components/quiz/quiz.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AnswerOptionComponent } from './components/answer-option/answer-option.component';
 import { NormalEditorModule } from '@shared/modules/normal-editor.module';
+import { ContentComponent } from './components/content/content.component';
 import { FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { QuestionService } from './services/question.service';
 
 @NgModule({
   imports: [
@@ -27,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     MatExpansionModule,
     EditorModule,
-    NormalEditorModule,FormsModule
+    NormalEditorModule,
+    FormsModule,
+    MatRadioModule,
   ],
   declarations: [
     CurriculumComponent,
@@ -37,7 +42,8 @@ import { FormsModule } from '@angular/forms';
     QuizComponent,
     QuestionComponent,
     AnswerOptionComponent,
+    ContentComponent,
   ],
-  providers: [CurriculumService,CourseCreationService],
+  providers: [CurriculumService, CourseCreationService, QuestionService],
 })
 export class CurriculumModule {}

@@ -11,18 +11,14 @@ import { CurriculumService } from '../../services/curriculum.service';
   styleUrls: ['./lecture.component.scss'],
 })
 export class LectureComponent implements OnInit {
-  @Input('order') order: number = 0;
-  @Input('title') title: string = 'Introduction';
-  @Input('content-id') content_id: string = '';
-  @Input('course-id') course_id: string;
-  @Input('status-type') status:  number = 0 
-  @Input('description') description: string;
-  videoResourse: Array<ResourseFile> =[];
-  fileResourse: Array<ResourseFile>=[];
 
-  expandMorePress: boolean = false;
+  @Input('video-resourses') videoResourse: Array<ResourseFile> =[];
+  @Input('file-resourses') fileResourse: Array<ResourseFile>=[];
+  @Input('description') description: string = ''
+  @Input('content-id')content_id:string = ''
+  @Input("course-id") course_id:string = ''
+
   videoUploadPress: boolean = false;
-  addQuestion: boolean =  false;
   descriptionUploadPress: boolean = false;
   resourseUploadPress: boolean = false;
 
@@ -38,9 +34,7 @@ export class LectureComponent implements OnInit {
       //update to database
       this.curriculumService
         .updateContent(this.content_id, contentBodyUpdate)
-        .subscribe((res) => {
-          console.log(res);
-        });
+        .subscribe();
     }
 
     this.descriptionUploadPress = false;
@@ -83,19 +77,11 @@ export class LectureComponent implements OnInit {
         this.curriculumService.addResourse(resourse).subscribe()
       });
     }
-
-  }
-
-  getVideoAndFileResourses(){
-    //lazy get video and file resourse
-    this.curriculumService.getAllResourseViaContentId(this.content_id).subscribe(res=>{
-      this.videoResourse = res.video_resourse_list;
-      this.fileResourse = res.file_resourse_list;
-    })
-    this.expandMorePress = true
+    this.cancelUploadFileHandler(uploadType)
   }
 
   trackByFn(index:number,item:any){
     return item.id;
   }
+
 }

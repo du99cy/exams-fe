@@ -1,47 +1,102 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Content } from '../../models/content';
-import { CurriculumService } from '../../services/curriculum.service';
+import { Observable } from 'rxjs';
+import { Answer } from '../../models/answer';
+import { Question } from '../../models/question';
+import { QuestionService } from '../../services/question.service';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+  styleUrls: ['./quiz.component.scss'],
 })
 export class QuizComponent implements OnInit {
-
-  @Input('order') order: number = 0;
-  @Input('title') title: string = 'Introduction';
-  @Input('content-id') content_id: string = '';
+  @Input('content-id') content_id: string;
   @Input('course-id') course_id: string;
+  questions: Array<Question> = [];
 
-  @Input('description') description: string;
-  descriptionUploadPress: boolean;
-  
+  formAction = 'save';
 
-  constructor(private curriculumService: CurriculumService) {}
+  addNewQuestion: boolean = false;
+  newQuestion: Question;
 
-  ngOnInit() {}
+  constructor(private questionService: QuestionService) {}
 
-  editorClickHandler(event: any): void {
-    if (event.name == 'save') {
-      this.description = event.data
-      let contentBodyUpdate: Content = { description: event.data };
+  ngOnInit(): void {
+    //get all questions via content id
+    this.questionService
+      .getAllQuestionViaContent(this.content_id, 'preview')
+      .subscribe((res: Array<Question>) => {
+        this.questions = res;
+      });
+  }
 
-      //update to database
-      this.curriculumService
-        .updateContent(this.content_id, contentBodyUpdate)
-        .subscribe((res) => {
-          console.log(res);
-        });
+  btnClickEventHandler(event: any) {
+    if (event.status === 0) this.addNewQuestion = false;
+  }
+
+  createNewQuestion() {
+    this.formAction = 'save';
+    this.addNewQuestion = true;
+    let answers: Array<Answer> = [1, 2, 3].map((order) => {
+      return {
+        id: String(Date.now() + order),
+        name: '',
+        description: '',
+      };
+    });
+    this.newQuestion = {
+      id: String(Date.now()) + Math.random().toString(16).slice(2),
+      answers: answers,
+      answers_right_id: [],
+      question_type: 'radio',
+      course_id: this.course_id,
+      content_id: this.content_id,
+    };
+  }
+
+  addAnswer() {
+    this.newQuestion.answers.push(this.newAnswer());
+  }
+
+  newAnswer(): Answer {
+    return {
+      id: String(Date.now()),
+      name: '',
+      description: '',
+    };
+  }
+  saveQuestion() {
+    if (this.formAction == 'save') {
+      //save to database
+      this.questionService.addQuestion(this.newQuestion).subscribe();
+      //update the screen
+      this.questions.push(this.newQuestion);
+    } else {
+      //update
+      let questionUpdate: Question = {
+        name: this.newQuestion.name,
+        description: this.newQuestion.description,
+        answers:this.newQuestion.answers,
+        answers_right_id:this.newQuestion.answers_right_id,
+        question_type:this.newQuestion.question_type
+      };
+      this.questionService
+        .updateQuestion(this.newQuestion.id, questionUpdate)
+        .subscribe();
     }
-
-    this.descriptionUploadPress = false;
+    this.addNewQuestion = false;
   }
-  
 
-  
-  trackByFn(index:number,item:any){
-    return item.id;
+  editQuestion(question: Question) {
+    this.formAction = 'edit';
+    //assign question for edit
+    this.newQuestion = question;
+    this.addNewQuestion = true;
   }
-  
+
+  deleteQuestion(question_id: string) {
+    //delete from database
+    this.questionService.removeQuestion(question_id).subscribe();
+    this.questions = this.questions.filter((qs) => qs.id != question_id);
+  }
 }

@@ -40,24 +40,38 @@ export class CurriculumComponent implements OnInit, OnDestroy {
 
   lectureCreationClickEvent(event: any) {
     if (event.status == 1) {
-      let title = event.data;
+
       //create content insert
       let content: Content = {
-        title: title,
-        type_status: 0,
+        title: event.data,
+        type_status: 1,
         course_id: this.course_id,
       };
-
-      this.addContent(content).subscribe((res) => {
-        //close menu and content creation form
-        this.lectureCreationOpen = false;
-        //get content list
-        this.ContentListObservable =
-          this.curriculumService.getAllContentViaCourseId(this.course_id);
-      });
+      //add content to database
+      this.addContent(content);
+      //close menu and content creation form
+      this.lectureCreationOpen = false;
     }
     //close menu and content creation form
-    else this.lectureCreationOpen = false;
+    this.lectureCreationOpen = false;
+  }
+
+  quizCreationClickEvent(event: any) {
+
+    if(event.status === 1){
+      let content:Content = {
+        title:event.data.title,
+        description:event.data.description,
+        type_status:1,
+        course_id:this.course_id,
+        time_for_quiz_minutes:event.data.timeForQuiz
+
+      }
+
+      this.addContent(content)
+    }
+
+    this.quizCreationOpen = false
   }
   quizCreationClickEvent(event: any) {
     if (event.status == 1) {
@@ -86,7 +100,7 @@ export class CurriculumComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private curriculumService: CurriculumService,
     private courseService: CourseCreationService,
-    private router:Router
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.route.parent.parent.params.subscribe((params) => {
@@ -112,14 +126,18 @@ export class CurriculumComponent implements OnInit, OnDestroy {
   }
 
   addContent(contentBody: Content) {
-    return this.curriculumService.addContent(contentBody);
+    this.curriculumService.addContent(contentBody).subscribe((res) => {
+      //get content list
+      this.ContentListObservable =
+        this.curriculumService.getAllContentViaCourseId(this.course_id);
+    });
   }
 
   trackByFn(index: number, item: any) {
     return item.id;
   }
 
-  preview(){
-    this.router.navigateByUrl(`course/${this.course_id}/contents?mode=preview`)
+  preview() {
+    this.router.navigateByUrl(`course/${this.course_id}/contents?mode=preview`);
   }
 }

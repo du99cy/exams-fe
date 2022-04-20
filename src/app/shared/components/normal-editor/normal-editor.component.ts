@@ -15,6 +15,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   ],
 })
 export class NormalEditorComponent implements OnInit, ControlValueAccessor {
+
+  @Input('placeholder') placeholder: string  ="Nhập mô tả "
   content: string;
   propagateChange = (_: any) => {};
 
