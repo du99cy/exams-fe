@@ -1,38 +1,6 @@
 <div class="lecture-wrapper">
-  <div class="title">
-    <div class="title-left">
-      <div class="lecture-name">Bài học {{ order }}: {{ title }}</div>
-      <div class="action">
-        <div>
-          <a mat-icon-button>
-            <i class="material-icons">edit</i>
-          </a>
-        </div>
-        <div>
-          <a mat-icon-button>
-            <i class="material-icons">delete</i>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="title-right">
-      <ng-template [ngIf]="!expandMorePress" [ngIfElse]="expand_less_temp">
-        <div>
-          <button mat-icon-button (click)="getVideoAndFileResourses()">
-            <i class="material-icons"> expand_more </i>
-          </button>
-        </div>
-      </ng-template>
-      <ng-template #expand_less_temp>
-        <div>
-          <button mat-icon-button (click)="expandMorePress = !expandMorePress">
-            <i class="material-icons"> expand_less </i>
-          </button>
-        </div>
-      </ng-template>
-    </div>
-  </div>
-  <div class="content" *ngIf="expandMorePress">
+
+  <div class="content">
     <ng-container
       *ngTemplateOutlet="
         !videoUploadPress ? videoNotExpandTemp : fileSelectTemp;

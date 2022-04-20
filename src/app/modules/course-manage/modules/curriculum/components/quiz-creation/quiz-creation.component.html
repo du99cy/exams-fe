@@ -1,15 +1,21 @@
-<div class="lecture-creation-wrapper">
-    <form>
-      <div class="input-container" >
-        <span>Bài học mới :</span>
-        <div>
-          <input type="text" placeholder="Nhập tiêu đề ..." #input>
-        </div>
-      </div>
+<div class="quiz-creation-wrapper">
+  <form #form = "ngForm">
+    <div class="title">Tạo bài tập trắc nghiệm mới:</div>
+    <div class="content">
+      <input type="text" placeholder="Tiêu đề" name="title" ngModel/>
+      <app-normal-editor name="description" ngModel></app-normal-editor>
+      <input type="number" placeholder="Thời gian làm bài(phút)" name="timeForQuiz" ngModel/>
+
       <div class="btns-container" align="end">
-        <button class="btn cancel-btn" (click)="btnClickHandler(0)" type="button">Huỷ</button>
-        <button class="btn save-btn" (click)="btnClickHandler(1,input.value)" type="button">Lưu</button>
+        <button
+          class="btn cancel-btn"
+          (click)="btnClickHandler(0)"
+          type="button"
+        >
+          Huỷ
+        </button>
+        <button class="btn save-btn" type="button" (click)="btnClickHandler(1,form.value)">Lưu</button>
       </div>
-    </form>
-  </div>
-  
+    </div>
+  </form>
+</div>

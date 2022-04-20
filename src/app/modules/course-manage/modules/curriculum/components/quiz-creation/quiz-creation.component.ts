@@ -16,6 +16,7 @@ export class QuizCreationComponent implements OnInit {
   btnClickHandler(status:number,data:string=''){
     //status 0:cancel,1:save
     this.btnClick.emit({status:status,data:data});
+
   }
-  
+
 }
