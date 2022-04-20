@@ -48,7 +48,11 @@ const routes: Routes = [
         path: 'setup-test', // child route path
         component: SetupTestComponent
       },
-      
+      {
+        path: '',
+        redirectTo:'intended-learners'
+      }
+
   ]
   },
 ];

@@ -6,6 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./lecture-creation.component.scss']
 })
 export class LectureCreationComponent implements OnInit {
+
   @Output('btn-click') btnClick = new EventEmitter()
   constructor() { }
 

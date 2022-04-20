@@ -3,7 +3,7 @@
     <div class="title-left">
       <div class="content-name">
         Nội dung {{ order }}({{
-          content.type_status == 0 ? "Bài học" : "Bài tập trắc nghiệm"
+          content.type_status == 0 ? "Bài học" : content.type_status == 1?"Bài tập trắc nghiệm":"Bài tập coding"
         }}): {{ content.title }}
       </div>
       <div class="action">

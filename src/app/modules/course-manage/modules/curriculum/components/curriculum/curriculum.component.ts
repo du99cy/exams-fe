@@ -19,6 +19,7 @@ import { CurriculumService } from '../../services/curriculum.service';
   styleUrls: ['./curriculum.component.scss'],
 })
 export class CurriculumComponent implements OnInit, OnDestroy {
+
   ContentListObservable: Observable<Array<Content>>;
   course_id: string;
   description: string
@@ -27,6 +28,8 @@ export class CurriculumComponent implements OnInit, OnDestroy {
   quizCreationOpen = false;
   orderContentChange = false;
   contentListTrace: Array<Content> = [];
+  content:any = {type:'',creation_title:''}
+
 
   drop(
     event: CdkDragDrop<{ title: string; poster: string }[]>,
@@ -62,7 +65,7 @@ export class CurriculumComponent implements OnInit, OnDestroy {
       let content:Content = {
         title:event.data.title,
         description:event.data.description,
-        type_status:1,
+        type_status:this.content.type,
         course_id:this.course_id,
         time_for_quiz_minutes:event.data.timeForQuiz
 
@@ -73,28 +76,28 @@ export class CurriculumComponent implements OnInit, OnDestroy {
 
     this.quizCreationOpen = false
   }
-  quizCreationClickEvent(event: any) {
-    if (event.status == 1) {
-      console.log(event)
-      //create content insert
-      let content: Content = {
-        title: event.data.title,
-        description: event.data.description,
-        type_status: 1,
-        course_id: this.course_id,
-      };
+  // quizCreationClickEvent(event: any) {
+  //   if (event.status == 1) {
+  //     console.log(event)
+  //     //create content insert
+  //     let content: Content = {
+  //       title: event.data.title,
+  //       description: event.data.description,
+  //       type_status: 1,
+  //       course_id: this.course_id,
+  //     };
 
-      this.addContent(content).subscribe((res) => {
-        //close menu and content creation form
-        this.quizCreationOpen = false;
-        //get content list
-        this.ContentListObservable =
-          this.curriculumService.getAllContentViaCourseId(this.course_id);
-      });
-    }
-    //close menu and content creation form
-    else this.lectureCreationOpen = false;
-  }
+  //     this.addContent(content).subscribe((res) => {
+  //       //close menu and content creation form
+  //       this.quizCreationOpen = false;
+  //       //get content list
+  //       this.ContentListObservable =
+  //         this.curriculumService.getAllContentViaCourseId(this.course_id);
+  //     });
+  //   }
+  //   //close menu and content creation form
+  //   else this.lectureCreationOpen = false;
+  // }
 
   constructor(
     private route: ActivatedRoute,
