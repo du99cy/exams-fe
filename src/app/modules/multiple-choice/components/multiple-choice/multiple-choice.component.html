@@ -20,8 +20,9 @@
               [id]="op.id"
               (change)="chooseAnswer(question, op.id)"
               [checked]="question.answers_of_student.includes(op.id)"
+              [disabled]="this.mode == 'view'"
             />
-            <label for="{{ op.id }}" [innerHTML]="op.name"></label>
+            <label for="{{ op.id }}" [innerHTML]="op.name" [ngStyle]="{'color':op.id | color : question : this.mode}"></label>
           </div>
           <div class="btn-group">
             <button (click)="goTo(questionList, pager.index - 1)">
@@ -35,15 +36,15 @@
         <div class="number-question">
           <div class="user-infor">
             <img
-              src="../../../../../assets/common-img/carlos-muza-hpjSkU2UYSU-unsplash.jpg"
+              [src]="userInfor.avatar_pic"
               alt=""
             />
             <div class="infor">
-              <span>Name: Ha Quang Huy</span>
-              <span>Id: 0123488121</span>
+              <span>{{userInfor.first_name+" "+userInfor.last_name}}</span>
+              <!-- <span>Id:{{userInfor.id}}</span> -->
             </div>
           </div>
-          <h3>Thời gian còn lại: 15:30</h3>
+          <!-- <h3>Thời gian còn lại: 15:30</h3> -->
           <div class="number">
             <div
               [ngStyle]="{
@@ -61,7 +62,7 @@
               {{ i + 1 }}
             </div>
           </div>
-          <button class="submit">Hoàn thành bài thi</button>
+          <button class="submit" (click)="finishExam()">Hoàn thành bài thi</button>
         </div>
       </div>
     </ng-container>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '@core/authentication/auth.service';
 import { Question } from '@modules/course-manage/modules/curriculum/models/question';
 
 import { CourseVideoService } from '@modules/course-video/services/course-video.service';
@@ -11,8 +12,11 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./multiple-choice.component.scss'],
 })
 export class MultipleChoiceComponent implements OnInit {
+  //mode for exam or view history exam
+  mode:string = 'exam'
   favoriteSeason: string;
   questionListObservable: Observable<Array<Question>>
+  userInfor:any
 
   pager = {
     index: 0,
@@ -21,7 +25,8 @@ export class MultipleChoiceComponent implements OnInit {
   };
   constructor(
     private courseVideoService: CourseVideoService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private AuthService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +37,9 @@ export class MultipleChoiceComponent implements OnInit {
           'preview'
         );
     });
+
+    this.userInfor = this.AuthService.User
+
   }
   filteredQuestions(questionList: Array<Question>): Array<Question> {
     return questionList
@@ -66,5 +74,9 @@ export class MultipleChoiceComponent implements OnInit {
         );
       }
     }
+  }
+
+  finishExam(){
+    this.mode = 'view'
   }
 }
