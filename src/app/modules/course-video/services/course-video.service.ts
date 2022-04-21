@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { fmt, mapToHttpParamsQuery } from '@core/utilities/helpers';
 import { api_urls } from '@shared/configs/api_url';
-import { first, Observable } from 'rxjs';
+import { first, map, Observable } from 'rxjs';
 
 const BASE_URL = api_urls.LOCAL_API_URL;
 
@@ -23,6 +23,9 @@ export class CourseVideoService {
   getQuestionByContentId(content_id: string, mode:string):Observable<any>{
     let uri = fmt(routes.getQuestion, { content_id });
     let httpParams = mapToHttpParamsQuery({mode:"preview"})
-    return this.httpClient.get(uri,{params:httpParams}).pipe(first())
+    return this.httpClient.get(uri,{params:httpParams}).pipe(first(),map((res:any)=>{
+      return res.data
+
+    }))
   }
 }

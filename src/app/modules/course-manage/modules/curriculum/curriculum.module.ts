@@ -48,6 +48,7 @@ import { CodingCreationComponent } from './components/coding-creation/coding-cre
     AnswerOptionComponent,
     ContentComponent,
     CodingCreationComponent,
+
   ],
   providers: [CurriculumService, CourseCreationService, QuestionService],
 })

@@ -3,53 +3,68 @@
     <h1>Exam name</h1>
   </div>
   <div class="multiple-choice">
-    <div class="row">
-      <div class="question-content" *ngFor="let item of filteredQuestions">
-        <span class="question-name">
-          Câu {{ pager.index + 1 }}: <span [innerHTML]="item.name"></span>
-        </span>
-        <br />
-        <div *ngFor="let op of item.answers">
-          <input
-            [type]="item.question_type"
-            value="op.id"
-            [checked]="op.checked"
-            (change)="updateStatusQuestion(op.name)"
-            [(ngModel)]="op.checked"
-            name="op.type"
-            id="{{op.name}}"
-          />
-          <label for="{{op.name}}" [innerHTML] = "op.name"></label>
-        </div>
-        <div class="btn-group">
-          <button (click)="goTo(pager.index - 1)">Câu trước</button>
-          <button (click)="goTo(pager.index + 1)">Câu tiếp</button>
-        </div>
-      </div>
-      <div class="number-question">
-        <div class="user-infor">
-          <img
-            src="../../../../../assets/common-img/carlos-muza-hpjSkU2UYSU-unsplash.jpg"
-            alt=""
-          />
-          <div class="infor">
-            <span>Name: Ha Quang Huy</span>
-            <span>Id: 0123488121</span>
+    <ng-container *ngIf="this.questionListObservable | async as questionList">
+      <div class="row">
+        <div
+          class="question-content"
+          *ngFor="let question of filteredQuestions(questionList)"
+        >
+          <span class="question-name">
+            Câu {{ pager.index + 1 }}: <span [innerHTML]="question.name"></span>
+          </span>
+          <br />
+          <div *ngFor="let op of question.answers">
+            <input
+              [type]="question.question_type"
+              [name]="question.id"
+              [id]="op.id"
+              (change)="chooseAnswer(question, op.id)"
+              [checked]="question.answers_of_student.includes(op.id)"
+              [disabled]="this.mode == 'view'"
+            />
+            <label for="{{ op.id }}" [innerHTML]="op.name" [ngStyle]="{'color':op.id | color : question : this.mode}"></label>
+          </div>
+          <div class="btn-group">
+            <button (click)="goTo(questionList, pager.index - 1)">
+              Câu trước
+            </button>
+            <button (click)="goTo(questionList, pager.index + 1)">
+              Câu tiếp
+            </button>
           </div>
         </div>
-        <h3>Thời gian còn lại: 15:30</h3>
-        <div class="number">
-          <div
-            [ngStyle]="{ 'background-color': i===pager.index ? '#73c7af' : '#fff' }"
-            class="grid-item"
-            *ngFor="let qs of this.questionList; let i = index"
-            (click)="goTo(i)"
-          >
-            {{ i + 1 }}
+        <div class="number-question">
+          <div class="user-infor">
+            <img
+              [src]="userInfor.avatar_pic"
+              alt=""
+            />
+            <div class="infor">
+              <span>{{userInfor.first_name+" "+userInfor.last_name}}</span>
+              <!-- <span>Id:{{userInfor.id}}</span> -->
+            </div>
           </div>
+          <!-- <h3>Thời gian còn lại: 15:30</h3> -->
+          <div class="number">
+            <div
+              [ngStyle]="{
+                'background-color':
+                  i === pager.index
+                    ? 'rgba(0,0,0,0.2)'
+                    : qs.answers_of_student.length != 0
+                    ? 'greenyellow'
+                    : '#fff'
+              }"
+              class="grid-item"
+              *ngFor="let qs of questionList; let i = index"
+              (click)="goTo(questionList, i)"
+            >
+              {{ i + 1 }}
+            </div>
+          </div>
+          <button class="submit" (click)="finishExam()">Hoàn thành bài thi</button>
         </div>
-        <button class="submit">Hoàn thành bài thi</button>
       </div>
-    </div>
+    </ng-container>
   </div>
 </div>
