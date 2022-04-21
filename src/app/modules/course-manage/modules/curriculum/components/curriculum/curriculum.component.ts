@@ -26,6 +26,7 @@ export class CurriculumComponent implements OnInit, OnDestroy {
   BtnsMenuOpen = false;
   lectureCreationOpen = false;
   quizCreationOpen = false;
+  codingCreationOpen = false;
   orderContentChange = false;
   contentListTrace: Array<Content> = [];
   content:any = {type:'',creation_title:''}
@@ -75,6 +76,24 @@ export class CurriculumComponent implements OnInit, OnDestroy {
     }
 
     this.quizCreationOpen = false
+  }
+
+  codingCreationClickEvent(event: any) {
+
+    // if(event.status === 1){
+    //   let content:Content = {
+    //     title:event.data.title,
+    //     description:event.data.description,
+    //     type_status:this.content.type,
+    //     course_id:this.course_id,
+    //     time_for_quiz_minutes:event.data.timeForQuiz
+
+    //   }
+
+    //   this.addContent(content)
+    // }
+
+    this.codingCreationOpen = false
   }
 
 

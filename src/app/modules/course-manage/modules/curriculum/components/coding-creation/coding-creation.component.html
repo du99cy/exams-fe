@@ -1,0 +1,68 @@
+<div style="display: flex">
+  <div style="display: flex" class="function-name">
+    <label for="">Tên hàm</label>
+    <input type="text" />
+  </div>
+  <div style="display: flex" class="function-name" s>
+    <label for="">Thời gian thực thi</label>
+    <input type="number" />
+  </div>
+</div>
+<div>
+  <ng-template *ngIf="inputParameter">
+    <ul>
+      <li></li>
+    </ul>
+  </ng-template>
+  <div style="display: flex; margin: 20px 0px; flex-direction: column;">
+    <label for="">Danh sách đầu vào:</label>
+    <ng-template [ngIf]="showBtnInput" [ngIfElse]="addInputTemp">
+        <button (click)="addInput()"> <i class="material-icons">add</i>Thêm đầu vào</button>
+    </ng-template>
+    <ng-template #addInputTemp>
+        <div class="add-input">
+            <div>
+                <label for="">Tên đầu vào:</label>
+                <input type="text" name="" id="">
+            </div>
+            <div>
+                <label for="">Loại:</label>
+                <input type="text" name="" id="">
+            </div>
+            <div>
+                <label for="">Giá trị:</label>
+                <input type="text" name="" id="">
+            </div>
+        </div>
+    </ng-template>
+  </div>
+</div>
+<div style="display: flex; margin: 20px 0px; align-items: center; ">
+    <label for="">Kiểu dữ liệu đầu ra</label>
+    <input type="number" style="height:40px; margin-left:20px; ">
+</div>
+<div>
+  <ng-template *ngIf="inputParameter">
+    <ul>
+      <li></li>
+    </ul>
+  </ng-template>
+  <div style="display: flex; margin: 20px 0px; flex-direction: column;">
+    <label for="">Danh sách Test Case:</label>
+    <ng-template [ngIf]="showBtnTest" [ngIfElse]="addTestCaseTemp">
+        <button  (click)="addTestCase()"><i class="material-icons">add</i>Thêm test case vào</button>
+    </ng-template>
+    <ng-template #addTestCaseTemp>
+        <div class="add-input">
+            <div>
+                <label for="">Giá trị đầu vào</label>
+                <input type="text" name="" id="">
+            </div>
+            <div>
+                <label for="">Giá trị đầu ra</label>
+                <input type="text" name="" id="">
+            </div>
+        </div>
+    </ng-template>
+  </div>
+</div>

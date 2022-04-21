@@ -22,6 +22,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { QuestionService } from './services/question.service';
 
 import { ExerciseCreationComponent } from './components/exercise-creation/exercise-creation.component';
+import { CodingCreationComponent } from './components/coding-creation/coding-creation.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ExerciseCreationComponent } from './components/exercise-creation/exerci
     QuestionComponent,
     AnswerOptionComponent,
     ContentComponent,
+    CodingCreationComponent,
 
   ],
   providers: [CurriculumService, CourseCreationService, QuestionService],
