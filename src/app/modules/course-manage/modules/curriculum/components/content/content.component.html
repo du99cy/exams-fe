@@ -3,7 +3,11 @@
     <div class="title-left">
       <div class="content-name">
         Nội dung {{ order }}({{
-          content.type_status == 0 ? "Bài học" : content.type_status == 1?"Bài tập trắc nghiệm":"Bài tập coding"
+          content.type_status == 0
+            ? "Bài học"
+            : content.type_status == 1
+            ? "Bài tập trắc nghiệm"
+            : "Bài tập coding"
         }}): {{ content.title }}
       </div>
       <div class="action">
@@ -41,7 +45,7 @@
 
   <ng-template [ngIf]="expandMorePress">
     <div class="content">
-      <ng-template [ngIf]="content.type_status == 0" >
+      <ng-template [ngIf]="content.type_status == 0">
         <ng-container *ngIf="this.DetailsObserable | async as resourses">
           <app-lecture
             [video-resourses]="resourses.video_resourse_list"
@@ -58,8 +62,11 @@
           [course-id]="content.course_id"
         ></app-quiz>
       </ng-template>
-      <ng-template [ngIf] ="content.type_status ==2">
-        <app-coding-creation></app-coding-creation>
+      <ng-template [ngIf]="content.type_status == 2">
+        <app-coding-creation
+          [content-id]="content.id"
+          [course-id]="content.course_id"
+        ></app-coding-creation>
       </ng-template>
     </div>
   </ng-template>

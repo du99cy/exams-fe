@@ -25,7 +25,7 @@ export class CodingExamComponent {
   text_color = '';
   editorOptions = {
     theme: 'vs-dark',
-    language: 'python',
+    language: 'javascript',
     automaticLayout: true,
   };
   code: string = '';

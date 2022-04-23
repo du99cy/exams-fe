@@ -17,13 +17,17 @@ import { QuestionComponent } from './components/question/question.component';
 import { AnswerOptionComponent } from './components/answer-option/answer-option.component';
 import { NormalEditorModule } from '@shared/modules/normal-editor.module';
 import { ContentComponent } from './components/content/content.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { QuestionService } from './services/question.service';
 
 import { ExerciseCreationComponent } from './components/exercise-creation/exercise-creation.component';
 import { CodingCreationComponent } from './components/coding-creation/coding-creation.component';
-
+import { CodingAddInputComponent } from './components/coding-add-input/coding-add-input.component';
+import { FunctionService } from './services/function.service';
+import { TestCaseComponent } from './components/testcase/testcase.component';
+import { TestcaseCreationComponent } from './components/testcase-creation/testcase-creation.component';
+import { TestcaseService } from './services/testcase.service';
 
 @NgModule({
   imports: [
@@ -36,6 +40,7 @@ import { CodingCreationComponent } from './components/coding-creation/coding-cre
     EditorModule,
     NormalEditorModule,
     FormsModule,
+    ReactiveFormsModule,
     MatRadioModule,
   ],
   declarations: [
@@ -48,8 +53,16 @@ import { CodingCreationComponent } from './components/coding-creation/coding-cre
     AnswerOptionComponent,
     ContentComponent,
     CodingCreationComponent,
-
+    CodingAddInputComponent,
+    TestCaseComponent,
+    TestcaseCreationComponent
   ],
-  providers: [CurriculumService, CourseCreationService, QuestionService],
+  providers: [
+    CurriculumService,
+    CourseCreationService,
+    QuestionService,
+    FunctionService,
+    TestcaseService
+  ],
 })
 export class CurriculumModule {}

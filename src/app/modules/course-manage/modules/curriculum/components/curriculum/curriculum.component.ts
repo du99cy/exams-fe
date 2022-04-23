@@ -48,7 +48,7 @@ export class CurriculumComponent implements OnInit, OnDestroy {
       //create content insert
       let content: Content = {
         title: event.data,
-        type_status: 1,
+        type_status: 0,
         course_id: this.course_id,
       };
       //add content to database
@@ -60,7 +60,7 @@ export class CurriculumComponent implements OnInit, OnDestroy {
     this.lectureCreationOpen = false;
   }
 
-  quizCreationClickEvent(event: any) {
+  exerciseCreationClickEvent(event: any) {
 
     if(event.status === 1){
       let content:Content = {

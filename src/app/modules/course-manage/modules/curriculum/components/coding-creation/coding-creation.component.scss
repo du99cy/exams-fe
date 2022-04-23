@@ -1,34 +1,58 @@
-.function-name{
-    flex: 1;
+.coding-creation-wrapper{
+  width: 100%;
+
+  .input-container{
+    display:flex;
     align-items: center;
-    input{
-        width: 70%;
-        margin-left: 10px;
-        height: 40px;
-        font-size: 16px;
+    margin-bottom: 20px;
+    .label{
+      width: 20%;
+      font-size: 18px;
+      font-weight: 500;
+
     }
-    label{
-        font-size: 16px;
+    input,select{
+      width: 80%;
+      height:50px;
+      outline:none
     }
-}
-button{
-    background-color: #ffffff;
-    border: 1px solid #111111;
-    padding: 10px;
+  }
+  .input-list{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    span{
+      width:20%;
+      font-size:18px;
+      font-weight: 500;
+    }
+    div{
+      display:flex;
+      width: 20%;
+      align-items: center;
+      justify-content: center;
+
+    }
+  }
+
+  table {
     margin: 20px 0px;
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-}
-label{
-    font-size: 16px;
-}
-.add-input{
-    display: flex;
-    justify-content: space-between;
-    input{
-        height: 40px;
-        margin-left: 10px;
-    }
-    font-size: 16px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .testcase-container{
+    width: 100%;
+  }
+
 }
