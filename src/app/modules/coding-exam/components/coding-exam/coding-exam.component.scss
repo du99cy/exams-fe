@@ -3,6 +3,7 @@
   --text_color: white;
 }
 .coding-wrapper {
+  width: 100%;
   position:absolute;
   top:0;
   right:0;
@@ -88,42 +89,9 @@
         }
         border: 1px solid rgba(128, 128, 128, 0.3);
       }
-      .test-case {
-        font-family: Gotham A, Gotham B, sans-serif;
-        font-size: 14px;
-        letter-spacing: 0.1px;
-        margin: 0;
-        padding: 0;
-        font-weight: 400;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
 
-        .-padding-t-16 {
-          padding-top: 16px;
 
-          .-layout-h {
-            display: flex;
-            flex-direction: row;
-            .task-tests--label {
-              font-weight: 700;
-              margin: 0 0 16px 20px;
-              width: 130px;
-            }
-            .task-tests--value {
-              margin: 0 0 10px 20px;
-              max-width: calc(100% - 130px);
-              word-wrap: break-word;
-              //overflow-x: scroll;
-              -ms-overflow-style: none;
-              scrollbar-width: none;
-            }
-            pre {
-              font-family: Operator Mono SSm A, Operator Mono SSm B, monospace;
-              color: var(--text_color);
-            }
-          }
-        }
-      }
+
       .btn-submit {
         margin: 40px 26%;
         font-size: 20px;

@@ -12,9 +12,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatExpansionModule } from '@angular/material/expansion'; 
+import { MatExpansionModule } from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { OverviewComponent } from './components/overview/overview.component';
+import { CodingExamService } from './services/coding-exam.service';
+import { TestcaseListComponent } from './components/testcase-list/testcase-list.component';
+import { IconCodingExamPipe } from './pipes/icon.pipe';
 
 
 
@@ -40,10 +44,13 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
   declarations: [
     CodingExamComponent,
     OptionCodingEditorComponent,
-    DialogSubmitComponent
+    DialogSubmitComponent,
+    OverviewComponent,
+    TestcaseListComponent,
+    IconCodingExamPipe
   ],
   providers: [
-   
+   CodingExamService
   ],
   bootstrap: [ CodingExamComponent],
 })

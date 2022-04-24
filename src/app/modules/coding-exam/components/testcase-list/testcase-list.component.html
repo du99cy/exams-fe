@@ -1,0 +1,60 @@
+<div class="testcase-list--wrapper">
+  <mat-accordion>
+    <ng-container
+      *ngFor="let testcase of testcases; let i = index; trackBy: trackBy"
+    >
+      <mat-expansion-panel
+        style="background: var(--background_color); color: var(--text_color)"
+      >
+        <mat-expansion-panel-header>
+          <ng-template [ngIf]="testcase.user_output">
+            <span class="mr-2" [innerHTML]="testcase.passed | iconCodingExam"></span>
+          </ng-template>
+
+          Testcase {{ i + 1 }}
+        </mat-expansion-panel-header>
+        <mat-panel-description> </mat-panel-description>
+        <div class="-padding-t-16">
+          <div class="-layout-h">
+            <div class="task-tests--label">Inputs:</div>
+
+            <div class="task-tests--value">
+              <div
+                class="testcase"
+                *ngFor="let input of testcase.inputs; trackBy: trackBy"
+              >
+                <span>{{ input.name }}:</span> {{ input.value }}
+              </div>
+            </div>
+          </div>
+          <div class="-layout-h">
+            <div class="task-tests--label">
+              <div>Expected Output:</div>
+            </div>
+            <div class="task-tests--value">{{ testcase.expected_output }}</div>
+          </div>
+          <ng-template [ngIf]="testcase.user_output != null">
+            <div class="-layout-h">
+              <div class="task-tests--label">
+                <div>Output:</div>
+              </div>
+              <div class="task-tests--value">
+                {{ testcase.user_output }}
+              </div>
+            </div>
+            <div class="-layout-h">
+              <div class="task-tests--label">
+                <div>Console log:</div>
+              </div>
+              <pre class="task-tests--value"></pre>
+            </div>
+          </ng-template>
+          <div class="task-tests--value -empty">
+            Click nút "Run Tests" để xem output và console logs.
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </ng-container>
+  </mat-accordion>
+  <!-- for test case hide -->
+</div>

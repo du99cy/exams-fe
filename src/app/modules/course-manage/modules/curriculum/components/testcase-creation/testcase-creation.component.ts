@@ -9,13 +9,16 @@ import { TestCase } from '../../models/testcase';
 export class TestcaseCreationComponent implements OnInit {
   @Input('testcase') testcase: TestCase;
   @Output('btn-click') emiter = new EventEmitter();
+  testcaseCopy: TestCase
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.testcaseCopy = JSON.parse(JSON.stringify(this.testcase))
+  }
 
   btnClickEvent(btn_status: number) {
     let data;
-    if (btn_status == 1) data = this.testcase;
+    if (btn_status == 1) data = this.testcaseCopy;
     this.emiter.emit({ btn_status: btn_status, data: data });
   }
 }

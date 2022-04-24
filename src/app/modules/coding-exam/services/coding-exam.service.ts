@@ -1,53 +1,38 @@
-
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { QuizCreateService } from './quiz-create.service';
+import { fmt, mapToHttpParamsQuery } from '@core/utilities/helpers';
+import { api_urls } from '@shared/configs/api_url';
+import { first, Observable } from 'rxjs';
 
-
-@Injectable({
-  providedIn: 'root',
-})
+const BASE_URL = `${api_urls.LOCAL_API_URL}/coding`;
+const routes = {
+  getFunctionTemplate: `${BASE_URL}/content/{contentId}/function_template`,
+  runTestcase: `${BASE_URL}/content/{contentId}/run-testcase`,
+};
+@Injectable()
 export class CodingExamService {
-  private BASE_URL = environment.apiUrl;
-  constructor(
-    private http: HttpClient,
-    private CauHoiService: QuizCreateService,
+  constructor(private httpClient: HttpClient) {}
 
-  ) {}
-  getAllCauHoi(id_ky_thi: string): Observable<any> {
-    return this.CauHoiService.GetCauHoiViaKyThi(id_ky_thi);
-  }
-
-  getAllTestCase(id_cau_hoi: string): Observable<any> {
-    const apiURL = `${this.BASE_URL}/testcase/${id_cau_hoi}/get_hide_testcase`
-
-    return this.http.get<any>(apiURL);
-  }
-
-  getTemplateOfLanguage(
-    cauhoiid: string,
+  getFunctionTemplate(
+    contentId: string,
     language_name: string
-  ): Observable<string> {
-    let apiUrl = `${this.BASE_URL}/cauhoi/${cauhoiid}/function_template?language=${language_name}`;
-    return this.http.get<any>(apiUrl);
+  ): Observable<any> {
+    let uri = fmt(routes.getFunctionTemplate, { contentId });
+    let params = mapToHttpParamsQuery({ language: language_name });
+    return this.httpClient.get(uri, { params: params }).pipe(first());
   }
 
-  runTest(
-    cauHoiId: string,
+  runTestcase(
+    contentId: string,
     language_name: string,
-    code: string
+    scripts: string
   ): Observable<any> {
-    //use http params for query parameters
-
-    let params = new HttpParams().set('language', language_name);
-
-    let apiUrl = `${this.BASE_URL}/cauhoi/${cauHoiId}/run_test`;
-    return this.http.post<any>(apiUrl, code, {
-      params: params,
+    let uri = fmt(routes.runTestcase, { contentId });
+    let queryParams = mapToHttpParamsQuery({
+      language_program_name: language_name,
     });
+    return this.httpClient
+      .post(uri, scripts, { params: queryParams })
+      .pipe(first());
   }
 }

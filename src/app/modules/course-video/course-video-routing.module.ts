@@ -10,6 +10,15 @@ const routes: Routes = [
     component: CourseVideoComponent ,
     pathMatch: 'full'
   },
+  {
+    path:':content_id/coding',
+    loadChildren: () => import('@modules/coding-exam/coding-exam.module').then(m=>m.CodingExamModule)
+  },
+  {
+    path:':content_id/quiz',
+    loadChildren: () => import('@modules/multiple-choice/multiple-choice.module').then(m=>m.MultipleChoiceModule)
+  }
+
 ];
 
 @NgModule({

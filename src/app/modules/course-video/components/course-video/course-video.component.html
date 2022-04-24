@@ -13,6 +13,7 @@
       <mat-tab label="Third">Content 3</mat-tab>
     </mat-tab-group>
   </div>
+
   <div class="course-content">
     <ng-container
       *ngFor="
@@ -21,19 +22,11 @@
         trackBy: trackByFn
       "
     >
-      <mat-card
-        (click)="getDetailContent(content)"
-        class="d-flex"
-        *ngIf="content.type_status === 0"
-        ><i class="material-icons mr-2">play_circle_outline</i> {{ i + 1 }}.
-        {{ content.title }}</mat-card
-      >
-      <mat-card
-        (click)="goToDetail(content.id)"
-        class="d-flex"
-        *ngIf="content.type_status === 1"
-        ><i class="material-icons mr-2">assignment</i> {{ i + 1 }}.
-        {{ content.title }}</mat-card
+      <mat-card (click)="getDetailContent(content)" class="d-flex"
+        ><i class="material-icons mr-2">{{
+          content.type_status | content_icon
+        }}</i>
+        {{ i + 1 }}. {{ content.title }}</mat-card
       >
     </ng-container>
   </div>

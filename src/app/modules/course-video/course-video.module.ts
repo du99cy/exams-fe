@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CurriculumService } from '@modules/course-manage/modules/curriculum/services/curriculum.service';
 import { CommonModule } from '@angular/common';
 import { CourseVideoService } from './services/course-video.service';
+import { ContentIconPipe } from './pipes/content-icon.pipe';
 @NgModule({
   imports: [
     CourseVideoRoutingModule,
@@ -13,7 +14,7 @@ import { CourseVideoService } from './services/course-video.service';
     MatCardModule,
     CommonModule,
   ],
-  declarations: [CourseVideoComponent],
+  declarations: [CourseVideoComponent,ContentIconPipe],
   providers: [CurriculumService,CourseVideoService],
 })
 export class CourseVideoModule {}

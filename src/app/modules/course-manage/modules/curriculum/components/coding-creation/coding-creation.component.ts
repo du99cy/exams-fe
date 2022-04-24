@@ -22,7 +22,7 @@ export class CodingCreationComponent implements OnInit {
   paramChange = false;
   params: Array<Parameter> = [];
   paramForEditOrAdd: Parameter;
-  showTestcase: boolean = false
+  showTestcase: boolean = false;
 
   //whether add or update parameters mode
   mode: string = 'add';
@@ -62,23 +62,27 @@ export class CodingCreationComponent implements OnInit {
     this.FunctionFormGroup = this.formBuilder.group(
       this.functionFormAttributes
     );
-    this.functionObservable =  this.funcService.getFunction(this.content_id).pipe(map((res:any)=>{
-      let data:Function = res.data;
-      //asign params list
-      this.params = data.inputs
-      this.FunctionFormGroup.patchValue({
-        name:data.name,
-        execution_time:data.execution_time,
-        output_data_type:data.output_data_type
-      })
-    }))
+    this.functionObservable = this.funcService
+      .getFunction(this.content_id)
+      .pipe(
+        map((res: any) => {
+          let data: Function = res.data;
+          //asign params list
+          this.params = data.inputs;
+          this.FunctionFormGroup.patchValue({
+            name: data.name,
+            execution_time: data.execution_time,
+            output_data_type: data.output_data_type,
+          });
+        })
+      );
   }
   addInput() {
     this.showBtnInput = false;
     this.showTestCasse = true;
   }
 
-  get FunctionForm():any {
+  get FunctionForm(): any {
     return this.FunctionFormGroup.value;
   }
   addTestCase() {
@@ -125,19 +129,21 @@ export class CodingCreationComponent implements OnInit {
   }
 
   codingAddInputEvent(event: any) {
-    let param: Parameter = {
-      id: event.data.id,
-      name: event.data.input_name,
-      datatype: event.data.data_type,
-    };
-    if (this.mode == 'add') {
-      this.params.push(param);
-    } else {
-      let paramEditIndex = this.params.findIndex(
-        (param) => param.id == event.data.id
-      );
+    if (event.mode_code == 1) {
+      let param: Parameter = {
+        id: event.data.id,
+        name: event.data.input_name,
+        datatype: event.data.data_type,
+      };
+      if (this.mode == 'add') {
+        this.params.push(param);
+      } else {
+        let paramEditIndex = this.params.findIndex(
+          (param) => param.id == event.data.id
+        );
 
-      this.params[paramEditIndex] = param;
+        this.params[paramEditIndex] = param;
+      }
     }
 
     this.isAddCodingInput = false;

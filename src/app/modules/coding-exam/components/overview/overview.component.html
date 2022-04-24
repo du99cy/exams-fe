@@ -1,0 +1,31 @@
+<div class="overview-wrapper">
+  <div class="title">
+    {{ content.title }}
+  </div>
+  <div [innerHTML]="content.description"></div>
+
+  <div>Thời gian thực thi: {{ function.execution_time }}</div>
+
+  <div class="input-container">
+    <div>Input</div>
+    <div class="input">
+      <div *ngFor="let input of function.inputs">
+        <div>Tên tham số: {{ input.name }}</div>
+        <div>
+          Kiểu dữ liệu: {{input.datatype}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="output-container">
+    <div>
+      Output:
+    </div>
+    <div>
+      <div>
+        Kiểu dữ liệu: {{function.output_data_type}}
+      </div>
+    </div>
+  </div>
+</div>

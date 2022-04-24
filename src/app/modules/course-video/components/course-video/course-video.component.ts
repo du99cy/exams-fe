@@ -13,11 +13,11 @@ import { Router } from '@angular/router';
   templateUrl: './course-video.component.html',
   styleUrls: ['./course-video.component.scss'],
 })
-export class CourseVideoComponent implements OnInit,OnDestroy {
+export class CourseVideoComponent implements OnInit, OnDestroy {
   description: string;
   videoURL: SafeUrl;
   video: Blob;
-  urlObject:string
+  urlObject: string;
 
   course_id: string;
   //whether preview or real studying
@@ -53,22 +53,27 @@ export class CourseVideoComponent implements OnInit,OnDestroy {
   }
 
   getDetailContent(content: Content) {
-    this.description = content.description;
-    this.courseVideoService
-      .getVideoViaContentId(content.id, this.mode)
-      .subscribe((video) => {
-        this.video = video;
-        this.urlObject = URL.createObjectURL(this.video)
-        this.videoURL = this.sanitizer.bypassSecurityTrustUrl(
-          this.urlObject
-        );
-
-      });
+    //if lecture
+    if (content.type_status == 0) {
+      this.description = content.description;
+      this.courseVideoService
+        .getVideoViaContentId(content.id, this.mode)
+        .subscribe((video) => {
+          this.video = video;
+          this.urlObject = URL.createObjectURL(this.video);
+          this.videoURL = this.sanitizer.bypassSecurityTrustUrl(this.urlObject);
+        });
+    }
+    //if quiz
+    if(content.type_status == 1){
+      this.router.navigate([`./${content.id}/quiz`],{relativeTo:this.route})
+    }
+    //if coding
+    if(content.type_status == 2)
+      this.router.navigate([`./${content.id}/coding`],{relativeTo:this.route})
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     URL.revokeObjectURL(this.urlObject);
   }
-  goToDetail(_id:string) {
-    this.router.navigateByUrl(`/multiple-choice/${_id}`)
-  }
+
 }

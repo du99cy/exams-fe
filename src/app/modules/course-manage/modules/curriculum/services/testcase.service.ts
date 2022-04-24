@@ -9,7 +9,9 @@ const BASE_URL = `${api_urls.LOCAL_API_URL}/testcase`;
 
 const routes = {
   addTestcase: `${BASE_URL}`,
-  getAllTestcaseViaContentId: `${BASE_URL}/{content_id}/all`
+  getAllTestcaseViaContentId: `${BASE_URL}/{content_id}/all`,
+  updateTestcase: `${BASE_URL}/{testcaseId}`,
+  deleteTestcase: `${BASE_URL}/{testcaseId}`
 };
 
 @Injectable()
@@ -23,8 +25,19 @@ export class TestcaseService {
   getAllTestcaseViaContentId(content_id:string): Observable<any> {
     let uri = fmt(routes.getAllTestcaseViaContentId,{content_id})
     return this.httpClient.get(uri).pipe(first(),map((res:any)=>{
-      console.log(res)
+
       return res.data
     }))
+  }
+
+  updateTestcase(testcaseId:string,tescaseBodyUpdate:TestCase){
+    let uri = fmt(routes.updateTestcase,{testcaseId})
+    return this.httpClient.patch(uri,tescaseBodyUpdate).pipe(first())
+  }
+
+  deleteTestcase(testcaseId:string){
+    let uri  = fmt(routes.deleteTestcase,{testcaseId})
+
+    return this.httpClient.delete(uri).pipe(first())
   }
 }
