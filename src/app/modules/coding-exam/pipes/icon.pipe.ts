@@ -5,8 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class IconCodingExamPipe implements PipeTransform {
   transform(passed: boolean) {
-    return passed
-      ? `<i class="material-icons" style="color: greenyellow">check_circle_outline</i>`
-      : `<i class="material-icons" style="color:red">cancel</i>`;
+    return passed ? `check_circle_outline` : `cancel`;
   }
 }
