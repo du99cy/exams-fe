@@ -1,0 +1,27 @@
+:host{
+  .success{
+    background-color: #1fcf35;
+    color: #fff;
+  }
+  .fail{
+    background-color: #cf1f1f;
+    color: #fff;
+  }
+  .noti-container{
+    min-width: 100px;
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    padding: 0.3rem 1rem;
+    line-height: 30px;
+    border-radius: 8px;
+    animation-name: hide-noti;
+    animation-duration: 2s;
+  }
+  @keyframes hide-noti {
+    from {opacity: 1;
+    transform: translate(0, 50px);}
+    to {opacity: 0;
+    transform: translate(0, 0px);}
+  }
+}

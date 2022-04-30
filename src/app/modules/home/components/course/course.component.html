@@ -37,7 +37,7 @@
           {{ item.thoi_gian_ket_thuc * 1000 | date: "MM/dd/yyyy" }}</span
         >
         <div class="tool-btns">
-          <button mat-flat-button class="add-card" color="#106ba3">
+          <button mat-flat-button class="add-card" color="#106ba3" (click)="addToCart(item)">
             Thêm vào giỏ
           </button>
           <div class="favorite-btn">
@@ -57,3 +57,6 @@
     </div>
   </div>
 </div>
+<ng-container *ngIf="noti">
+  <ex-notification [noti]="noti"></ex-notification>
+</ng-container>
