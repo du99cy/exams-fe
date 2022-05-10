@@ -24,6 +24,7 @@ export class CourseVideoService {
     let uri = fmt(routes.getQuestion, { content_id });
     let httpParams = mapToHttpParamsQuery({mode:"preview"})
     return this.httpClient.get(uri,{params:httpParams}).pipe(first(),map((res:any)=>{
+      console.log(res.data)
       return res.data
 
     }))

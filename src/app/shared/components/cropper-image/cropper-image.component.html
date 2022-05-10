@@ -19,12 +19,7 @@
       (cropperReady)="cropperReady($event)"
       (loadImageFailed)="loadImageFailed()"
     ></image-cropper>
-    <img
-      src="../../../../assets/create-course/placeholder (1).jpg"
-      alt=""
-      *ngIf="!showCropper"
-      class="img-response"
-    />
+    <img [src]="srcImg" alt="" *ngIf="!showCropper" class="img-response" />
   </div>
   <div class="input-image">
     <p>
@@ -36,9 +31,10 @@
     <div>
       <label for="upload-photo">
         <span class="upload-photo-box">
-          <span class="upload-photo-text"> No file selected </span>
+          <span class="upload-photo-text"> {{filename}} </span>
         </span>
-        <span class="upload-photo-btn">Select image</span>
+        <span class="upload-photo-btn">{{actionName}}</span>
+
       </label>
       <input
         type="file"
@@ -47,5 +43,6 @@
         (change)="fileChangeEvent($event)"
       />
     </div>
+    <button class="btn save-btn" style="margin-top:20px;width:100px;" (click)="saveImg()" [disabled]="!croppedImage">Lưu ảnh</button>
   </div>
 </div>

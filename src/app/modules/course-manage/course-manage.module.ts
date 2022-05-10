@@ -9,12 +9,14 @@ import { CourseMessagesComponent } from './modules/course-messages/course-messag
 import { FilmEditComponent } from './modules/film-edit/film-edit.component';
 import { HeaderContentLayoutModule } from './core/modules/header-content-layout.module';
 import { PricingComponent } from './modules/pricing/pricing.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CourseManageRoutingModule,
     MatIconModule,
     HeaderContentLayoutModule,
+    FormsModule
   ],
   declarations: [
     LayoutManageComponent,
