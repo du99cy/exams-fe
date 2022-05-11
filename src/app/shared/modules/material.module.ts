@@ -4,7 +4,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   exports: [
     MatFormFieldModule,
@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     MatPasswordStrengthModule,
     MatInputModule,
+    MatSelectModule,
   ],
 })
-export class materialModule {}
+export class MaterialModule {}

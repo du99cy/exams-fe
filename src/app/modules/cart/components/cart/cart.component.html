@@ -1,0 +1,35 @@
+<div class="cart-container">
+  <div class="cart-header">
+    {{title | uppercase}}
+  </div>
+  <div class="cart-body">
+    <div class="cart-items">
+      <table *ngIf="cart?.length > 0; else noRecord">
+        <tr *ngFor="let course of cart">
+          <td>
+            <img [src]="course.avatar">
+          </td>
+          <td>
+            <h2 class="m-0">{{course.ten_lop}}</h2>
+            <h3>Tạo bởi: Nguyễn Văn Anh</h3>
+          </td>
+          <td>
+            <div class="text-right" (click)="remove(course._id)">Xóa</div>
+            <div class="text-right" (click)="remove(course._id)">Lưu vào mục yêu thích</div>
+            <!-- <button>delete</button> -->
+          </td>
+          <td class="price">{{'400000' | number:'1.0-0'}} VNĐ</td>
+        </tr>
+      </table>
+      <ng-template #noRecord>
+        {{noRecordMessage}}
+      </ng-template>
+    </div>
+    <div class="cart-total">
+      <h2>{{total}}</h2>
+      <!-- <td class="text-right"><h2>{{getTotal() | number:'1.0-0'}} VNĐ</h2></td> -->
+      <h1>{{'800000' | number:'1.0-0'}} VNĐ</h1>
+      <button class="exs-btn success-btn checkout-btn w-100" (click)="onCheckout()">{{checkout}}</button>
+    </div>
+  </div>
+</div>

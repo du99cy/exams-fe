@@ -34,7 +34,6 @@ const routes: Routes = [
   {
     path: 'confirm-token',
     loadChildren: () =>
-
       import('@modules/confirm-token/confirm-token.module').then(
         (m) => m.ConfirmTokenModule
       ),
@@ -55,15 +54,25 @@ const routes: Routes = [
   {
     path: 'course/:course_id/contents',
     loadChildren: () =>
-      import('@modules/course-video/course-video.module').then((m) => m.CourseVideoModule),
+      import('@modules/course-video/course-video.module').then(
+        (m) => m.CourseVideoModule
+      ),
   },
   {
     path: 'course',
-    loadChildren: () => import('@modules/course/course.module').then(m=>m.CourseModule)
+    loadChildren: () =>
+      import('@modules/course/course.module').then((m) => m.CourseModule),
   },
-
-
-
+  {
+    path: 'cart',
+    loadChildren: () =>
+      import('@modules/cart/cart.module').then((m) => m.CartModule),
+  },
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('@modules/checkout/checkout.module').then((m) => m.CheckoutModule),
+  },
 ];
 
 @NgModule({

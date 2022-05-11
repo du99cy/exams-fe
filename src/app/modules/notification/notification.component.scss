@@ -1,11 +1,12 @@
+@import '../../shared/styles/color.scss';
 :host{
   .success{
-    background-color: #1fcf35;
-    color: #fff;
+    background-color: $light_green;
+    color: white;
   }
   .fail{
-    background-color: #cf1f1f;
-    color: #fff;
+    background-color: $light_red;
+    color: $white;
   }
   .noti-container{
     min-width: 100px;

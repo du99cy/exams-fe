@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "./app/shared/styles/color.scss";
 html,
 body {
   height: 100%;
@@ -14,17 +14,14 @@ body {
 .save-btn {
   height: 50px;
   width: 10%;
-
-
 }
-.cancel-btn{
+.cancel-btn {
   color: #000;
   font-weight: 500;
 }
-.save-btn{
+.save-btn {
   background-color: #000;
   color: #fff;
-
 }
 
 .btn-add-form {
@@ -36,6 +33,23 @@ body {
   height: 40px;
   width: 15%;
 }
-
-
-
+.remove-icon {
+  color: #000;
+  &:hover {
+    color: #626262;
+    cursor: pointer;
+  }
+}
+.exs-btn {
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  &:hover{
+    opacity: .8;
+    cursor: pointer;
+  }
+}
+.success-btn {
+  background: $dark_blue;
+  color: $white;
+}
