@@ -11,7 +11,7 @@ import { routeParamFactory } from '@core/utilities/activated-route.factories';
 import { Course } from '@modules/new-course-creation/models/course';
 import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
 import { api_urls } from '@shared/configs/api_url';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { CurriculumService } from '../curriculum/services/curriculum.service';
 
 const APP_SOME_ID = new InjectionToken<Observable<string>>('stream id');
@@ -26,18 +26,18 @@ const APP_SOME_ID = new InjectionToken<Observable<string>>('stream id');
       deps: [ActivatedRoute],
     },
     CourseCreationService,
-    CurriculumService
+    CurriculumService,
   ],
 })
 export class CourseLandingPageComponent implements OnInit, OnDestroy {
   //make this variable for event detect change of form
 
-  changeFormNumber:number = 0;
+  changeFormNumber: number = 0;
   isChange: boolean = false;
   getCourseInforMode: string = 'course-landing-page';
   destroy$ = new Subject<boolean>();
   img: string;
-  imgName:string;
+  imgName: string;
   courseId: string;
   formGroup: FormGroup;
   attributes = {
@@ -67,17 +67,18 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
     //initialize form group
     this.formGroup = this.fb.group(this.attributes);
     //get course id
-    this.id$.subscribe((courseId) => (this.courseId = courseId));
+    this.id$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((courseId) => (this.courseId = courseId));
     //get information
     this.getCourseInfor();
     //trace changing of form
-    this.formGroup.valueChanges.subscribe(rel=>{
+    this.formGroup.valueChanges.subscribe((rel) => {
       //when subscribe we will get a result but form have changed Nothing
       //so if number >0 mean that form have changed
-      if(this.changeFormNumber > 0)
-        this.isChange = true
-      this.changeFormNumber +=1
-    })
+      if (this.changeFormNumber > 0) this.isChange = true;
+      this.changeFormNumber += 1;
+    });
   }
   ngOnDestroy() {
     //save status of data into database
@@ -103,8 +104,8 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
           teaching_language: res?.teaching_language,
         });
 
-        this.img =  res.img ? `${api_urls.LOCAL_API_URL}/${res?.img}` : null
-        this.imgName = res.img_name?res.img_name : null
+        this.img = res.img ? `${api_urls.LOCAL_API_URL}/${res?.img}` : null;
+        this.imgName = res.img_name ? res.img_name : null;
       });
   }
 
@@ -112,15 +113,16 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
     return this.formGroup.value;
   }
 
-  getFile(event:any){
-
-    this.curriculumService.uploadFile(event.file,"public").subscribe(res=>{
-      let img = res.data.file
+  getFile(event: any) {
+    this.curriculumService.uploadFile(event.file, 'public').subscribe((res) => {
+      let img = res.data.file;
       //update to database
-      let courseBodyUpdate:Course = {img:img,img_name:event.imgName}
-      this.courseService.updateCourse(this.courseId, courseBodyUpdate).subscribe(res=>{
-        alert("Cập nhật thành công")
-      })
-    })
+      let courseBodyUpdate: Course = { img: img, img_name: event.imgName };
+      this.courseService
+        .updateCourse(this.courseId, courseBodyUpdate)
+        .subscribe((res) => {
+          alert('Cập nhật thành công');
+        });
+    });
   }
 }

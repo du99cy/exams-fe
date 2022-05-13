@@ -52,14 +52,14 @@ export class IntendedLearnersComponent implements OnInit, OnDestroy {
     @Inject(APP_SOME_ID)
     private id$: Observable<string>
   ) {
-    this.id$.subscribe((idParam) => {
+    this.id$.pipe(takeUntil(this.destroy$)).subscribe((idParam) => {
       this.courseId = idParam;
       this.courseServices
         .getCourseInfor(this.courseId, 'goals')
         .pipe(takeUntil(this.destroy$))
         .subscribe((data) => {
           this.InitArr(data);
-          console.log(this.whatWillLearn);
+
         });
     });
   }
@@ -85,7 +85,8 @@ export class IntendedLearnersComponent implements OnInit, OnDestroy {
     return index;
   }
 
-  InitArr(data: any) {
+  InitArr(data: Course) {
+    console.log(data)
     this.whatWillLearn =
       data.knowleages_will_learn.length != 0
         ? data.knowleages_will_learn

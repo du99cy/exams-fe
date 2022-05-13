@@ -10,6 +10,7 @@ const routes = {
   addNewCourse: `${BASE_URL}/course`,
   updateCourse: `${BASE_URL}/course/{course_id}`,
   getCourseInfor: `${BASE_URL}/course/{courseId}/infor`,
+  review:`${BASE_URL}/course/{courseId}/review`
 };
 
 @Injectable()
@@ -30,5 +31,10 @@ export class CourseCreationService {
     let uri = fmt(routes.getCourseInfor, { courseId });
     let params = mapToHttpParamsQuery({ mode: mode });
     return this.httpClient.get(uri, { params: params }).pipe(first(),map((res:any)=>res.data));
+  }
+
+  CourseReview(courseId:string): Observable<any> {
+    let uri = fmt(routes.review, { courseId });
+    return this.httpClient.get(uri).pipe(first(),map((res:any)=>res.data))
   }
 }
