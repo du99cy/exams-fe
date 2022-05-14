@@ -103,7 +103,8 @@ export class SignUpComponent implements OnInit {
         this.loading = false;
       },
       (err:HttpErrorResponse)=>{
-
+        alert("Email của bạn đã tồn tại .Hãy thử với email khác để đăng kí .")
+        this.loading = false
       })
     }
 
