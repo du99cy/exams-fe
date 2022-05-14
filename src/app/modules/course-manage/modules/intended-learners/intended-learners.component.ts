@@ -1,36 +1,108 @@
 import { CdkDrag, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  InjectionToken,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { routeParamFactory } from '@core/utilities/activated-route.factories';
+import { Course } from '@modules/new-course-creation/models/course';
+import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
+export const APP_SOME_ID = new InjectionToken<Observable<string>>(
+  'stream of id from route param'
+);
+export const COURSE_TOKEN = new InjectionToken('course-service');
 @Component({
   selector: 'app-intended-learners',
   templateUrl: './intended-learners.component.html',
-  styleUrls: ['./intended-learners.component.scss']
+  styleUrls: ['./intended-learners.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: APP_SOME_ID,
+      useFactory: routeParamFactory('newCourseId'),
+      deps: [ActivatedRoute],
+    },
+    {
+      provide: COURSE_TOKEN,
+      useClass: CourseCreationService,
+    },
+  ],
 })
-export class IntendedLearnersComponent implements OnInit {
-  numbers = [
-    'Ví dụ: Xác định vai trò và trách nhiệm của người quản lý dự án',
-    'Ví dụ: Ước tính tiến độ và ngân sách của dự án',
-    'Ví dụ: Xác định và quản lý rủi ro dự án',
-    'Ví dụ: Hoàn thành một nghiên cứu điển hình để quản lý một dự án từ khi hình thành đến khi hoàn thành'
-  ];
-  requirements = [
-    'Ví dụ: Không cần kinh nghiệm lập trình. Bạn sẽ học mọi thứ bạn cần biết',
-  ];
-  people=[
-    'Ví dụ: Các nhà phát triển Python mới bắt đầu tò mò về khoa học dữ liệu'
-  ]
-  drop(event: CdkDragDrop<unknown>) {
-    moveItemInArray(this.numbers, event.previousIndex, event.currentIndex);
+export class IntendedLearnersComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  courseId: string;
+  isChange: boolean = false;
+  whatWillLearn: string[] = [''];
+  prerequisites: string[] = [''];
+  courseForPeople: string[] = [''];
+
+  drop(event: CdkDragDrop<unknown>, arr: string[]) {
+    moveItemInArray(arr, event.previousIndex, event.currentIndex);
   }
 
-  /**
-   * Predicate function that only allows even numbers to be
-   * sorted into even indices and odd numbers at odd indices.
-   */
- 
-  constructor() { }
+  constructor(
+    @Inject(COURSE_TOKEN)
+    private courseServices: CourseCreationService,
+    @Inject(APP_SOME_ID)
+    private id$: Observable<string>
+  ) {
+    this.id$.pipe(takeUntil(this.destroy$)).subscribe((idParam) => {
+      this.courseId = idParam;
+      this.courseServices
+        .getCourseInfor(this.courseId, 'goals')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data) => {
+          this.InitArr(data);
 
-  ngOnInit(): void {
+        });
+    });
   }
 
+  ngOnInit(): void {}
+  ngOnDestroy() {
+    if (this.isChange) {
+      //update to database
+      let CourseBodyUpdate: Course = {
+        knowleages_will_learn: this.whatWillLearn,
+        prerequisites: this.prerequisites,
+        who_course_is_for: this.courseForPeople,
+      };
+      this.courseServices
+        .updateCourse(this.courseId, CourseBodyUpdate)
+        .subscribe();
+    }
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
+  trackByFn(index: number, item: any) {
+    return index;
+  }
+
+  InitArr(data: Course) {
+    console.log(data)
+    this.whatWillLearn =
+      data.knowleages_will_learn.length != 0
+        ? data.knowleages_will_learn
+        : [''];
+    this.prerequisites =
+      data.prerequisites.length != 0 ? data.prerequisites : [''];
+    this.courseForPeople =
+      data.who_course_is_for.length != 0 ? data.who_course_is_for : [''];
+  }
+
+  addNewResponse(arr: Array<string>) {
+    arr.push('');
+    this.isChange = true;
+  }
+
+  deleteResponse(arr: Array<string>, index: number) {
+    arr.splice(index, 1);
+  }
 }

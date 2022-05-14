@@ -1,34 +1,43 @@
-
 <div>
-    <app-course-manage-header-content-layout>
-      <h1 header>Trang đích của khóa học</h1>
-      <div content class="course-landing-wrapper">
-        <div class="course-landing-item">
-            <span>
-              Tên khóa học
-            </span>
-            <input type="text">
-        </div>
-        <div class="course-landing-item">
-            <span>
-              Phụ đề khóa học
-            </span>
-            <input type="text">
-        </div>
-        <div class="course-landing-item">
-            <span>
-              Mô tả khóa học
-            </span>
-            <app-editor></app-editor>
-        </div>
-        <div class="course-landing-item">
-          <span>
-            Hình ảnh khóa học
-          </span>
-          <app-cropper-image></app-cropper-image>
+  <app-course-manage-header-content-layout>
+    <h1 header>Trang đích của khóa học</h1>
+    <div [formGroup]="formGroup" content class="course-landing-wrapper">
+      <div class="course-landing-item">
+        <span> Tiêu đề khóa học </span>
+        <input type="text" formControlName='title'/>
       </div>
-        
+      <div class="course-landing-item">
+        <span> Ngôn ngữ khóa học </span>
+        <select formControlName='teaching_language'>
+          <option
+            value=""
+            *ngFor="let language of this.teachingLanguage"
+            [value]="language"
+          >
+            {{ language | titlecase}}
+          </option>
+        </select>
       </div>
-    </app-course-manage-header-content-layout>
-  </div>
-  
+      <div class="course-landing-item">
+        <span> Thể loại </span>
+        <select formControlName="category">
+          <option
+            value=""
+            *ngFor="let category of this.course_categories"
+            [value]="category"
+          >
+            {{ category }}
+          </option>
+        </select>
+      </div>
+      <div class="course-landing-item">
+        <span> Mô tả khóa học </span>
+        <app-normal-editor formControlName="description"></app-normal-editor>
+      </div>
+      <div class="course-landing-item">
+        <span> Hình ảnh khóa học </span>
+        <app-cropper-image [filename]="this.imgName"  [src-img]="this.img" (img-cropped)="getFile($event)"></app-cropper-image>
+      </div>
+    </div>
+  </app-course-manage-header-content-layout>
+</div>

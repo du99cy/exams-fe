@@ -15,16 +15,16 @@
         Bạn phải nhập ít nhất 4 mục tiêu hoặc kết quả học tập mà người học có
         thể mong đợi đạt được sau khi hoàn thành khóa học của bạn.
       </p>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event,whatWillLearn)">
         <div
           class="example-box"
-          *ngFor="let number of numbers"
-          [cdkDragData]="number"
+          *ngFor="let knowleage of whatWillLearn;let i = index;trackBy: trackByFn"
+          [cdkDragData]="whatWillLearn"
           cdkDrag
         >
-          <input type="text" placeholder="{{ number }}" />
+          <input type="text" placeholder="Ví dụ: Xác định và quản lý rủi ro dự án" [(ngModel)]='whatWillLearn[i]' />
           <div class="action">
-            <div class="example-handle">
+            <div class="example-handle" (click)="deleteResponse(whatWillLearn,i)">
               <mat-icon>delete</mat-icon>
             </div>
             <div class="example-handle" cdkDragHandle>
@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="add-response">
+        <div class="add-response" (click)="addNewResponse(whatWillLearn)">
           <mat-icon>add</mat-icon>
           <span>Thêm nhiều hơn vào câu trả lời của bạn</span>
         </div>
@@ -47,16 +47,16 @@
         Nếu không có yêu cầu nào, hãy sử dụng không gian này như một cơ hội để
         hạ thấp rào cản cho người mới bắt đầu.
       </p>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event,prerequisites)">
         <div
           class="example-box"
-          *ngFor="let requirement of requirements"
-          [cdkDragData]="requirements"
+          *ngFor="let requirement of prerequisites;let i=index;trackBy: trackByFn"
+          [cdkDragData]="prerequisites"
           cdkDrag
         >
-          <input type="text" placeholder="{{ requirement }}" />
+          <input type="text" placeholder="Ví dụ: SQL cơ bản ..." [(ngModel)]='prerequisites[i]'/>
           <div class="action">
-            <div class="example-handle">
+            <div class="example-handle" (click)="deleteResponse(prerequisites,i)">
               <mat-icon>delete</mat-icon>
             </div>
             <div class="example-handle" cdkDragHandle>
@@ -64,7 +64,7 @@
             </div>
           </div>
         </div>
-        <div class="add-response">
+        <div class="add-response" (click)="addNewResponse(prerequisites)">
           <mat-icon>add</mat-icon>
           <span>Thêm nhiều hơn vào câu trả lời của bạn</span>
         </div>
@@ -75,16 +75,16 @@
         những người sẽ thấy nội dung khóa học của bạn có giá trị. <br> Điều này sẽ
         giúp bạn thu hút đúng người học đến với khóa học của bạn.
       </p>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event,courseForPeople)">
         <div
           class="example-box"
-          *ngFor="let person of people"
-          [cdkDragData]="people"
+          *ngFor="let person of courseForPeople;let i = index;trackBy: trackByFn"
+          [cdkDragData]="courseForPeople"
           cdkDrag
         >
-          <input type="text" placeholder="{{ person }}" />
+          <input type="text" placeholder="Ví dụ :Các nhà phát triển Python mới bắt đầu tò mò về khoa học dữ liệu" [(ngModel)]="courseForPeople[i]"/>
           <div class="action">
-            <div class="example-handle">
+            <div class="example-handle" (click)="deleteResponse(courseForPeople,i)">
               <mat-icon>delete</mat-icon>
             </div>
             <div class="example-handle" cdkDragHandle>
@@ -92,7 +92,7 @@
             </div>
           </div>
         </div>
-        <div class="add-response">
+        <div class="add-response" (click)="addNewResponse(courseForPeople)">
           <mat-icon>add</mat-icon>
           <span>Thêm nhiều hơn vào câu trả lời của bạn</span>
         </div>

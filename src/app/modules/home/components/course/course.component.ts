@@ -41,8 +41,9 @@ export class CourseComponent implements OnInit {
     });
   }
 
-  goToDetail(_id: string) {
-    this.router.navigateByUrl(`/course-detail/${_id}`);
+  goToDetail(_id:string) {
+    this.router.navigateByUrl(`/course/${_id}`)
+
   }
 
   addToCart(course: ICourse) {

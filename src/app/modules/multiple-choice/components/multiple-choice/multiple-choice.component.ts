@@ -58,7 +58,7 @@ export class MultipleChoiceComponent implements OnInit {
   }
 
   chooseAnswer(question: Question, optionId: string) {
-    console.log(question);
+
     let option_exists = question.answers_of_student.includes(optionId);
     if (question.question_type == 'radio') {
       if (!option_exists) {

@@ -7,6 +7,8 @@ import { CourseLandingPageComponent } from './course-landing-page.component';
 import { CourseLandingPageRoutingModule } from './course-landing-page-routing.module';
 import { EditorModule } from '@shared/modules/editor.module';
 import { CropperImageModule } from '@shared/modules/cropper-image.module';
+import { NormalEditorModule } from '@shared/modules/normal-editor.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -17,6 +19,9 @@ import { CropperImageModule } from '@shared/modules/cropper-image.module';
     CourseLandingPageRoutingModule,
     EditorModule,
     CropperImageModule,
+    NormalEditorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [CourseLandingPageComponent],
 })

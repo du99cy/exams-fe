@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { fmt, mapToFormData } from '@core/utilities/helpers';
+import {
+  fmt,
+  mapToFormData,
+  mapToHttpParamsQuery,
+} from '@core/utilities/helpers';
 import { api_urls } from '@shared/configs/api_url';
 import { first, map, Observable } from 'rxjs';
 import { Content } from '../models/content';
@@ -34,9 +38,12 @@ export class CurriculumService {
     );
   }
 
-  uploadFile(file: File): Observable<any> {
+  uploadFile(file: File, mode: string = 'private'): Observable<any> {
     let formData = mapToFormData({ file: file });
-    return this.httpClient.post<any>(routes.uploadFile, formData).pipe(first());
+    let params = mapToHttpParamsQuery({ mode: mode });
+    return this.httpClient
+      .post<any>(routes.uploadFile, formData, { params: params })
+      .pipe(first());
   }
 
   addResourse(resourseBody: ResourseFile): Observable<any> {
@@ -53,9 +60,11 @@ export class CurriculumService {
 
   getAllResourseViaContentId(content_id: string): Observable<any> {
     let uri = fmt(routes.getAllResourseViaContentId, { content_id });
-    return this.httpClient.get(uri).pipe(map((res:any)=>{
-
-      return res.status_code == 200?res.data:[]
-    }),first());
+    return this.httpClient.get(uri).pipe(
+      map((res: any) => {
+        return res.status_code == 200 ? res.data : [];
+      }),
+      first()
+    );
   }
 }
