@@ -19,7 +19,7 @@ export class CourseDetailComponent implements OnInit {
 
 
   router: any;
-
+  courses:any
   courseId:string
   course: Course;
   instructor:User
@@ -115,6 +115,7 @@ export class CourseDetailComponent implements OnInit {
     source.addEventListener('message', (message) => {
 
       let res = JSON.parse(message.data);
+      console.log(res);
       let data = res?.data
       if(res?.data_name == "course")
         this.course = data
