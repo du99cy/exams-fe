@@ -8,8 +8,12 @@ import { cannotSubmitExplainData } from './cannot-submit-explain-data';
   styleUrls: ['./cannot-submit-for-review.component.scss']
 })
 export class CannotSubmitForReviewComponent implements OnInit {
-  cannotSubmitExplainData = cannotSubmitExplainData;
-  constructor(@Inject(MAT_DIALOG_DATA) public data:any) { }
+  cannotSubmitExplainData:any
+  data:any
+  constructor(@Inject(MAT_DIALOG_DATA) public res:any) {
+    this.data = res?.data
+    this.cannotSubmitExplainData = cannotSubmitExplainData(res?.courseId)
+   }
 
   ngOnInit() {
 

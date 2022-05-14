@@ -41,7 +41,7 @@ export class IntendedLearnersComponent implements OnInit, OnDestroy {
   whatWillLearn: string[] = [''];
   prerequisites: string[] = [''];
   courseForPeople: string[] = [''];
-
+  pressUpdateBtn = false
   drop(event: CdkDragDrop<unknown>, arr: string[]) {
     moveItemInArray(arr, event.previousIndex, event.currentIndex);
   }
@@ -66,16 +66,9 @@ export class IntendedLearnersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
   ngOnDestroy() {
-    if (this.isChange) {
+    if (this.isChange && !this.pressUpdateBtn) {
       //update to database
-      let CourseBodyUpdate: Course = {
-        knowleages_will_learn: this.whatWillLearn,
-        prerequisites: this.prerequisites,
-        who_course_is_for: this.courseForPeople,
-      };
-      this.courseServices
-        .updateCourse(this.courseId, CourseBodyUpdate)
-        .subscribe();
+      this.updateData()
     }
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
@@ -104,5 +97,21 @@ export class IntendedLearnersComponent implements OnInit, OnDestroy {
 
   deleteResponse(arr: Array<string>, index: number) {
     arr.splice(index, 1);
+  }
+
+  keyUpEvent(){
+    this.isChange = true
+  }
+
+  updateData(){
+    this.pressUpdateBtn = true
+    let CourseBodyUpdate: Course = {
+      knowleages_will_learn: this.whatWillLearn,
+      prerequisites: this.prerequisites,
+      who_course_is_for: this.courseForPeople,
+    };
+    this.courseServices
+      .updateCourse(this.courseId, CourseBodyUpdate)
+      .subscribe();
   }
 }

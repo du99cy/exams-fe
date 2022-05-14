@@ -53,13 +53,13 @@ export class LayoutManageComponent implements OnInit, OnDestroy {
   review() {
     this.CourseService.CourseReview(this.courseId).subscribe((lst:any[]) => {
       if(lst.length >0 )
-        this.openDialog(lst)
+        this.openDialog({data:lst,courseId:this.courseId})
       else
         this.router.navigateByUrl(`/course/${this.courseId}?mode=preview`)
     });
   }
 
-  openDialog(data: any[]) {
+  openDialog(data: any) {
     this.dialog.open(CannotSubmitForReviewComponent, {
       data: data,
       width: '40rem',

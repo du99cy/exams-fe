@@ -113,9 +113,11 @@ export class CourseDetailComponent implements OnInit {
     );
     source.addEventListener('message', (message) => {
       let res = JSON.parse(message.data);
-      let data = res?.data;
-      console.log(data)
-      if (res?.data_name == 'course') {
+
+
+      let data = res?.data
+      if(res?.data_name == "course")
+
         this.course = data
       }
       else if (res?.data_name == 'user') this.instructor = data;
