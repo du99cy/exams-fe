@@ -26,6 +26,11 @@
       <input placeholder="Tìm kiếm ... " type="text" />
     </div>
   </div>
+  <div>
+    <div [routerLink]="['/cart']">
+      <mat-icon style="color: #0d4579; cursor: pointer">shopping_cart</mat-icon>{{cartItem}}
+    </div>
+  </div>
   <!-- <div>
     <a class="a-blue" href="" style="font-weight: bolder; text-decoration: none"
       >Hệ thống kiểm tra đánh giá AI</a

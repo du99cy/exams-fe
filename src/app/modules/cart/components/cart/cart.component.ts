@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CheckoutService } from '@modules/cart/services/checkout.service';
+import { CheckoutService } from '@modules/checkout/services/checkout.service';
 import { ICourse } from '@modules/home/models/interface';
 import { CartService } from '@modules/home/services/cart.service';
 import { BaseComponent } from '@shared/abstract/base.component';
@@ -40,7 +40,7 @@ export class CartComponent extends BaseComponent implements OnInit {
     this.checkoutService.redirectToPayment({
       amount: 1000000,
       bank_code: 'NCB',
-      order_id: 'hd023122',
+      order_id: Math.random().toString(),
     }).subscribe(res => {
       window.location.href = res.data
     });

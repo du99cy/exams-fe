@@ -1,28 +1,30 @@
-@import '../../shared/styles/color.scss';
-:host{
-  .success{
+@import "../../shared/styles/color.scss";
+:host {
+  .success {
     background-color: $light_green;
     color: white;
   }
-  .fail{
+  .fail {
     background-color: $light_red;
     color: $white;
   }
-  .noti-container{
+  .noti-container {
+    margin-top: 5px;
     min-width: 100px;
-    position: fixed;
-    bottom: 50px;
-    right: 20px;
     padding: 0.3rem 1rem;
     line-height: 30px;
     border-radius: 8px;
-    animation-name: hide-noti;
-    animation-duration: 2s;
+    animation: hide 3s;
   }
-  @keyframes hide-noti {
-    from {opacity: 1;
-    transform: translate(0, 50px);}
-    to {opacity: 0;
-    transform: translate(0, 0px);}
+  @keyframes hide {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
   }
 }
