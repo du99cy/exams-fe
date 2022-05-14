@@ -23,8 +23,8 @@ export class CourseComponent implements OnInit {
   }
 
   goToDetail(_id:string) {
-    this.router.navigateByUrl(`/course-detail/${_id}`)
-    console.log(_id)
+    this.router.navigateByUrl(`/course/${_id}`)
+
   }
 
 }

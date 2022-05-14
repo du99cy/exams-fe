@@ -5,10 +5,14 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { routeParamFactory } from '@core/utilities/activated-route.factories';
 import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
+import { CannotSubmitForReviewComponent } from '../cannot-submit-for-review-notifacation-dialog/cannot-submit-for-review.component';
+
+
 
 const APP_SOME_ID = new InjectionToken<Observable<string>>('stream some id');
 @Component({
@@ -21,17 +25,23 @@ const APP_SOME_ID = new InjectionToken<Observable<string>>('stream some id');
       useFactory: routeParamFactory('newCourseId'),
       deps: [ActivatedRoute],
     },
-    CourseCreationService
+    CourseCreationService,
   ],
 })
 export class LayoutManageComponent implements OnInit, OnDestroy {
+
   destroy$ = new Subject<boolean>();
-  courseId: string
-  constructor(@Inject(APP_SOME_ID) private id$: Observable<string>,private CourseService: CourseCreationService) {}
+  courseId: string;
+  constructor(
+    @Inject(APP_SOME_ID) private id$: Observable<string>,
+    private CourseService: CourseCreationService,
+    public dialog: MatDialog,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.id$.pipe(takeUntil(this.destroy$)).subscribe((id) => {
-      this.courseId = id
+      this.courseId = id;
     });
   }
 
@@ -41,6 +51,18 @@ export class LayoutManageComponent implements OnInit, OnDestroy {
   }
 
   review() {
-    this.CourseService.CourseReview(this.courseId).subscribe(res => {console.log(res)})
+    this.CourseService.CourseReview(this.courseId).subscribe((lst:any[]) => {
+      if(lst.length >0 )
+        this.openDialog(lst)
+      else
+        this.router.navigateByUrl(`/course/${this.courseId}?mode=preview`)
+    });
+  }
+
+  openDialog(data: any[]) {
+    this.dialog.open(CannotSubmitForReviewComponent, {
+      data: data,
+      width: '40rem',
+    });
   }
 }

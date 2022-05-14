@@ -10,13 +10,18 @@ import { FilmEditComponent } from './modules/film-edit/film-edit.component';
 import { HeaderContentLayoutModule } from './core/modules/header-content-layout.module';
 import { PricingComponent } from './modules/pricing/pricing.component';
 import { FormsModule } from '@angular/forms';
+import { CannotSubmitForReviewComponent } from './core/components/cannot-submit-for-review-notifacation-dialog/cannot-submit-for-review.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
     CourseManageRoutingModule,
     MatIconModule,
     HeaderContentLayoutModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    CommonModule
   ],
   declarations: [
     LayoutManageComponent,
@@ -25,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     CourseMessagesComponent,
     FilmEditComponent,
     PricingComponent,
+    CannotSubmitForReviewComponent
   ],
 })
 export class CourseManageModule {}

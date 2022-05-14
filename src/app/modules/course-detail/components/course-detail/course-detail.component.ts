@@ -5,6 +5,7 @@ import { scrollToTopPage } from '@core/utilities/helpers';
 import { CourseDetailService } from '@modules/course-detail/services/course-detail.service';
 import { RegisterCourseService } from '@modules/course-detail/services/register-course.service';
 import { CourseService } from '@modules/home/services/course.service';
+import { api_urls } from '@shared/configs/api_url';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-course-detail',
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class CourseDetailComponent implements OnInit {
   router: any;
+  courseId:string
   courses: any;
   panelOpenState = false;
   listTopic: any;
@@ -51,22 +53,23 @@ export class CourseDetailComponent implements OnInit {
     //scroll to top page
     scrollToTopPage();
     this.activateRoute.params.subscribe((queryParams) => {
+      this.courseId = queryParams['class_id']
+      this.getCourseDetailsSSE(this.courseId)
+      // this.courseDetailService
+      //   .getClassById(this.courseId)
+      //   .subscribe((data) => {
+      //     this.courses = data;
+      //     console.log("detail",data)
+      //     let course = this.courses[0];
 
-      this.courseDetailService
-        .getClassById(queryParams['class_id'])
-        .subscribe((data) => {
-          this.courses = data;
-          console.log("detail",data)
-          let course = this.courses[0];
-
-          this.button_dis = this.assignBtnByStatus(course?.trang_thai_dang_ki)
-          this.courseDetailService
-            .getTopicByClassId(queryParams['class_id'])
-            .subscribe((topics) => {
-              this.listTopic = topics.data;
-              console.log(this.listTopic)
-            });
-        });
+      //     this.button_dis = this.assignBtnByStatus(course?.trang_thai_dang_ki)
+      //     this.courseDetailService
+      //       .getTopicByClassId(queryParams['class_id'])
+      //       .subscribe((topics) => {
+      //         this.listTopic = topics.data;
+      //         console.log(this.listTopic)
+      //       });
+      //   });
     });
 
   }
@@ -97,5 +100,20 @@ export class CourseDetailComponent implements OnInit {
     if (status_name == null) return this.buttons_data.no_registration;
     else if (status_name == 'DONGY') return this.buttons_data.registrated;
     else return this.buttons_data.not_accept;
+  }
+
+  getCourseDetailsSSE(courseId:string){
+    let source = new EventSource(`${api_urls.LOCAL_API_URL}/course/${this.courseId}/data-stream`);
+    source.addEventListener('message', (message) => {
+
+      let myData = JSON.parse(message.data);
+      console.log(myData)
+      // source.close()
+    });
+    source.addEventListener('end', function (event) {
+      console.log('Handling end....');
+      source.close();
+    });
+
   }
 }
