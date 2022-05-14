@@ -3,6 +3,7 @@ import { AuthService } from '@core/authentication/auth.service';
 import { User } from '@core/authentication/user';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { CartService } from '@modules/home/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit,OnDestroy {
-
+  cartItem:number
   userData:any
   userSubs = new Subscription();
-  constructor(private authService: AuthService,private router: Router) { }
+  constructor(private authService: AuthService,private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.getUserData()
+    this.cartItem = this.cartService.Cart?.length || 0;
+    this.cartService.refresh$.subscribe((res)=> {
+     console.log('eee',res)
+      this.cartItem = this.cartService.Cart?.length || 0;
+    })
+    this.getUserData();
   }
 
   ngOnDestroy(){

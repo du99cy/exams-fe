@@ -9,14 +9,14 @@ import { content } from '@modules/home/models/content';
 })
 export class HomeComponent implements OnInit {
   data : any=[];
-  user_data:any
+  user_data:any;
   constructor(private authService: AuthService) {
 
    }
 
   ngOnInit(): void {
     this.data= content
-    this.user_data = this.authService.User
+    this.user_data = this.authService.User;
   }
 
 }

@@ -1,0 +1,30 @@
+@import "../../shared/styles/color.scss";
+:host {
+  .success {
+    background-color: $light_green;
+    color: white;
+  }
+  .fail {
+    background-color: $light_red;
+    color: $white;
+  }
+  .noti-container {
+    margin-top: 5px;
+    min-width: 100px;
+    padding: 0.3rem 1rem;
+    line-height: 30px;
+    border-radius: 8px;
+    animation: hide 3s;
+  }
+  @keyframes hide {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+}

@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpsModule } from '@shared/modules/https.module';
 import { UserCourseComponent } from './components/user-course/user-course.component';
+import { NotificationModule } from '@modules/notification/notification.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UserCourseComponent } from './components/user-course/user-course.compon
     FormsModule,
     CommonModule,
     MatButtonModule,
-    HttpsModule
+    HttpsModule,
+    NotificationModule
   ],
   declarations: [CourseComponent, ListCoursesComponent, HomeComponent, UserCourseComponent],
 })
