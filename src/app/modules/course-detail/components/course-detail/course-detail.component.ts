@@ -16,18 +16,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./course-detail.component.scss'],
 })
 export class CourseDetailComponent implements OnInit {
-
-
   router: any;
-  courses:any
-  courseId:string
+  courses: any;
+  courseId: string;
   course: Course;
-  instructor:User
-  contents:Array<Content>
+  instructor: User;
+  contents: Array<Content>;
   panelOpenState = false;
   listTopic: any;
   listTopicUser: any;
-
+  link = api_urls.LOCAL_API_URL
   openRegister = true;
 
   button_dis: any;
@@ -61,8 +59,8 @@ export class CourseDetailComponent implements OnInit {
     //scroll to top page
     scrollToTopPage();
     this.activateRoute.params.subscribe((queryParams) => {
-      this.courseId = queryParams['class_id']
-      this.getCourseDetailsSSE(this.courseId)
+      this.courseId = queryParams['class_id'];
+      this.getCourseDetailsSSE(this.courseId);
       // this.courseDetailService
       //   .getClassById(this.courseId)
       //   .subscribe((data) => {
@@ -79,7 +77,6 @@ export class CourseDetailComponent implements OnInit {
       //       });
       //   });
     });
-
   }
 
   convertHttps(str_: any) {
@@ -110,30 +107,28 @@ export class CourseDetailComponent implements OnInit {
   //   else return this.buttons_data.not_accept;
   // }
 
-  getCourseDetailsSSE(courseId:string){
-    let source = new EventSource(`${api_urls.LOCAL_API_URL}/course/${this.courseId}/data-stream`);
+  getCourseDetailsSSE(courseId: string) {
+    let source = new EventSource(
+      `${api_urls.LOCAL_API_URL}/course/${this.courseId}/data-stream`
+    );
     source.addEventListener('message', (message) => {
-
       let res = JSON.parse(message.data);
+
 
       let data = res?.data
       if(res?.data_name == "course")
+
         this.course = data
-      else if(res?.data_name == "user")
-        this.instructor = data
-      else{
-        this.contents = data
-        source.close()
       }
-
-
+      else if (res?.data_name == 'user') this.instructor = data;
+      else {
+        this.contents = data;
+        source.close();
+      }
     });
     source.addEventListener('end', function (event) {
       console.log('Handling end....');
       source.close();
     });
-
   }
-
-
 }

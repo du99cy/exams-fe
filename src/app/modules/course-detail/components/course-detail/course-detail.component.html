@@ -1,23 +1,19 @@
-<div class="course-title" *ngFor="let item of courses">
+<div class="course-title">
   <div class="course-detail">
     <div class="container-detail">
-      <h1>{{ item.ten_mon_hoc }}</h1>
-      <span class="des">
-        {{ item.mo_ta }}
-      </span>
-      <span class="time"
-        >Thời gian bắt đầu:
-        {{ item.thoi_gian_bat_dau * 1000 | date: "dd/MM/yyyy" }}</span
-      >
-      <span class="time"
-        >Thời gian kết thúc:
-        {{ item.thoi_gian_ket_thuc * 1000 | date: "dd/MM/yyyy" }}</span
-      >
+      <h1>{{ this.course?.title }}</h1>
+      <span class="time">Thể loại: {{ this.course?.category }}</span>
+      <span class="time">Ngôn ngữ: {{ this.course?.teaching_language }}</span>
       <div class="hightlight-sub">
         <button class="hightlight">Nổi bật</button>
         <button class="sub">Đăng kí</button>
       </div>
-      <span class="create-by"> Tạo bởi <a href="">Nguyễn Minh Sơn</a> </span>
+      <span class="create-by">
+        Tạo bởi
+        <a href=""
+          >{{ this.instructor?.first_name }} {{ this.instructor?.last_name }}</a
+        >
+      </span>
       <div class="vote">
         <button>
           <span class="title"> Yêu thích </span>
@@ -66,102 +62,60 @@
       <!-- <span class="cost">$84.99</span> -->
     </div>
     <div class="course-review">
-      <img [src]="item.avatar | https" alt="" class="img-response" />
+      <img src="{{ link }}/{{ this.course?.img }}" />
       <span class="number-people"> Số người tham gia</span>
       <button class="join" (click)="this.button_dis.event()">
-        {{ this.button_dis.name }}
+        <!-- {{ this.button_dis.name }} -->
       </button>
     </div>
   </div>
 </div>
+
 <div class="container" style="margin-top: 40px">
+  
   <div class="will-learn">
     <h2>Bạn học được gì từ khóa học này?</h2>
-    <div class="course-result">
+    <div
+      class="course-result"
+      *ngFor="let item of this.course?.knowleages_will_learn"
+    >
       <span>
         <mat-icon>done</mat-icon>
-        Create any website layout you can imagine
-      </span>
-      <span>
-        <mat-icon>done</mat-icon>
-        Create any website layout you can imagine
-      </span>
-      <span>
-        <mat-icon>done</mat-icon>
-        Create any website layout you can imagine
-      </span>
-      <span>
-        <mat-icon>done</mat-icon>
-        Create any website layout you can imagine
+        {{ item }}
       </span>
     </div>
   </div>
+  <div class="requirement">
+    <h2>Điều kiện để học khóa học hiệu quả</h2>
+    <ul *ngFor="let requirement of this.course?.prerequisites">
+      <li>{{ requirement }}</li>
+    </ul>
+  </div>
   <div class="description">
     <h2>Mô tả</h2>
-    <p>
-      You can launch a new career in web development today by learning HTML &
-      CSS. You don't need a computer science degree or expensive software. All
-      you need is a computer, a bit of time, a lot of determination, and a
-      teacher you trust. I've taught HTML and CSS to countless coworkers and
-      held training sessions for fortune 100 companies. I am that teacher you
-      can trust. Don't limit yourself by creating websites with some cheesy
-      “site-builder" tool. This course teaches you how to take 100% control over
-      your webpages by using the same concepts that every professional website
-      is created with. This course does not assume any prior experience. We
-      start at square one and learn together bit by bit. By the end of the
-      course you will have created (by hand) a website that looks great on
-      phones, tablets, laptops, and desktops alike. In the summer of 2020 the
-      course has received a new section where we push our website live up onto
-      the web using the free GitHub Pages service; this means you'll be able to
-      share a link to what you've created with your friends, family, colleagues
-      and the world! I have helped over 100,000 students and have received the
-      following feedback: “…A fantastic course… clear, definite and engaging."
-      “…Presentation is concise without being tedious… you honestly feel that
-      you have a thorough understanding of the subject." “…[Brad] explained the
-      process. Not memorize this or that, he explained the process. If you're
-      looking to take a course to understand the foundations of creating
-      websites, look no further." “Brad definitely has some of the best
-      techniques to embed the lesson into your mind… hands down these are the
-      best tutorials I have had the opportunity to view." “I found this course
-      really helpful and I highly recommend it… all things you learn are seen in
-      action instantly." “Brad has put together a great foundation for any body
-      wishing to get a good understanding with front end web-development." “…I
-      would definitely recommend this course to most folks I know who want to
-      learn web design."
-    </p>
+    <p [innerHTML]="this.course?.description"></p>
+  </div>
+  <div class="requirement">
+    <h2>Khóa học dành cho đối tượng nào ?</h2>
+    <ul *ngFor="let who of this.course?.who_course_is_for">
+      <li>{{ who }}</li>
+    </ul>
   </div>
   <div class="course-content">
     <h2>Nội dung khóa học</h2>
-    <mat-accordion *ngFor="let topic of listTopic">
+    <mat-accordion *ngFor="let content of this.contents">
       <mat-expansion-panel
         (opened)="panelOpenState = true"
         (closed)="panelOpenState = false"
       >
         <mat-expansion-panel-header>
-          <mat-panel-title> {{ topic.tieu_de }} </mat-panel-title>
+          <mat-panel-title><i class="material-icons mr-2">{{
+            content.type_status | content_icon
+          }}</i> {{ content.title }} </mat-panel-title>
         </mat-expansion-panel-header>
-        <ng-template [ngIf]="topic.file" [ngIfElse]="nof">
-          <div class="file">
-            <p [innerHTML]="topic.mo_ta"></p>
-            <ul *ngFor="let item of topic.file" style="list-style: none">
-              <li>
-                <a
-                  [href]="item.link"
-                  target="_blank"
-                  style="display: flex; align-items: center"
-                >
-                  {{ item.display_name }}
-                  <mat-icon style="margin-left: 20px">{{
-                    item.icon.value
-                  }}</mat-icon>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </ng-template>
-        <ng-template #nof>
-          <p>Bạn cần đang kí để xem nội dung khóa học</p>
-        </ng-template>
+        <div class="file">
+          <p [innerHTML]="content.description"></p>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
@@ -227,13 +181,19 @@
     </div>
   </div>
   <div class="instructor" style="margin-top: 90px">
-    <h3 style="font-size: 32px; font-weight: bold; padding: 30px;" >Instructor</h3>
+    <h3 style="font-size: 32px; font-weight: bold; padding: 30px">
+      Người tạo khóa học
+    </h3>
 
-    <h3 style="font-size: 20px; font-weight: bold; padding: 0px 30px;"><a href="#" style="text-decoration: underline">Rahuk Shetty</a></h3>
+    <h3 style="font-size: 20px; font-weight: bold; padding: 0px 30px">
+      <a href="#" style="text-decoration: underline">{{ this.instructor?.first_name }} {{ this.instructor?.last_name }}</a>
+    </h3>
 
-    <p style=" padding:0px 30px;">Founder of RahulShettyAcademy.com|350k+ QA Students</p>
+    <p style="padding: 0px 30px">
+      Founder of RahulShettyAcademy.com|350k+ QA Students
+    </p>
 
-    <div class="row" style=" padding: 30px;">
+    <div class="row" style="padding: 30px">
       <div class="col-lg-2">
         <img
           src="../../../../../assets/common-img/AdobeStock_288304009 1.png"
@@ -252,14 +212,8 @@
       </div>
     </div>
 
-    <p style=" padding: 0px 30px;">
-      Nothing is Impossible. It all depends on how we are Trained on it.
-      Teaching is my Passion. And it’s my Profession. The only Business I know
-      is Spreading the Knowledge. "Every QA Professional have a wish of learning
-      trending Automation courses but somehow 90% of them are giving up their
-      thoughts It’s not due to the lack of courses available in the Market, but
-      it’s about finding the right Mentor who can guide, teach and understand
-      student's pulse with their background education"
+    <p [innerHTML]="this.instructor?.biography">
+      
     </p>
   </div>
 </div>

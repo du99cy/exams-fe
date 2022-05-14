@@ -1,0 +1,60 @@
+.user-profile {
+  display: flex;
+  .user-profile-infor {
+      flex: 1;
+    .infor {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      span {
+        font-weight: bold;
+        padding: 10px 0px;
+      }
+      input {
+        height: 48px;
+        width: 100%;
+        outline: none;
+      }
+    }
+  }
+  .user-profile-link {
+      flex: 1;
+      padding-left: 30px;
+    .infor {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      span{
+          font-weight: bold;
+          padding: 10px 0px;
+      }
+      .link {
+          width: 100%;
+          display: flex;
+          span{
+            height: 48px;
+            border: 1px solid #111;
+            border-right: none;
+            background-color: #f7f9fa;
+            padding: 10px 20px;
+            p{
+                padding: 10px;
+                margin: 0px;
+            }
+          }
+          input{
+            flex: 1;
+            height: 48px;
+            outline: none;
+          }
+      }
+    }
+  }
+}
+button{
+    background: #111111;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 20px;
+    margin-top: 20px;
+}

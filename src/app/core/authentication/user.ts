@@ -6,6 +6,12 @@ export interface User {
   role_id: any;
   avatar_pic: string;
   account_type: string;
+  biography:string;
+  facebook_link:string;
+  headline:string;
+  twitter_link:string;
+  website_link:string;
+  youtube_link:string;
 }
 
 export interface MailUser extends User {
