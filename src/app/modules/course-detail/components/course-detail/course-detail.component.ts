@@ -19,7 +19,7 @@ export class CourseDetailComponent implements OnInit {
 
 
   router: any;
-
+  courses : any
   courseId:string
   course: Course;
   instructor:User
@@ -116,8 +116,10 @@ export class CourseDetailComponent implements OnInit {
 
       let res = JSON.parse(message.data);
       let data = res?.data
+      console.log(data)
       if(res?.data_name == "course")
         this.course = data
+        
       else if(res?.data_name == "user")
         this.instructor = data
       else{
