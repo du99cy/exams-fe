@@ -31,7 +31,7 @@ const APP_SOME_ID = new InjectionToken<Observable<string>>('stream id');
 })
 export class CourseLandingPageComponent implements OnInit, OnDestroy {
   //make this variable for event detect change of form
-
+  pressUpdateBtn = false
   changeFormNumber: number = 0;
   isChange: boolean = false;
   getCourseInforMode: string = 'course-landing-page';
@@ -82,11 +82,8 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     //save status of data into database
-    if (this.isChange) {
-      let courseBodyUpdate: Course = { ...this.FormValue };
-      this.courseService
-        .updateCourse(this.courseId, courseBodyUpdate)
-        .subscribe();
+    if (this.isChange && !this.pressUpdateBtn) {
+      this.updateData()
     }
 
     this.destroy$.next(true);
@@ -124,5 +121,13 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
           alert('Cập nhật thành công');
         });
     });
+  }
+
+  updateData(){
+    this.pressUpdateBtn = true
+    let courseBodyUpdate: Course = { ...this.FormValue };
+      this.courseService
+        .updateCourse(this.courseId, courseBodyUpdate)
+        .subscribe();
   }
 }
