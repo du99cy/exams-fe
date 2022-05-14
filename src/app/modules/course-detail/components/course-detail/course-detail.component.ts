@@ -117,14 +117,14 @@ export class CourseDetailComponent implements OnInit {
 
       let data = res?.data
       if(res?.data_name == "course")
-
         this.course = data
-      }
+
       else if (res?.data_name == 'user') this.instructor = data;
       else {
         this.contents = data;
         source.close();
       }
+
     });
     source.addEventListener('end', function (event) {
       console.log('Handling end....');
