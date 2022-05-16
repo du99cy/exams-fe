@@ -28,7 +28,8 @@
   </div>
   <div>
     <div [routerLink]="['/cart']">
-      <mat-icon style="color: #0d4579; cursor: pointer">shopping_cart</mat-icon>{{cartItem}}
+      <mat-icon style="color: #0d4579; cursor: pointer">shopping_cart</mat-icon
+      >{{ cartItem }}
     </div>
   </div>
   <!-- <div>
@@ -100,62 +101,40 @@
         </div>
       </div>
     </ng-template>
-    <!-- <div class="category">
-      <mat-icon
-        style="color: #0d4579; cursor: pointer"
-        matBadge="8"
-        matBadgePosition="after"
-        matBadgeColor="warn"
-        >shopping_cart</mat-icon
-      >
-      <div class="category-box">
-        <div class="shoping">
-          <div class="shopping-cart">
-            <img
-              class="img-response"
-              src="../../../../assets/common-img/355212_948a_10 (1).jpg"
-              alt=""
-            />
-            <div class="shoping-cart-content">
-              <span class="name"
-                >Web Design for Beginners: Real World Coding in HTML & CSS
-                1</span
-              >
-              <span class="author">Brad Schiff</span>
-              <span class="cost">$84.99</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <ng-template [ngIf]="this.userData">
+    <!-- <ng-template [ngIf]="this.userData">
       <div class="category">
         <mat-icon style="color: #0d4579; cursor: pointer"
           >notifications</mat-icon
         >
         <div class="category-box"></div>
       </div>
-    </ng-template>
+    </ng-template> -->
     <ng-template [ngIf]="this.userData" [ngIfElse]="login_signup_temp">
       <div class="category user">
-        <img [src]="this.userData.avatar_pic" alt="" class="user-img" />
+        <img
+          src="{{ link }}/{{ this.userData.avatar_pic }}"
+          alt=""
+          class="user-img"
+        />
         <div class="category-box">
-          <div class="infor-user">
-            <div class="user-infor">
-              <img
-                [src]="this.userData.avatar_pic"
-                alt=""
-                class="user-img-box"
-              />
-              <div class="name">
-                <span class="full-name"
-                  >{{ this.userData.first_name }}
-                  {{ this.userData.last_name }}</span
-                >
-                <span class="email">{{ this.userData.email }}</span>
+          <a routerLink="user-infor" style="color: #111111;">
+            <div class="infor-user"  routerLink="user-infor">
+              <div class="user-infor">
+                <img
+                  src="{{ link }}/{{ this.userData.avatar_pic }}"
+                  alt=""
+                  class="user-img-box"
+                />
+                <div class="name">
+                  <span class="full-name"
+                    >{{ this.userData.first_name }}
+                    {{ this.userData.last_name }}</span
+                  >
+                  <span class="email">{{ this.userData.email }}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
           <div class="tools">
             <span>Khóa học của tôi</span>
             <span>Giỏ hàng</span>

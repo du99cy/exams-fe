@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { mapToFormData } from '@core/utilities/helpers';
+import { fmt, mapToFormData } from '@core/utilities/helpers';
 import { api_urls } from '@shared/configs/api_url';
 import {
   BehaviorSubject,
@@ -14,7 +14,7 @@ import {
   of,
 } from 'rxjs';
 import { ACCESS_TOKEN } from './constant';
-import { FacebookUser, MailUser } from './user';
+import { FacebookUser, MailUser, User } from './user';
 
 const BASE_URL = api_urls.LOCAL_API_URL;
 const routes = {
@@ -107,6 +107,7 @@ export class AuthService implements OnDestroy {
       .pipe(
         first(),
         map((res: any) => {
+          console.log(res)
           let userData = res.data;
           this.User = userData;
         })
@@ -207,7 +208,10 @@ export class AuthService implements OnDestroy {
   }
 
   //
-
+  updateUser(userBodyUpdate:User){
+    let uri = routes.userInfor;
+    return this.httpClient.patch(uri, userBodyUpdate).pipe(first());
+  }
   ngOnDestroy() {
     this.stopRefreshTokenTimer();
   }

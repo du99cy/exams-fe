@@ -11,6 +11,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -22,6 +23,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     BrowserAnimationsModule,
     MatIconModule,
     MatBadgeModule,
+    MatMenuModule
   ],
   bootstrap: [AppComponent],
 })
