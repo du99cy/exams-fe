@@ -7,6 +7,7 @@ import { CourseVideoService } from '@modules/course-video/services/course-video.
 import { content } from '@modules/home/models/content';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ResourseFile } from '@modules/course-manage/modules/curriculum/models/ResourseFile';
 
 @Component({
   selector: 'app-course-video',
@@ -22,6 +23,7 @@ export class CourseVideoComponent implements OnInit, OnDestroy {
   course_id: string;
   //whether preview or real studying
   mode: string;
+  fileResourses:Array<ResourseFile>=[]
   ContentsObservable: Observable<Array<Content>>;
   constructor(
     private route: ActivatedRoute,
@@ -63,6 +65,12 @@ export class CourseVideoComponent implements OnInit, OnDestroy {
           this.urlObject = URL.createObjectURL(this.video);
           this.videoURL = this.sanitizer.bypassSecurityTrustUrl(this.urlObject);
         });
+
+      //get file resourse
+      this.curriculumService.getAllResourseViaContentIdAndResourseType(content.id,"file",this.mode).subscribe(res=>{
+        this.fileResourses = res
+      })
+
     }
     //if quiz
     if(content.type_status == 1){
@@ -74,6 +82,14 @@ export class CourseVideoComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     URL.revokeObjectURL(this.urlObject);
+  }
+  downloadFile(resourse_id:string){
+    this.curriculumService.getDownloadFile(resourse_id,this.mode).subscribe(file=>{
+
+      let fileURL = URL.createObjectURL(file);
+
+      window.open(fileURL)
+    })
   }
 
 }

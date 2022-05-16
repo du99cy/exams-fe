@@ -11,7 +11,8 @@ const routes = {
   addTestcase: `${BASE_URL}`,
   getAllTestcaseViaContentId: `${BASE_URL}/{content_id}/all`,
   updateTestcase: `${BASE_URL}/{testcaseId}`,
-  deleteTestcase: `${BASE_URL}/{testcaseId}`
+  deleteTestcase: `${BASE_URL}/{testcaseId}`,
+  deleteAllTestcaseOfContent: `${BASE_URL}/content/{content_id}/all`
 };
 
 @Injectable()
@@ -38,6 +39,11 @@ export class TestcaseService {
   deleteTestcase(testcaseId:string){
     let uri  = fmt(routes.deleteTestcase,{testcaseId})
 
+    return this.httpClient.delete(uri).pipe(first())
+  }
+
+  deleteAllTestcaseOfContent(content_id:string): Observable<any> {
+    let uri = fmt(routes.deleteAllTestcaseOfContent,{content_id})
     return this.httpClient.delete(uri).pipe(first())
   }
 }

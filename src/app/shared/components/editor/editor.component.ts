@@ -7,7 +7,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit {
-  htmlContent = ''
+  @Input('html-content') htmlContent = ''
   @Input('config') config :AngularEditorConfig = {
     editable: true,
     spellcheck: true,

@@ -19,18 +19,16 @@ import { CurriculumService } from '../../services/curriculum.service';
   styleUrls: ['./curriculum.component.scss'],
 })
 export class CurriculumComponent implements OnInit, OnDestroy {
-
   ContentListObservable: Observable<Array<Content>>;
   course_id: string;
-  description: string
+  description: string;
   BtnsMenuOpen = false;
   lectureCreationOpen = false;
   quizCreationOpen = false;
   codingCreationOpen = false;
   orderContentChange = false;
   contentListTrace: Array<Content> = [];
-  content:any = {type:'',creation_title:''}
-
+  content: any = { type: '', creation_title: '' };
 
   drop(
     event: CdkDragDrop<{ title: string; poster: string }[]>,
@@ -42,44 +40,38 @@ export class CurriculumComponent implements OnInit, OnDestroy {
     this.contentListTrace = dataList;
   }
 
-  lectureCreationClickEvent(event: any) {
+  lectureCreationClickEvent(event: { status: number; data: Content },contentList: Array<Content>){
     if (event.status == 1) {
-
       //create content insert
       let content: Content = {
-        title: event.data,
+        ...event.data,
         type_status: 0,
         course_id: this.course_id,
       };
       //add content to database
-      this.addContent(content);
+      this.addContent(contentList,content);
       //close menu and content creation form
-      this.lectureCreationOpen = false;
+      //this.lectureCreationOpen = false;
     }
     //close menu and content creation form
     this.lectureCreationOpen = false;
   }
 
-  exerciseCreationClickEvent(event: any) {
+  exerciseCreationClickEvent(event: any,contentList: Array<Content>) {
+    if (event.status === 1) {
+      let content: Content = {
+        ...event.data,
+        type_status: this.content.type,
+        course_id: this.course_id,
+      };
 
-    if(event.status === 1){
-      let content:Content = {
-        title:event.data.title,
-        description:event.data.description,
-        type_status:this.content.type,
-        course_id:this.course_id,
-        time_for_quiz_minutes:event.data.timeForQuiz
-
-      }
-
-      this.addContent(content)
+      this.addContent(contentList,content);
     }
 
-    this.quizCreationOpen = false
+    this.quizCreationOpen = false;
   }
 
   codingCreationClickEvent(event: any) {
-
     // if(event.status === 1){
     //   let content:Content = {
     //     title:event.data.title,
@@ -93,9 +85,8 @@ export class CurriculumComponent implements OnInit, OnDestroy {
     //   this.addContent(content)
     // }
 
-    this.codingCreationOpen = false
+    this.codingCreationOpen = false;
   }
-
 
   constructor(
     private route: ActivatedRoute,
@@ -126,12 +117,18 @@ export class CurriculumComponent implements OnInit, OnDestroy {
     }
   }
 
-  addContent(contentBody: Content) {
-    this.curriculumService.addContent(contentBody).subscribe((res) => {
+  addContent(contentList:Array<Content>,contentBody: Content) {
+    this.curriculumService.addContent(contentBody).subscribe((insertedId:string) => {
+      contentBody.id = insertedId
+      contentList.push(contentBody);
       //get content list
-      this.ContentListObservable =
-        this.curriculumService.getAllContentViaCourseId(this.course_id);
+      // this.ContentListObservable =
+      //   this.curriculumService.getAllContentViaCourseId(this.course_id);
     });
+
+    //can not add in front end because content in FE have not id so that edit later
+    // since have not id so u can retrun id from api POST like the following when api returned ip
+
   }
 
   trackByFn(index: number, item: any) {
@@ -140,5 +137,17 @@ export class CurriculumComponent implements OnInit, OnDestroy {
 
   preview() {
     this.router.navigateByUrl(`course/${this.course_id}/contents?mode=preview`);
+  }
+
+  contentChangeEvent(event:{data:{contentId:string,bodyUpdate?:Content},action:string},contentList:Array<Content>){
+
+    let contentIndex = contentList.findIndex(content => content.id == event.data.contentId)
+    if(event.action == "delete"){
+      contentList.splice(contentIndex, 1)
+    }
+    else if(event.action == "update"){
+      let contentIndex = contentList.findIndex(content => content.id == event.data.contentId)
+      contentList[contentIndex]= event.data.bodyUpdate
+    }
   }
 }

@@ -52,30 +52,32 @@
           </button>
         </div>
       </ng-template>
-      <!-- lecture-creation -->
-      <ng-template [ngIf]="lectureCreationOpen">
-        <div class="lecture-creation-wrapper">
-          <app-lecture-creation
-            (btn-click)="lectureCreationClickEvent($event)"
-          ></app-lecture-creation>
-        </div>
-      </ng-template>
-      <!-- quiz vs coding-->
-      <ng-template [ngIf]="quizCreationOpen">
-        <div class="lecture-creation-wrapper">
-          <app-exercise-creation
-            [title-creation]="content.creation_title"
-            (btn-click)="exerciseCreationClickEvent($event)"
-          ></app-exercise-creation>
-        </div>
-      </ng-template>
       <ng-container *ngIf="ContentListObservable | async as contentList">
+        <!-- lecture-creation -->
+        <ng-template [ngIf]="lectureCreationOpen">
+          <div class="lecture-creation-wrapper">
+            <app-lecture-creation
+              (btn-click)="lectureCreationClickEvent($event,contentList)"
+            ></app-lecture-creation>
+          </div>
+        </ng-template>
+        <!-- quiz vs coding-->
+        <ng-template [ngIf]="quizCreationOpen">
+          <div class="lecture-creation-wrapper">
+            <app-exercise-creation
+              [title-creation]="content.creation_title"
+              (btn-click)="exerciseCreationClickEvent($event,contentList)"
+            ></app-exercise-creation>
+          </div>
+        </ng-template>
+
         <div
           cdkDropList
           class="drag-drop-list"
           (cdkDropListDropped)="drop($event, contentList)"
         >
           <app-content
+            (content-change)="contentChangeEvent($event, contentList)"
             [order]="i + 1"
             [content]="content"
             class="drag-drop-box"
@@ -107,6 +109,9 @@
           </app-content>
         </div>
       </ng-container>
+      <!-- <div class="text-center" style="">
+        <mat-spinner></mat-spinner>
+      </div> -->
     </div>
   </app-course-manage-header-content-layout>
 </div>
