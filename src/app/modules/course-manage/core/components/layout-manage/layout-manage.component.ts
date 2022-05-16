@@ -43,6 +43,7 @@ export class LayoutManageComponent implements OnInit, OnDestroy {
     this.id$.pipe(takeUntil(this.destroy$)).subscribe((id) => {
       this.courseId = id;
     });
+    console.log(this.router.url);
   }
 
   ngOnDestroy(): void {

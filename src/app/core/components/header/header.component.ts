@@ -4,6 +4,7 @@ import { User } from '@core/authentication/user';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { CartService } from '@modules/home/services/cart.service';
+import { api_urls } from '@shared/configs/api_url';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
   cartItem:number
   userData:any
   userSubs = new Subscription();
+  openSetting = false
+  link = api_urls.LOCAL_API_URL
   constructor(private authService: AuthService,private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
@@ -41,8 +44,5 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.router.navigateByUrl(`/`)
   }
 
-  courseCreation(){
-
-  }
 
 }

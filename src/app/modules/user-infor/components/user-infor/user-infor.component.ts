@@ -9,21 +9,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./user-infor.component.scss']
 })
 export class UserInforComponent implements OnInit {
-  userData:any
-  userSubs = new Subscription();
-  constructor(private authService: AuthService ) {
+  constructor( ) {
     
    }
 
   ngOnInit(): void {
-    this. getUserData()
   }
-  getUserData(){
-    let userSub = this.authService.UserObservable.subscribe((res:any)=>{
-      this.userData = res
-      console.log(this.userData)
-
-    })
-    this.userSubs.add(userSub);
-  }
+  
 }

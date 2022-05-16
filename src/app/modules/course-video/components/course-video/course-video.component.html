@@ -9,8 +9,12 @@
     ></video>
     <mat-tab-group mat-align-tabs="start">
       <mat-tab label="Mô tả"><p [innerHTML]="description"></p></mat-tab>
-      <mat-tab label="Second">Content 2</mat-tab>
-      <mat-tab label="Third">Content 3</mat-tab>
+      <mat-tab label="Hỏi đáp">
+        <app-comment></app-comment>
+      </mat-tab>
+      <mat-tab label="Đánh giá">
+        <app-rating></app-rating>
+      </mat-tab>
     </mat-tab-group>
   </div>
 

@@ -116,6 +116,7 @@ export class CourseDetailComponent implements OnInit {
 
 
       let data = res?.data
+      console.log(data)
       if(res?.data_name == "course")
         this.course = data
 

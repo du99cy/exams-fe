@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '@core/authentication/auth.service';
+import { User } from '@core/authentication/user';
 import { routeParamFactory } from '@core/utilities/activated-route.factories';
 import { Course } from '@modules/new-course-creation/models/course';
 import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
@@ -31,7 +33,7 @@ const APP_SOME_ID = new InjectionToken<Observable<string>>('stream id');
 })
 export class CourseLandingPageComponent implements OnInit, OnDestroy {
   //make this variable for event detect change of form
-  pressUpdateBtn = false
+  pressUpdateBtn = false;
   changeFormNumber: number = 0;
   isChange: boolean = false;
   getCourseInforMode: string = 'course-landing-page';
@@ -40,6 +42,9 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
   imgName: string;
   courseId: string;
   formGroup: FormGroup;
+  error: boolean;
+  user: User;
+  link = api_urls.LOCAL_API_URL
   attributes = {
     title: new FormControl(''),
     teaching_language: new FormControl('tiếng việt'),
@@ -60,7 +65,8 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
     @Inject(APP_SOME_ID) private id$: Observable<string>,
     private fb: FormBuilder,
     private courseService: CourseCreationService,
-    private curriculumService: CurriculumService
+    private curriculumService: CurriculumService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -79,11 +85,22 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
       if (this.changeFormNumber > 0) this.isChange = true;
       this.changeFormNumber += 1;
     });
+    this.authService.UserObservable.subscribe((res) => {
+      this.user = res;
+      if (
+        this.user.avatar_pic != '' &&
+        this.user.biography.split(' ').length >= 49
+      ) {
+        this.error = false;
+      } else {
+        this.error = true;
+      }
+    });
   }
   ngOnDestroy() {
     //save status of data into database
     if (this.isChange && !this.pressUpdateBtn) {
-      this.updateData()
+      this.updateData();
     }
 
     this.destroy$.next(true);
@@ -123,11 +140,10 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateData(){
-    this.pressUpdateBtn = true
+  updateData() {
     let courseBodyUpdate: Course = { ...this.FormValue };
-      this.courseService
-        .updateCourse(this.courseId, courseBodyUpdate)
-        .subscribe();
+    this.courseService
+      .updateCourse(this.courseId, courseBodyUpdate)
+      .subscribe();
   }
 }
