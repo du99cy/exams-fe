@@ -37,12 +37,5 @@ export class CartComponent extends BaseComponent implements OnInit {
     this.cart = this.cartService.Cart;
   }
   onCheckout() {
-    this.checkoutService.redirectToPayment({
-      amount: 1000000,
-      bank_code: 'NCB',
-      order_id: Math.random().toString(),
-    }).subscribe(res => {
-      window.location.href = res.data
-    });
   }
 }

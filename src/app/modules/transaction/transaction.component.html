@@ -1,0 +1,29 @@
+<div class="ex-container">
+  <div class="ex-header">
+    {{title | uppercase}}
+  </div>
+  <div class="trans-body" *ngIf="trans?.length > 0; else noRecord">
+    <div class="trans-items">
+      <table>
+        <tr>
+          <th>Mã giao dịch</th>
+          <th>Loại giao dịch</th>
+          <th>Nội dung</th>
+          <th>Số tiền</th>
+          <th>Thời gian</th>
+        </tr>
+        <tr *ngFor="let tran of trans">
+          <td>{{tran.transaction_id}}</td>
+          <td>{{tran.isRecharge ? 'Nạp tiền' : 'Thanh toán'}}</td>
+          <td>{{tran.desc}}</td>
+          <td [class]="tran.isRecharge ? 'recharge' : 'checkout'">{{tran.isRecharge ? "+" : "-"}} {{tran.amount | number:'1.0-0'}}</td>
+          <td>{{tran.time | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #noRecord>
+    <div class="no-record">{{noRecordMessage}}</div>
+  </ng-template>
+</div>

@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CourseComponent } from '@modules/home/components/course/course.component';
+import { Component } from '@angular/core';
 import { BaseComponent } from '@shared/abstract/base.component';
 import { notiType } from './model/enum';
 import { INotification } from './model/interface';

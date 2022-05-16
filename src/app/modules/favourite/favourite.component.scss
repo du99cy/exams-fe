@@ -1,11 +1,11 @@
-@import "../../../../shared/styles/color.scss";
+@import "../../shared/styles/color.scss";
 :host {
-  .cart-body {
+  .favour-body {
     display: flex;
     justify-content: space-between;
-    .cart-items {
-      flex-basis: 70%;
-      max-width: 70%;
+    .favour-items {
+      flex-basis: 100%;
+      max-width: 100%;
       font-size: 16px;
       padding: 1rem 0;
       & > table {
@@ -25,7 +25,7 @@
         }
       }
     }
-    .cart-total {
+    .favour-total {
       flex-basis: 25%;
       max-width: 25%;
       padding: 2rem 0;
