@@ -1,0 +1,47 @@
+<div *ngIf="rechargeInfo; else recharge">
+ <div class="ex-container text-center">
+   <div class="ex-header">
+     {{rechargeInfo?.Message}}
+   </div>
+ </div>
+</div>
+<ng-template #recharge>
+  <div class="form_page_wrapper">
+    <div class="form-wrapper">
+      <div class="form-header">Nạp tiền</div>
+
+      <div class="form-content">
+        <form [formGroup]="rechargeForm" (ngSubmit)="Charge()">
+          <div fxFlex>
+            <!-- amount Form control -->
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Ngân hàng</mat-label>
+              <mat-select formControlName="bank_code">
+                <mat-option *ngFor="let bank of banks" [value]="bank.value">
+                  {{bank.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="isValidControl('bank_code', 'required')" class="error">Ngân hàng là trường bắt buộc nhập</div>
+            <!-- amount Form control -->
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Số tiền</mat-label>
+
+              <input matInput numbermask placeholder="Số tiền" formControlName="amount" maxLength="10" />
+            </mat-form-field>
+
+            <div *ngIf="isValidControl('amount', 'required')" class="error">Số tiền là trường bắt buộc nhập</div>
+            <div *ngIf="isValidControl('amount', 'amountErr') && !isValidControl('amount', 'required')" class="error">Số
+              tiền phải lớn hơn 0 và là bội số của 1.000
+            </div>
+            <!-- last name Form control -->
+
+            <button mat-flat-button color="primary" class="mt-4" (click)="Charge()">
+              {{isLoading ? 'Loading ...' : 'Nạp tiền' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -16,10 +16,5 @@ export class CheckoutComponent extends BaseComponent implements OnInit {
     super();
   }
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.checkoutService.saveOrder(params).subscribe((res)=> {
-        console.log(res)
-      })
-    });
   }
 }
