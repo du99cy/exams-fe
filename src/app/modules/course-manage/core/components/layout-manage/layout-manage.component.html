@@ -2,11 +2,11 @@
     <div class="manage-side-nav">
         <h3>Kế hoạch khóa học</h3>
         <ul class="manage-list">
-            <li class="manage-item">
+            <li (click)="clickToTab('intendedLearners')" [ngStyle]="{'border-left':this.currentTab.intendedLearners?'5px solid black':'1px solid white'}" class="manage-item">
                 <mat-icon>radio_button_unchecked</mat-icon>
                 <a routerLink="intended-learners">Mục đích môn học</a>
             </li>
-            <li class="manage-item">
+            <li class="manage-item" (click)="clickToTab('courseStructure')" [ngStyle]="{'border-left':this.currentTab.courseStructure?'5px solid black':'1px solid white'}">
                 <mat-icon>radio_button_unchecked</mat-icon>
                 <a routerLink="course-structure">Cấu trúc môn học</a>
             </li>

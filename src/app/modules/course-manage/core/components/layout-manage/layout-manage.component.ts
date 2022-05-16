@@ -29,7 +29,7 @@ const APP_SOME_ID = new InjectionToken<Observable<string>>('stream some id');
   ],
 })
 export class LayoutManageComponent implements OnInit, OnDestroy {
-
+  currentTab:any = {courseStructure:false,intendedLearners:false}
   destroy$ = new Subject<boolean>();
   courseId: string;
   constructor(
@@ -65,5 +65,14 @@ export class LayoutManageComponent implements OnInit, OnDestroy {
       data: data,
       width: '40rem',
     });
+  }
+
+  clickToTab(tabName:string){
+    for(const t in this.currentTab){
+
+      this.currentTab[t] = t== tabName
+    }
+
+
   }
 }

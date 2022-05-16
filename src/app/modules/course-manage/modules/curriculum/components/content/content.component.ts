@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { Content } from '../../models/content';
@@ -13,6 +13,10 @@ import { CurriculumService } from '../../services/curriculum.service';
 export class ContentComponent implements OnInit {
   @Input('order') order: number = 0;
   @Input('content') content: Content;
+  @Output("content-change") contentEmitChange = new EventEmitter()
+
+  isEdit = false
+  contentUsedToEdit:Content
 
   DetailsObserable:Observable<any>
   expandMorePress = false;
@@ -29,5 +33,25 @@ export class ContentComponent implements OnInit {
     //lazy get video and file resourse
     return this.curriculumService
       .getAllResourseViaContentId(this.content.id)
+  }
+  deleteContent(){
+    //show swal to user
+    this.curriculumService.deleteContent(this.content.id).subscribe()
+    this.contentEmitChange.emit({data:{contentId:this.content.id},action:"delete"})
+  }
+
+  editContent(){
+    this.isEdit = true
+    //copy from this.content
+    this.contentUsedToEdit = JSON.parse(JSON.stringify(this.content))
+  }
+
+  updateContent(event:{status:number,data:Content}){
+    this.isEdit =  false
+
+    if(event.status == 1)
+      this.curriculumService.updateContent(event.data.id,event.data).subscribe(content_id=>{
+        this.contentEmitChange.emit({data:{contentId:content_id,bodyUpdate:event.data},action:"update"})
+      })
   }
 }

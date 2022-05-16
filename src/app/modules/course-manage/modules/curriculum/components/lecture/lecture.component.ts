@@ -57,6 +57,7 @@ export class LectureComponent implements OnInit {
     ) {
       //upload file to database
       this.curriculumService.uploadFile(file).subscribe((res) => {
+        //update resourse with file
         let resourse: ResourseFile = {
           name: file.name,
           size: file.size,
@@ -65,8 +66,10 @@ export class LectureComponent implements OnInit {
           content_id: this.content_id,
           course_id: this.course_id,
         };
-
-        //push to resourse array
+        //add resourse to database
+        this.curriculumService.addResourse(resourse).subscribe(resourseId=>{
+          resourse.id = resourseId
+          //push to resourse array
         if(uploadType == 'video'){
           this.videoResourse.push(resourse)
           this.descriptionUploadPress  = false}
@@ -74,7 +77,9 @@ export class LectureComponent implements OnInit {
           this.fileResourse.push(resourse)
           this.resourseUploadPress = false
           }
-        this.curriculumService.addResourse(resourse).subscribe()
+        })
+
+
       });
     }
     this.cancelUploadFileHandler(uploadType)
@@ -82,6 +87,14 @@ export class LectureComponent implements OnInit {
 
   trackByFn(index:number,item:any){
     return item.id;
+  }
+
+  deleteResourse(resourse_id:string,resourseList:Array<ResourseFile>){
+
+    this.curriculumService.deleteResourse(resourse_id).subscribe(res=>{
+      let resourseDeleteIndex = resourseList.findIndex(res => res.id == resourse_id)
+      resourseList.splice(resourseDeleteIndex,1)
+    })
   }
 
 }
