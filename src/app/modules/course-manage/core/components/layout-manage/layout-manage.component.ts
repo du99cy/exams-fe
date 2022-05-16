@@ -29,7 +29,7 @@ const APP_SOME_ID = new InjectionToken<Observable<string>>('stream some id');
   ],
 })
 export class LayoutManageComponent implements OnInit, OnDestroy {
-
+  currentTab:any = {courseStructure:false,intendedLearners:false}
   destroy$ = new Subject<boolean>();
   courseId: string;
   constructor(
@@ -43,6 +43,7 @@ export class LayoutManageComponent implements OnInit, OnDestroy {
     this.id$.pipe(takeUntil(this.destroy$)).subscribe((id) => {
       this.courseId = id;
     });
+    console.log(this.router.url);
   }
 
   ngOnDestroy(): void {
@@ -53,16 +54,25 @@ export class LayoutManageComponent implements OnInit, OnDestroy {
   review() {
     this.CourseService.CourseReview(this.courseId).subscribe((lst:any[]) => {
       if(lst.length >0 )
-        this.openDialog(lst)
+        this.openDialog({data:lst,courseId:this.courseId})
       else
         this.router.navigateByUrl(`/course/${this.courseId}?mode=preview`)
     });
   }
 
-  openDialog(data: any[]) {
+  openDialog(data: any) {
     this.dialog.open(CannotSubmitForReviewComponent, {
       data: data,
       width: '40rem',
     });
+  }
+
+  clickToTab(tabName:string){
+    for(const t in this.currentTab){
+
+      this.currentTab[t] = t== tabName
+    }
+
+
   }
 }

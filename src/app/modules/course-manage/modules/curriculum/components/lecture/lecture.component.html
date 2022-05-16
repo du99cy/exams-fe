@@ -1,5 +1,4 @@
 <div class="lecture-wrapper">
-
   <div class="content">
     <ng-container
       *ngTemplateOutlet="
@@ -16,13 +15,16 @@
         </div>
       </ng-template>
       <ng-template #descriptionExists>
-        <div class="resourse" [innerHTML]="description">
-
-        </div>
+        <div align="end" (click)="descriptionUploadPress = true"><i class="material-icons icon-color">edit</i></div>
+        <div
+          style="height: auto; width: 100%; display: block"
+          class="resourse"
+          [innerHTML]="description"
+        ></div>
       </ng-template>
     </ng-template>
     <ng-template #editorTemp>
-      <app-editor (btn-click)="editorClickHandler($event)"></app-editor>
+      <app-editor [html-content]="description" (btn-click)="editorClickHandler($event)"></app-editor>
     </ng-template>
     <ng-container
       *ngTemplateOutlet="
@@ -69,23 +71,31 @@
 </ng-template>
 
 <ng-template #videoNotExpandTemp>
-  <ng-template [ngIf]="this.videoResourse.length == 0" [ngIfElse]="videoExistsTemp">
+  <ng-template
+    [ngIf]="this.videoResourse.length == 0"
+    [ngIfElse]="videoExistsTemp"
+  >
     <div class="content-btn" (click)="videoUploadPress = true">
       <i class="material-icons">add</i>
       <span>Video</span>
     </div>
   </ng-template>
   <ng-template #videoExistsTemp>
-    <div class="resourse" *ngFor="let video of videoResourse;trackBy:trackByFn">
-      {{video.name}}({{video.size/(1024*1024) | number }}MB)
+    <div
+      class="resourse"
+      *ngFor="let video of videoResourse; trackBy: trackByFn"
+    >
+      <div>{{ video.name }}({{ video.size / (1024 * 1024) | number }}MB)</div>
+      <div (click)="deleteResourse(video.id,videoResourse)"><i class="material-icons icon-color">delete</i></div>
     </div>
   </ng-template>
 </ng-template>
 
 <ng-template #resourseNotExpandTemp>
   <ng-template [ngIf]="fileResourse">
-    <div class="resourse" *ngFor="let file of fileResourse;trackBy:trackByFn">
-      {{file.name}}({{file.size/(1024*1024) | number}}MB)
+    <div class="resourse" *ngFor="let file of fileResourse; trackBy: trackByFn">
+      <div>{{ file.name }}({{ file.size / (1024 * 1024) | number }}MB)</div>
+      <div (click)="deleteResourse(file.id,fileResourse)"><i class="material-icons icon-color">delete</i></div>
     </div>
   </ng-template>
   <div class="content-btn" (click)="resourseUploadPress = true">

@@ -24,6 +24,7 @@
     "@kolkov/angular-editor": "^2.0.0",
     "@materia-ui/ngx-monaco-editor": "^6.0.0",
     "@types/facebook-js-sdk": "^3.3.5",
+    "angular-responsive-carousel": "^2.1.2",
     "angular-split": "^13.2.0",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.33.0",

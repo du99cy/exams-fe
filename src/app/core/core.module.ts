@@ -13,6 +13,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { appInitializer } from './initializer/app.initializer';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+
 @NgModule({
   imports: [HttpClientModule],
   declarations: [],

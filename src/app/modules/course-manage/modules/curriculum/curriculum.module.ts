@@ -28,6 +28,7 @@ import { FunctionService } from './services/function.service';
 import { TestCaseComponent } from './components/testcase/testcase.component';
 import { TestcaseCreationComponent } from './components/testcase-creation/testcase-creation.component';
 import { TestcaseService } from './services/testcase.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { TestcaseService } from './services/testcase.service';
     FormsModule,
     ReactiveFormsModule,
     MatRadioModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     CurriculumComponent,
@@ -55,7 +57,8 @@ import { TestcaseService } from './services/testcase.service';
     CodingCreationComponent,
     CodingAddInputComponent,
     TestCaseComponent,
-    TestcaseCreationComponent
+    TestcaseCreationComponent,
+
   ],
   providers: [
     CurriculumService,

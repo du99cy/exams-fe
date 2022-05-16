@@ -76,13 +76,19 @@ export class QuizComponent implements OnInit {
       let questionUpdate: Question = {
         name: this.newQuestion.name,
         description: this.newQuestion.description,
-        answers:this.newQuestion.answers,
-        answers_right_id:this.newQuestion.answers_right_id,
-        question_type:this.newQuestion.question_type
+        answers: this.newQuestion.answers,
+        answers_right_id: this.newQuestion.answers_right_id,
+        question_type: this.newQuestion.question_type,
       };
       this.questionService
         .updateQuestion(this.newQuestion.id, questionUpdate)
-        .subscribe();
+        .subscribe((res) => {
+          //update in FE
+          let qsIndex = this.questions.findIndex(
+            (qs) => qs.id === this.newQuestion.id
+          );
+          this.questions[qsIndex] = this.newQuestion;
+        });
     }
     this.addNewQuestion = false;
   }
@@ -90,7 +96,8 @@ export class QuizComponent implements OnInit {
   editQuestion(question: Question) {
     this.formAction = 'edit';
     //assign question for edit
-    this.newQuestion = question;
+    //copy object
+    this.newQuestion = JSON.parse(JSON.stringify(question));
     this.addNewQuestion = true;
   }
 

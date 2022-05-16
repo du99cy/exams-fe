@@ -1,0 +1,45 @@
+<div class="user-profile" [formGroup]="formGroup">
+    <div class="user-profile-infor">
+        <div class="infor">
+            <span>Họ đệm</span>
+            <input type="text" formControlName="first_name">
+        </div>
+        <div class="infor">
+            <span>Tên</span>
+            <input type="text" formControlName="last_name">
+        </div>
+        <div class="infor">
+            <span>Kinh nghiệm</span>
+            <input type="text" formControlName="headline">
+        </div>
+        <div class="infor">
+            <span>Tiểu sử</span>
+            <app-normal-editor formControlName="biography"></app-normal-editor>
+        </div>
+    </div>
+    <div class="user-profile-link">
+        <div class="infor">
+            <span>Twitter</span>
+            <div class="link">
+                <span>http://www.twitter.com/</span>
+                <input type="text" formControlName="twitter_link">
+            </div>
+        </div>
+        <div class="infor">
+            <span>Facebook</span>
+            <div class="link">
+                <span>http://www.facebook.com/</span>
+                <input type="text" formControlName="facebook_link">
+            </div>
+        </div>
+        <div class="infor">
+            <span>Youtube</span>
+            <div class="link">
+                <span>http://www.youtube.com/</span>
+                <input type="text" formControlName="youtube_link">
+            </div>
+        </div>
+        
+    </div>
+</div>
+<button (click)="updateData()">Lưu thông tin</button>

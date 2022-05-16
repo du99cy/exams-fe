@@ -9,6 +9,7 @@ import { map, Observable } from 'rxjs';
 import { Function } from '../../models/function';
 import { Parameter } from '../../models/parameter';
 import { FunctionService } from '../../services/function.service';
+import { TestcaseService } from '../../services/testcase.service';
 
 @Component({
   selector: 'app-coding-creation',
@@ -56,7 +57,8 @@ export class CodingCreationComponent implements OnInit {
   ];
   constructor(
     private formBuilder: FormBuilder,
-    private funcService: FunctionService
+    private funcService: FunctionService,
+    private testcaseService: TestcaseService
   ) {}
   ngOnInit(): void {
     this.FunctionFormGroup = this.formBuilder.group(
@@ -105,6 +107,7 @@ export class CodingCreationComponent implements OnInit {
   }
 
   addParam() {
+    if(!this.confirmChangeInputParams(this.content_id)) return
     this.mode = 'add';
     this.paramChange = true;
     this.paramForEditOrAdd = {
@@ -117,6 +120,7 @@ export class CodingCreationComponent implements OnInit {
   }
 
   editParam(param: Parameter) {
+    if(!this.confirmChangeInputParams(this.content_id)) return
     this.mode = 'edit';
     this.paramChange = true;
     this.paramForEditOrAdd = param;
@@ -124,6 +128,7 @@ export class CodingCreationComponent implements OnInit {
   }
 
   deleteParam(param_id: string) {
+    if(!this.confirmChangeInputParams(this.content_id)) return
     this.paramChange = true;
     this.params = this.params.filter((p) => p.id != param_id);
   }
@@ -148,4 +153,16 @@ export class CodingCreationComponent implements OnInit {
 
     this.isAddCodingInput = false;
   }
+
+  confirmChangeInputParams(contentId:string):boolean {
+    let res = confirm(
+      'Nếu dữ liệu đầu vào thay đổi dẫn đến thông tin testcase thay đổi theo vậy nên dữ liệu testcase lúc trước sẽ bị mất hết. Bạn có chắc muốn thay đổi '
+    );
+    if(res){
+      this.testcaseService.deleteAllTestcaseOfContent(contentId).subscribe()
+    }
+    return res
+  }
+
+
 }

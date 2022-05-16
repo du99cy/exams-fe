@@ -53,6 +53,7 @@ body {
   background: $dark_blue;
   color: $white;
 }
+
 .ex-container {
   min-height: 40vh;
   width: 80%;
@@ -118,4 +119,8 @@ body {
       }
     }
   }
+
+.icon-color{
+  color:rgba(0,0,0,0.5);
+
 }
