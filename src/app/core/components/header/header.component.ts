@@ -46,5 +46,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   recharge(){
     this.router.navigateByUrl(`/recharge`)
   }
-
+  transaction(){
+    this.router.navigateByUrl('/transaction')
+  }
 }

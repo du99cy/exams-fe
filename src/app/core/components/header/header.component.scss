@@ -7,12 +7,13 @@
   background-color: white;
   flex-wrap: wrap;
   box-shadow: 0 2px 4px #00000014, 0 4px 12px #00000014;
-  .user-interface{
+  .user-interface {
     display: flex;
     align-items: center;
     .category {
       position: relative;
-      margin-right: 50px;
+      margin-right: 40px;
+      margin-left: 10px;
       .category-box {
         position: absolute;
         min-width: 300px;
@@ -71,7 +72,7 @@
         border-bottom: 1px solid rgb(95, 94, 94);
         padding: 20px;
         cursor: pointer;
-        .user-infor{
+        .user-infor {
           display: flex;
           align-items: center;
           .user-img-box {
@@ -82,26 +83,28 @@
           .name {
             display: flex;
             flex-direction: column;
-            .full-name{
+            .full-name {
               font-size: 16px;
               line-height: 20px;
               font-weight: bold;
               padding-left: 20px;
             }
-            .email{
+            .email {
               line-height: 20px;
               padding-left: 20px;
             }
           }
         }
-        
       }
-      .tools{
+      .tools {
         display: flex;
         flex-direction: column;
-        span{
+        span {
           padding: 20px;
           cursor: pointer;
+          &:hover {
+            background-color: #bdbdbd8a;
+          }
         }
       }
       .user-img {
@@ -126,7 +129,7 @@
       right: 0;
     }
   }
-  
+
   .search-icon {
     height: 40px;
     width: 35px;
@@ -160,14 +163,13 @@
   .a-blue:hover {
     color: #0056b3;
   }
-  .btn{
+  .btn {
     margin-right: 20px;
   }
-
 }
 
 //
-@media screen  and (max-width: 1025px){
+@media screen and (max-width: 1025px) {
   .header-my-layout {
     height: 70px;
     width: 100%;
@@ -177,7 +179,7 @@
     background-color: white;
     flex-wrap: wrap;
     box-shadow: 0 2px 4px #00000014, 0 4px 12px #00000014;
-    .user-interface{
+    .user-interface {
       display: flex;
       align-items: center;
       .category {
@@ -239,7 +241,7 @@
         .infor-user {
           border-bottom: 1px solid rgb(95, 94, 94);
           padding: 20px;
-          .user-infor{
+          .user-infor {
             display: flex;
             align-items: center;
             .user-img-box {
@@ -250,24 +252,23 @@
             .name {
               display: flex;
               flex-direction: column;
-              .full-name{
+              .full-name {
                 font-size: 16px;
                 line-height: 20px;
                 font-weight: bold;
                 padding-left: 20px;
               }
-              .email{
+              .email {
                 line-height: 20px;
                 padding-left: 20px;
               }
             }
           }
-          
         }
-        .tools{
+        .tools {
           display: flex;
           flex-direction: column;
-          span{
+          span {
             padding: 20px;
           }
         }
@@ -293,7 +294,7 @@
         left: 0;
       }
     }
-    
+
     .search-icon {
       height: 40px;
       width: 35px;
@@ -301,26 +302,25 @@
       padding: 10px 12px;
       border: none;
     }
-  
+
     input .active {
       border: none;
     }
-  
+
     .search {
       display: none;
     }
-  
+
     .a-blue {
       color: #106ba3;
     }
-  
+
     .a-blue:hover {
       color: #0056b3;
     }
-  
   }
 }
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .header-my-layout {
     height: 70px;
     width: 100%;
@@ -330,7 +330,7 @@
     background-color: white;
     flex-wrap: wrap;
     box-shadow: 0 2px 4px #00000014, 0 4px 12px #00000014;
-    .user-interface{
+    .user-interface {
       display: flex;
       align-items: center;
       .category {
@@ -388,10 +388,10 @@
             }
           }
         }
-        .tools{
+        .tools {
           display: flex;
           flex-direction: column;
-          span{
+          span {
             padding: 20px;
           }
         }
@@ -401,7 +401,7 @@
           border-radius: 50%;
         }
       }
-      .user{
+      .user {
         display: block;
       }
       .category:hover .category-box {
@@ -420,7 +420,7 @@
         left: 0;
       }
     }
-    
+
     .search-icon {
       height: 40px;
       width: 35px;
@@ -428,23 +428,23 @@
       padding: 10px 12px;
       border: none;
     }
-  
+
     input .active {
       border: none;
     }
-  
+
     .search {
       display: none;
     }
-  
+
     .a-blue {
       color: #106ba3;
     }
-  
+
     .a-blue:hover {
       color: #0056b3;
     }
-    .btn{
+    .btn {
       font-size: 12px;
     }
   }
