@@ -9,15 +9,22 @@ import { CourseVideoService } from './services/course-video.service';
 import { ContentIconPipe } from './pipes/content-icon.pipe';
 import { CommentComponent } from './components/comment/comment.component';
 import {MatInputModule} from '@angular/material/input';
+import { HistoryDialogComponent } from './components/history-dialog/history-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   imports: [
     CourseVideoRoutingModule,
     MatTabsModule,
     MatCardModule,
     CommonModule,
-    MatInputModule
+    MatDialogModule,
+    MatInputModule,
+    MatTableModule,
+    MatButtonModule
   ],
-  declarations: [CourseVideoComponent,ContentIconPipe, CommentComponent],
+  declarations: [CourseVideoComponent,ContentIconPipe, CommentComponent, HistoryDialogComponent,],
   providers: [CurriculumService,CourseVideoService],
 })
 export class CourseVideoModule {}

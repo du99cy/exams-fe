@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/authentication/auth.service';
 import { UserCourseService } from '@modules/home/services/user-course.service';
+import { api_urls } from '@shared/configs/api_url';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,12 +15,13 @@ export class UserCourseComponent implements OnInit {
   listCourseUser:any = []
   userSubs = new Subscription();
   userData: any;
+  link = api_urls.LOCAL_API_URL;
 
   constructor(private userCourse: UserCourseService, private authService: AuthService,private router: Router) {
   }
 
   ngOnInit(): void {
-    this.getUserData()
+    this.getMyCourses()
   }
 
   ngOnDestroy(){
@@ -30,15 +32,14 @@ export class UserCourseComponent implements OnInit {
     let userSub = this.authService.UserObservable.subscribe((res:any)=>{
       this.userData = res
       //get my courses
-      this.getMyCourses(this.userData.id)
+      // this.getMyCourses()
     })
     this.userSubs.add(userSub);
   }
 
-  getMyCourses(user_id:string){
-    this.userCourse.getListCourseByUserId(user_id).subscribe((res)=>{
-      this.listCourseUser =res
-
+  getMyCourses(){
+    this.userCourse.getListCourse().subscribe((res)=>{
+      this.listCourseUser=res.data
     })
   }
 

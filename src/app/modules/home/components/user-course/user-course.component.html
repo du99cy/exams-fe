@@ -1,4 +1,4 @@
-<ng-template [ngIf]="this.userData">
+<div class="container">  
   <h1>Khoá học của bạn</h1>
   <div class="course-container row">
     <div
@@ -6,9 +6,9 @@
       *ngFor="let item of listCourseUser; index as i; let f = first"
     >
       <div style="display: flex; flex-direction: column" (click)="goToDetail(item._id)">
-        <img [src]="item.avatar | https" alt="" class="img-response" />
-        <span class="course-name">{{ item.ten_mon_hoc }}</span>
-        <span class="teacher-name">{{ item.mo_ta }}</span>
+        <img src="{{link}}/{{item.img}}" alt="" class="img-response" />
+        <span class="course-name">{{ item.title }}</span>
+        <span class="teacher-name">{{ item.price }}</span>
       </div>
       <div class="star">
         <span class="star-number">5</span>
@@ -18,10 +18,10 @@
         <mat-icon>star</mat-icon>
         <mat-icon>star</mat-icon>
         <span class="date"
-          >({{ item.thoi_gian_bat_dau * 1000 | date: "MM/dd/yyyy" }} -
-          {{ item.thoi_gian_ket_thuc * 1000 | date: "MM/dd/yyyy" }})</span
+          ></span
         >
       </div>
     </div>
   </div>
-</ng-template>
+
+</div>
