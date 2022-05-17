@@ -79,9 +79,8 @@
     <h2>Bạn học được gì từ khóa học này?</h2>
     <div
       class="course-result"
-      *ngFor="let item of this.course?.knowleages_will_learn"
     >
-      <span>
+      <span *ngFor="let item of this.course?.knowleages_will_learn">
         <mat-icon>done</mat-icon>
         {{ item }}
       </span>

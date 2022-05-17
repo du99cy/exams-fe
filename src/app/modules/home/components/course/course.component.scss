@@ -1,7 +1,7 @@
 .list-course {
   .slick-slider {
     margin: auto;
-    width: 88%;
+    width: 95%;
   }
   .slide{
     margin: 10px;
@@ -30,7 +30,7 @@
         display: flex;
         align-items: center;
         padding: 5px 0px;
-
+        justify-content: space-between;
         .star-number {
           color: #b4690e;
           padding-right: 5px;

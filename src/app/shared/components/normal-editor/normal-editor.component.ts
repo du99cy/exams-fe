@@ -38,8 +38,9 @@ export class NormalEditorComponent implements OnInit, ControlValueAccessor {
   @Input('config') config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '5rem',
+    height: 'auto',
     minHeight: '5rem',
+    maxHeight: 'auto',
     placeholder: 'Nhập mô tả ... ',
     translate: 'no',
     defaultParagraphSeparator: 'p',

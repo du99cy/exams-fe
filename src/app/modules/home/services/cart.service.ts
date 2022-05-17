@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ICourse } from '../models/interface';
 import * as _ from 'lodash';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { Course } from '@modules/new-course-creation/models/course';
 
 @Injectable({
   providedIn: 'root',
@@ -19,17 +20,17 @@ export class CartService {
     localStorage.setItem('cart', JSON.stringify(cart));
     this._refresh$.next(cart);
   }
-  addToCart(item: ICourse) {
+  addToCart(item: Course) {
     let cart = this.Cart;
     if (cart?.length > 0) {
-      cart = _.filter(cart, (c) => c._id !== item._id);
+      cart = _.filter(cart, (c) => c._id !== item.id);
       cart.push(item);
       this.Cart = cart;
     } else this.Cart = [item];
   }
   removeCart(id: string) {
     let cart = this.Cart;
-    const index = _.findIndex(cart, (c: ICourse) => c._id === id);
+    const index = _.findIndex(cart, (c: Course) => c.id === id);
     cart.splice(index, 1);
     this.Cart = cart;
   }

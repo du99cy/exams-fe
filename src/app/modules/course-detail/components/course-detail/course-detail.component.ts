@@ -90,9 +90,13 @@ export class CourseDetailComponent implements OnInit {
     });
     this.activateRoute.queryParams.subscribe(params => {
       let paramMode = params['mode'];
-      if(this.paramMode="preview"){
+      console.log("param",paramMode)
+      if(paramMode="preview"){
         this.button_dis ="Xuất bản khóa học"
-      }else this.button_dis ="Tham gia khóa học"
+      }
+      if(paramMode="detail"){
+        this.button_dis ="Tham gia khóa học"
+      }
   });
   }
 
