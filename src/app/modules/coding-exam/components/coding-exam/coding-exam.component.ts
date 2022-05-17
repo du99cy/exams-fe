@@ -28,7 +28,7 @@ export class CodingExamComponent implements OnInit {
   // text_color = '';
   editorOptions = {
     theme: 'vs-dark',
-    language: 'python',
+    language: 'java',
     automaticLayout: true,
   };
   //LanguageSubject$ = new BehaviorSubject<string>(this.editorOptions.language);
