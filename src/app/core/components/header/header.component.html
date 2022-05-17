@@ -131,6 +131,7 @@
                     {{ this.userData.last_name }}</span
                   >
                   <span class="email">{{ this.userData.email }}</span>
+                  <span >Số dư tài khoản:{{this.userData.amount_of_money}}</span>
                 </div>
               </div>
             </div>
@@ -138,6 +139,7 @@
           <div class="tools">
             <span>Khóa học của tôi</span>
             <span>Giỏ hàng</span>
+            <span (click)="recharge()">Nạp tiền</span>
             <span>Cài đặt</span>
             <span (click)="logOutUser()">Đăng xuất</span>
           </div>

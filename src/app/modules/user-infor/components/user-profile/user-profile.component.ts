@@ -23,27 +23,13 @@ export class UserProfileComponent implements OnInit {
   };
   constructor(private fb: FormBuilder, private authService: AuthService) {}
   userData: any;
-  userSubs = new Subscription();
+
   ngOnInit(): void {
     this.formGroup = this.fb.group(this.attributes);
-    this.getUserData();
+    this.userData = this.authService.User
+    this.formGroup.patchValue(this.userData)
   }
-  getUserData() {
-    let userSub = this.authService.UserObservable.subscribe((res: any) => {
-      this.formGroup.patchValue({
-        biography: res?.biography,
-        facebook_link: res?.facebook_link,
-        first_name: res?.first_name,
-        last_name: res?.last_name,
-        twitter_link: res?.twitter_link,
-        website_link: res?.website_link,
-        youtube_link: res?.youtube_link,
-        headline: res?.headline,
-      });
-      console.log(res)
-    });
-    this.userSubs.add(userSub);
-  }
+
   get FormValue() {
     return this.formGroup.value;
   }
@@ -52,6 +38,8 @@ export class UserProfileComponent implements OnInit {
       this.authService
         .updateUser(userBodyUpdate)
         .subscribe(res=>{
+          this.userData = {...this.userData,...userBodyUpdate}
+          this.authService.User = this.userData
           alert("Cập nhật thành công")
         });
   }

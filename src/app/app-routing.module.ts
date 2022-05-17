@@ -78,6 +78,21 @@ const routes: Routes = [
     loadChildren: () =>
       import('@modules/checkout/checkout.module').then((m) => m.CheckoutModule),
   },
+  {
+    path: 'recharge',
+    loadChildren: () =>
+      import('@modules/recharge/recharge.module').then((m) => m.RechargeModule),
+  },
+  {
+    path: 'transaction',
+    loadChildren: () =>
+      import('@modules/transaction/transaction.module').then((m) => m.TransactionModule),
+  },
+  {
+    path: 'favourite',
+    loadChildren: () =>
+      import('@modules/favourite/favourite.module').then((m) => m.FavouriteModule),
+  },
 ];
 
 @NgModule({

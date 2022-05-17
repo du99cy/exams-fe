@@ -1,0 +1,30 @@
+<div class="ex-container">
+  <div class="ex-header">
+    {{title | uppercase}}
+  </div>
+  <div class="favour-body" *ngIf="favourites?.length > 0; else noRecord">
+    <div class="favour-items">
+      <table>
+        <tr *ngFor="let favourite of favourites">
+          <td>
+            <img [src]="'../../../assets/common-img/' + favourite.avatar">
+          </td>
+          <td>
+            <h2 class="m-0">{{favourite.ten_lop}}</h2>
+            <h3>Tạo bởi: {{favourite.author}}</h3>
+          </td>
+          <td>
+            <div class="text-right cur-point" (click)="remove(favourite.id)">Xóa</div>
+            <div class="text-right cur-point" (click)="addToCart(favourite)">Thêm vào giỏ hàng</div>
+            <!-- <button>delete</button> -->
+          </td>
+          <td class="price">{{'400000' | number:'1.0-0'}} VNĐ</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #noRecord>
+    <div class="no-record">{{noRecordMessage}}</div>
+  </ng-template>
+</div>

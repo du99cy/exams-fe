@@ -21,11 +21,16 @@ export class PictureProfileComponent implements OnInit {
     })
   }
   getImgLink(event:any){
-    
+
     this.curriculumService.uploadFile(event.file,"public").subscribe(res=>{
       let userUpdate : User={avatar_pic:res.data.file}
       this.authService.updateUser(userUpdate).subscribe(res=>{
-        console.log(res)
+        //next for gloabal
+        let user = this.authService.User
+        user = {...user,...userUpdate}
+        this.authService.User = user
+
+        alert("Cập nhật thành công")
       })
     })
   }

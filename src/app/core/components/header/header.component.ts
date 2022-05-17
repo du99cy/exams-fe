@@ -43,6 +43,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.authService.logout()
     this.router.navigateByUrl(`/`)
   }
-
+  recharge(){
+    this.router.navigateByUrl(`/recharge`)
+  }
 
 }
