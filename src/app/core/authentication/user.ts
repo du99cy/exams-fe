@@ -12,6 +12,7 @@ export interface User {
   twitter_link?:string;
   website_link?:string;
   youtube_link?:string;
+  amount_of_money?:string
 }
 
 export interface MailUser extends User {

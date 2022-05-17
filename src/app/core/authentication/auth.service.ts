@@ -36,7 +36,7 @@ export class AuthService implements OnDestroy {
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  set User(data: MailUser | FacebookUser | null) {
+  set User(data: MailUser | FacebookUser | User |null) {
     this.userSubject.next(data);
   }
 

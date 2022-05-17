@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '@core/authentication/auth.service';
+import { User } from '@core/authentication/user';
 import { BaseComponent } from '@shared/abstract/base.component';
 import { IPayment } from './models/interface';
 import { BANKS } from './recharge.constant';
@@ -21,20 +23,35 @@ export class RechargeComponent extends BaseComponent implements OnInit {
   rechargeForm: FormGroup;
   readonly banks: { text: string; value: string }[] = BANKS;
   isLoading = false;
-  rechargeInfo:any;
+  rechargeInfo: any;
+  user: any;
   constructor(
     private fb: FormBuilder,
     private rechargeService: RechargeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {
     super();
   }
   ngOnInit(): void {
+    this.user = this.authService.User;
     this.route.queryParams.subscribe((params) => {
-      this.rechargeService.saveMoney(params).subscribe((res)=> {
-        this.rechargeInfo = res['data']
-        console.log(this.rechargeInfo)
-      })
+      if (Object.keys(params).length > 0) {
+        this.rechargeService.saveMoney(params).subscribe((res) => {
+          this.rechargeInfo = res['data'];
+          //console.log(this.rechargeInfo);
+          //next  for global
+          if (this.rechargeInfo.RspCode != '05') {
+            //05 is code that say exists transaction un database
+            let updateUser: any = {
+              ...this.authService.User,
+              amount_of_money:
+                Number(params['vnp_Amount']) + this.user.amount_of_money,
+            };
+            this.authService.User = updateUser;
+          }
+        });
+      }
     });
     this.buildForm();
   }
