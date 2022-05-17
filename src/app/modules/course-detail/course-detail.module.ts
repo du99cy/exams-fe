@@ -4,10 +4,16 @@ import { CourseDetailComponent } from './components/course-detail/course-detail.
 import { CourseDetailRoutingModule } from './course-detail-routing.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { HttpsModule } from '@shared/modules/https.module';
 import { ContentIconPipe } from '@modules/course-video/pipes/content-icon.pipe';
 import { ContentIconPipeDetail } from './pipe/content-icon.pipe';
+import { RatingDialogComponent } from './components/rating-dialog/rating-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+
+
+
 
 
 @NgModule({
@@ -18,7 +24,10 @@ import { ContentIconPipeDetail } from './pipe/content-icon.pipe';
     FormsModule,
     CommonModule,
     HttpsModule,
+    MatDialogModule,
+    NgxStarRatingModule,
+    ReactiveFormsModule,
   ],
-  declarations: [CourseDetailComponent,ContentIconPipeDetail],
+  declarations: [CourseDetailComponent,ContentIconPipeDetail, RatingDialogComponent],
 })
 export class CourseDetailModule {}

@@ -10,22 +10,15 @@
     <mat-tab-group mat-align-tabs="start">
       <mat-tab label="Mô tả"><p [innerHTML]="description"></p></mat-tab>
 
-      <mat-tab label="Hỏi đáp">
+      <mat-tab label="Thảo luận về bài học">
         <app-comment></app-comment>
       </mat-tab>
-      <mat-tab label="Đánh giá">
-        <app-rating></app-rating>
-
       <mat-tab label="Tài liệu liên quan">
         <ng-container *ngFor="let file of fileResourses">
           <a (click)="downloadFile(file.id)">
             {{file.name}} ({{ file.size / (1024 * 1024) | number }}MB)
           </a>
         </ng-container>
-      </mat-tab>
-      <mat-tab label="Thảo luận về bài học">
-
-
       </mat-tab>
     </mat-tab-group>
   </div>

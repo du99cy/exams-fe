@@ -1,60 +1,67 @@
-<div class="course-container row">
-  <div
-    class="course-content col-12 col-md-4"
-    *ngFor="let item of dataSource; index as i; let f = first"
-  >
-    <div (click)="goToDetail(item._id)" style="display: flex; flex-direction: column;">
-      <img
-        [src]="item.avatar | https"
-        alt=""
-        class="img-response"
-      />
-      <span class="course-name">{{ item.ten_mon_hoc }}</span>
-      <span class="teacher-name">{{ item.mo_ta }}</span>
-    </div>
-    <div class="star">
-      <span class="star-number">5</span>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <span class="date"
-        >({{ item.thoi_gian_bat_dau * 1000 | date: "MM/dd/yyyy" }} -
-        {{ item.thoi_gian_ket_thuc * 1000 | date: "MM/dd/yyyy" }})</span
-      >
-    </div>
-    <div class="course-box" [ngClass]="f ? 'active' : ''">
-      <div class="course-infor">
-        <span class="course-name"> {{ item.ten_mon_hoc }}</span>
-        <span class="course-des">{{ item.mo_ta }}</span>
-        <span class="course-des">
-          Thời gian bắt đầu:
-          {{ item.thoi_gian_bat_dau * 1000 | date: "MM/dd/yyyy" }}</span
-        >
-        <span class="course-des">
-          Thời gian kết thúc:
-          {{ item.thoi_gian_ket_thuc * 1000 | date: "MM/dd/yyyy" }}</span
-        >
-        <div class="tool-btns">
-          <button mat-flat-button class="add-card" color="#106ba3" (click)="addToCart(item)">
-            Thêm vào giỏ
-          </button>
-          <div class="favorite-btn">
-            <ng-template [ngIf]="like" [ngIfElse]="notLikeBtn">
-              <button mat-icon-button class="favorite">
-                <mat-icon> favorite </mat-icon>
+<div *ngFor="let category of categoryList; index as i; let f = first" class="list-course">
+  <h1>{{ category }}</h1>
+  <ngx-slick-carousel
+  class="carousel"
+  #slickModal="slick-carousel"
+  [config]="slideConfig"
+>
+  <div ngxSlickItem class="slide" *ngFor="let course of dataSource[category]">
+    <div class="course-container">
+      <div class="course-content">
+        <div style="display: flex; flex-direction: column">
+          <img src="{{link}}/{{course.img}}" alt="" class="img-response" />
+          <span class="course-name">{{ course.title }}</span>
+          <span class="teacher-name">{{ course.knowleages_will_learn }}</span>
+        </div>
+        <div class="star">
+          <span class="star-number">5</span>
+          <mat-icon>star</mat-icon>
+          <mat-icon>star</mat-icon>
+          <mat-icon>star</mat-icon>
+          <mat-icon>star</mat-icon>
+          <mat-icon>star</mat-icon>
+        </div>
+        <span>{{ course.category }}</span>
+        <span class="date">{{ course.price }} VND</span>
+        <div class="course-box">
+          <div class="course-infor">
+            <span class="course-name"> {{ course.title }}</span>
+            <span class="course-des" [innerHTML]="course.description"></span>
+            <span class="course-des">
+              Giá tiền
+              {{ course.price }}</span
+            >
+            <span class="course-des">
+              Ngôn ngữ:
+              {{ course.teaching_language }}</span
+            >
+            <div class="tool-btns">
+              <button
+                mat-flat-button
+                class="add-card"
+                color="#106ba3"
+                (click)="addToCart(course)"
+              >
+                Thêm vào giỏ
               </button>
-            </ng-template>
-            <ng-template #notLikeBtn>
-              <button mat-icon-button class="favorite">
-                <mat-icon> favorite_border </mat-icon>
-              </button>
-            </ng-template>
+              <div class="favorite-btn">
+                <ng-template [ngIf]="like" [ngIfElse]="notLikeBtn">
+                  <button mat-icon-button class="favorite">
+                    <mat-icon> favorite </mat-icon>
+                  </button>
+                </ng-template>
+                <ng-template #notLikeBtn>
+                  <button mat-icon-button class="favorite">
+                    <mat-icon> favorite_border </mat-icon>
+                  </button>
+                </ng-template>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ngx-slick-carousel>
 
+</div>

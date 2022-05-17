@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpsModule } from '@shared/modules/https.module';
 import { UserCourseComponent } from './components/user-course/user-course.component';
 import { NotificationModule } from '@modules/notification/notification.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NotificationModule } from '@modules/notification/notification.module';
     CommonModule,
     MatButtonModule,
     HttpsModule,
-    NotificationModule
+    NotificationModule,
+    SlickCarouselModule
   ],
   declarations: [CourseComponent, ListCoursesComponent, HomeComponent, UserCourseComponent],
 })

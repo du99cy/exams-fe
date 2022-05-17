@@ -1,5 +1,6 @@
 import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '@core/authentication/user';
 import { scrollToTopPage } from '@core/utilities/helpers';
@@ -8,12 +9,15 @@ import { RegisterCourseService } from '@modules/course-detail/services/register-
 import { Content } from '@modules/course-manage/modules/curriculum/models/content';
 import { CourseService } from '@modules/home/services/course.service';
 import { Course } from '@modules/new-course-creation/models/course';
+import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
 import { api_urls } from '@shared/configs/api_url';
 import Swal from 'sweetalert2';
+import { RatingDialogComponent } from '../rating-dialog/rating-dialog.component';
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.scss'],
+  providers:[CourseCreationService]
 })
 export class CourseDetailComponent implements OnInit {
   router: any;
@@ -27,8 +31,9 @@ export class CourseDetailComponent implements OnInit {
   listTopicUser: any;
   link = api_urls.LOCAL_API_URL
   openRegister = true;
-
+  paramMode:string
   button_dis: any;
+  is_published:boolean
 
   // buttons_data:any = {
   //   no_registration: {
@@ -52,8 +57,13 @@ export class CourseDetailComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private courseService: CourseService,
     private registerCourse: RegisterCourseService,
-    private courseDetailService: CourseDetailService
-  ) {}
+    private courseDetailService: CourseDetailService,
+    private courseCreationService :CourseCreationService,
+    public dialog: MatDialog
+    
+  ) {
+   
+  }
 
   ngOnInit(): void {
     //scroll to top page
@@ -61,6 +71,7 @@ export class CourseDetailComponent implements OnInit {
     this.activateRoute.params.subscribe((queryParams) => {
       this.courseId = queryParams['class_id'];
       this.getCourseDetailsSSE(this.courseId);
+      console.log(this.courseId)
       // this.courseDetailService
       //   .getClassById(this.courseId)
       //   .subscribe((data) => {
@@ -77,6 +88,12 @@ export class CourseDetailComponent implements OnInit {
       //       });
       //   });
     });
+    this.activateRoute.queryParams.subscribe(params => {
+      let paramMode = params['mode'];
+      if(this.paramMode="preview"){
+        this.button_dis ="Xuất bản khóa học"
+      }else this.button_dis ="Tham gia khóa học"
+  });
   }
 
   convertHttps(str_: any) {
@@ -113,8 +130,6 @@ export class CourseDetailComponent implements OnInit {
     );
     source.addEventListener('message', (message) => {
       let res = JSON.parse(message.data);
-
-
       let data = res?.data
       console.log(data)
       if(res?.data_name == "course")
@@ -130,6 +145,21 @@ export class CourseDetailComponent implements OnInit {
     source.addEventListener('end', function (event) {
       console.log('Handling end....');
       source.close();
+    });
+  }
+  publicThisCourse(){
+    let courseUpdate: Course ={is_published:true}
+    this.courseCreationService.updateCourse(this.courseId, courseUpdate).subscribe(publish=>{
+      
+      alert('xuất bản thành công')
+    })
+  }
+  openDialogRating(): void {
+    const dialogRef = this.dialog.open(RatingDialogComponent, {
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 }
