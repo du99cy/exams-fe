@@ -49,7 +49,7 @@ export class CourseComponent implements OnInit {
     this.courseService.getCourseList().subscribe((data) => {
       this.dataSource = data.data;
       this.categoryList = Object.keys(this.dataSource);
-      console.log(this.categoryList);
+      console.log(this.dataSource);
     });
   }
 

@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
+import { api_urls } from '@shared/configs/api_url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseDetailService {
-  url = `${environment.apiUrl}/class`;
-  url1 =`${environment.apiUrl}/topic`
+  url = `${api_urls.LOCAL_API_URL}/course-rating`;
   Course: any;
   constructor(private http: HttpClient) {}
   private _refresh$ = new Subject<void>();
@@ -16,10 +16,11 @@ export class CourseDetailService {
   get refresh$() {
     return this._refresh$;
   }
-  getClassById(_id:any):Observable<any>{
-    return this.http.get<any>(`${this.url}/LopHoc?id_lop_hoc=${_id}`);
+  
+  courseRating(body:any){
+    return this.http.post(this.url,body)
   }
-  getTopicByClassId(_id:any):Observable<any>{
-    return this.http.get<any>(`${this.url1}/ma_lop/${_id}`)
+  getRating(course_id:string){
+    return this.http.get(`${this.url}/course/${course_id}/rating-all`)
   }
 }

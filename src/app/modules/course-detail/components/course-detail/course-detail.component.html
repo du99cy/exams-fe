@@ -63,7 +63,7 @@
     </div>
     <div class="course-review">
       <img src="{{ link }}/{{ this.course?.img }}" class="img-response" />
-      <button class="sub" (click)="openDialogRating()">
+      <button class="sub" (click)="openDialogRating(this.course?.id)">
          Đánh giá khóa học
       </button>
       <button class="join" (click)="publicThisCourse()">
@@ -123,61 +123,13 @@
 </div>
 <div class="container">
   <div class="start-rate" style="min-height: 250px">
-    <h1 class="display1">Students Feedback</h1>
-    <div class="row">
-      <div class="col-lg-2 rate-point">
-        <h1 style="font-size: 100px; color: #b4690e">4.5</h1>
-        <div class="star">
-          <mat-icon>star</mat-icon>
-          <mat-icon>star</mat-icon>
-          <mat-icon>star</mat-icon>
-          <mat-icon>star</mat-icon>
-          <mat-icon>star</mat-icon>
-        </div>
-        <h5 style="color: #b4690e">Course Rating</h5>
-      </div>
-      <div class="col-lg-8">
-        <div class="progress">
-          <div class="progress-bar" style="width: 52%"></div>
-        </div>
-        <br />
-        <div class="progress">
-          <div class="progress-bar" style="width: 34%"></div>
-        </div>
-        <br />
-        <div class="progress">
-          <div class="progress-bar" style="width: 10%"></div>
-        </div>
-        <br />
-        <div class="progress">
-          <div class="progress-bar" style="width: 2%"></div>
-        </div>
-        <br />
-        <div class="progress">
-          <div class="progress-bar" style="width: 2%"></div>
-        </div>
-      </div>
-
-      <div class="col-lg-2">
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <br />
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <br />
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <br />
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <br />
-        <mat-icon>star</mat-icon>
+    <h1 class="display1" style="margin-left:40px ;">Đánh giá của người học</h1>
+    <div class="feedback" *ngFor="let feedback of this.rating.data">
+      <img src="{{link}}/{{feedback.learner_img}}" alt="" class="img-response" width="40px" height="40px">
+      <div class="user">
+        <span class="name">{{feedback.learner_name}}</span>
+        <span class="time">{{feedback.rating_date_epoch_time_seconds*1000|date}}</span>
+        <span class="comment">{{feedback.comment}}</span>
       </div>
     </div>
   </div>
@@ -206,9 +158,5 @@
         <p [innerHTML]="this.instructor?.biography"></p>
       </div>
     </div>
-
-    <p [innerHTML]="this.instructor?.biography">
-      
-    </p>
   </div>
 </div>

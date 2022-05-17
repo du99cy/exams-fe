@@ -17,7 +17,7 @@ import { RatingDialogComponent } from '../rating-dialog/rating-dialog.component'
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.scss'],
-  providers:[CourseCreationService]
+  providers: [CourseCreationService],
 })
 export class CourseDetailComponent implements OnInit {
   router: any;
@@ -29,11 +29,12 @@ export class CourseDetailComponent implements OnInit {
   panelOpenState = false;
   listTopic: any;
   listTopicUser: any;
-  link = api_urls.LOCAL_API_URL
+  link = api_urls.LOCAL_API_URL;
   openRegister = true;
-  paramMode:string
+  paramMode: string;
   button_dis: any;
-  is_published:boolean
+  is_published: boolean;
+  rating:any
 
   // buttons_data:any = {
   //   no_registration: {
@@ -58,12 +59,9 @@ export class CourseDetailComponent implements OnInit {
     private courseService: CourseService,
     private registerCourse: RegisterCourseService,
     private courseDetailService: CourseDetailService,
-    private courseCreationService :CourseCreationService,
+    private courseCreationService: CourseCreationService,
     public dialog: MatDialog
-    
-  ) {
-   
-  }
+  ) {}
 
   ngOnInit(): void {
     //scroll to top page
@@ -71,7 +69,7 @@ export class CourseDetailComponent implements OnInit {
     this.activateRoute.params.subscribe((queryParams) => {
       this.courseId = queryParams['class_id'];
       this.getCourseDetailsSSE(this.courseId);
-      console.log(this.courseId)
+
       // this.courseDetailService
       //   .getClassById(this.courseId)
       //   .subscribe((data) => {
@@ -88,16 +86,20 @@ export class CourseDetailComponent implements OnInit {
       //       });
       //   });
     });
-    this.activateRoute.queryParams.subscribe(params => {
+    this.activateRoute.queryParams.subscribe((params) => {
       let paramMode = params['mode'];
-      console.log("param",paramMode)
-      if(paramMode="preview"){
-        this.button_dis ="Xuất bản khóa học"
+      console.log('param', paramMode);
+      if ((paramMode = 'preview')) {
+        this.button_dis = 'Xuất bản khóa học';
       }
-      if(paramMode="detail"){
-        this.button_dis ="Tham gia khóa học"
+      if ((paramMode = 'detail')) {
+        this.button_dis = 'Tham gia khóa học';
       }
-  });
+    });
+    this.courseDetailService.getRating(this.courseId).subscribe(res=>{
+      this.rating =res
+      console.log(this.rating)
+    })
   }
 
   convertHttps(str_: any) {
@@ -134,36 +136,40 @@ export class CourseDetailComponent implements OnInit {
     );
     source.addEventListener('message', (message) => {
       let res = JSON.parse(message.data);
-      let data = res?.data
-      console.log(data)
-      if(res?.data_name == "course")
-        this.course = data
-
+      let data = res?.data;
+      console.log(data);
+      if (res?.data_name == 'course') this.course = data;
       else if (res?.data_name == 'user') this.instructor = data;
       else {
         this.contents = data;
         source.close();
       }
-
     });
     source.addEventListener('end', function (event) {
       console.log('Handling end....');
       source.close();
     });
   }
-  publicThisCourse(){
-    let courseUpdate: Course ={is_published:true}
-    this.courseCreationService.updateCourse(this.courseId, courseUpdate).subscribe(publish=>{
-      
-      alert('xuất bản thành công')
-    })
+  publicThisCourse() {
+    let courseUpdate: Course = { is_published: true };
+    this.courseCreationService
+      .updateCourse(this.courseId, courseUpdate)
+      .subscribe((publish) => {
+        alert('xuất bản thành công');
+      });
   }
-  openDialogRating(): void {
+  openDialogRating(course_id: any): void {
     const dialogRef = this.dialog.open(RatingDialogComponent, {
       width: '600px',
     });
-
-    dialogRef.afterClosed().subscribe(result => {
+    console.log(course_id);
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result)
+      this.courseDetailService
+        .courseRating({ course_id: course_id, comment: result, star_number: 5 })
+        .subscribe((res) => {
+          console.log(res);
+        });
     });
   }
 }

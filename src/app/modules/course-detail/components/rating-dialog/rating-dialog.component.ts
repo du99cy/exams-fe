@@ -7,16 +7,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./rating-dialog.component.scss']
 })
 export class RatingDialogComponent implements OnInit {
-
-  public form: FormGroup;
-
-  constructor(private fb: FormBuilder){
-    this.form = this.fb.group({
-      rating: ['', Validators.required],
-    })
+  formGroup: FormGroup;
+  constructor(private fb:FormBuilder){
   }
-
   ngOnInit(): void {
+    this.formGroup = this.fb.group({comment:''})
   }
 
 }

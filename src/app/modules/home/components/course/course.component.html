@@ -14,24 +14,15 @@
               class="img-response"
             />
             <span class="course-name">{{ course.title }}</span>
-            <span class="teacher-name">{{ course.knowleages_will_learn }}</span>
+            <span class="teacher-name"></span>
           </div>
           <div class="star">
-           <div>
-            <span class="star-number">5</span>
-            <mat-icon>star</mat-icon>
-            <mat-icon>star</mat-icon>
-            <mat-icon>star</mat-icon>
-            <mat-icon>star</mat-icon>
-            <mat-icon>star</mat-icon>
-           </div>
             <span style="font-weight: bold;">{{ course.price|number:'1.0-0'}} VND</span>
           </div>
           <div class="course-box">
             <div class="course-infor">
               <span class="course-name"> {{ course.title }}</span>
-              <span class="course-des" [innerHTML]="course.description"></span>
-              <span class="course-des"> </span>
+              <span class="course-des" *ngFor="let item of course.knowleages_will_learn">{{item}}</span>
               <span class="course-des">
                 Ngôn ngữ:
                 {{ course.teaching_language }}</span
