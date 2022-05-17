@@ -10,7 +10,6 @@
     <mat-tab-group mat-align-tabs="start">
       <mat-tab label="Mô tả"><p [innerHTML]="description"></p></mat-tab>
 
-
       <mat-tab label="Thảo luận về bài học">
         <app-comment></app-comment>
       </mat-tab>
@@ -18,11 +17,10 @@
       <mat-tab label="Tài liệu liên quan">
         <ng-container *ngFor="let file of fileResourses">
           <a (click)="downloadFile(file.id)">
-            {{file.name}} ({{ file.size / (1024 * 1024) | number }}MB)
+            {{ file.name }} ({{ file.size / (1024 * 1024) | number }}MB)
           </a>
         </ng-container>
       </mat-tab>
-
     </mat-tab-group>
   </div>
 
@@ -34,12 +32,17 @@
         trackBy: trackByFn
       "
     >
-      <mat-card (click)="getDetailContent(content)" class="d-flex"
-        ><i class="material-icons mr-2">{{
-          content.type_status | content_icon
-        }}</i>
-        {{ i + 1 }}. {{ content.title }}</mat-card
-      >
+      <mat-card class="d-flex" style="justify-content: space-between; ">
+        <div style="align-items: center; display: flex;">
+          <i class="material-icons mr-2">{{
+            content.type_status | content_icon
+          }}</i>
+          <span (click)="getDetailContent(content)" style="cursor: pointer">
+            {{ i + 1 }}. {{ content.title }}
+          </span>
+        </div>
+        <span *ngIf="content.type_status === 1" (click)="openDialog(content.id)"  style="cursor: pointer">Lịch sử làm bài</span>
+      </mat-card>
     </ng-container>
   </div>
 </div>

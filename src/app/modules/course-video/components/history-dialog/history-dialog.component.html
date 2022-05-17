@@ -1,0 +1,27 @@
+<h1>Lịch sử làm bài</h1>
+<table mat-table [dataSource]="historyQuestion" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Điểm số </th>
+      <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Ngày làm bài </th>
+      <td mat-cell *matCellDef="let element"> {{element.created_at_seconds_epoch_time*1000|date :'MMM d, y, h:mm:ss a':'vi'}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Hành động </th>
+        <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="goToDetail()">Xem chi tiết</button> </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

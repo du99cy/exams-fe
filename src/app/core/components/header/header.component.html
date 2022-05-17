@@ -38,6 +38,7 @@
           class="a-blue"
           href=""
           style="font-weight: bolder; text-decoration: none"
+          [routerLink]="['/my-course']"
           >Khóa học của tôi</a
         >
       </div>
@@ -137,7 +138,9 @@
             </div>
           </a>
           <div class="tools">
-            <span>Khóa học của tôi</span>
+            <span>
+              <a routerLink="/my-course">Khóa học của tôi</a>
+            </span>
             <span>Giỏ hàng</span>
             <span (click)="recharge()">Nạp tiền</span>
             <span>Cài đặt</span>
