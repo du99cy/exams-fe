@@ -1,9 +1,11 @@
 <div class="overview-wrapper">
   <div class="title">
-    {{ content.title }}
+    Bài tập: {{ content.title }}
   </div>
-  <div [innerHTML]="content.description"></div>
-
+  <div>
+    <span>Mô tả:</span>
+    <p [innerHTML]="content.description"></p>
+  </div>
   <div>Thời gian thực thi: {{ function.execution_time }}</div>
 
   <div class="input-container">

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ICourse } from '@modules/home/models/interface';
 import { CartService } from '@modules/home/services/cart.service';
 import { CourseService } from '@modules/home/services/course.service';
+import { Course } from '@modules/new-course-creation/models/course';
 import { notiType } from '@modules/notification/model/enum';
 import { INotification } from '@modules/notification/model/interface';
 import { NotificationComponent } from '@modules/notification/notification.component';
@@ -52,11 +53,11 @@ export class CourseComponent implements OnInit {
     });
   }
 
-  goToDetail(_id: string) {
-    this.router.navigateByUrl(`/course/${_id}`);
+  goToDetail(id: string) {
+    this.router.navigateByUrl(`/course/${id}?mode=detail`);
   }
 
-  addToCart(course: ICourse) {
+  addToCart(course: Course) {
     this.cartService.addToCart(course);
     this.notiService.addNoti(this.noti);
     // this.createComponent();

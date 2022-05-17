@@ -14,5 +14,6 @@ export interface Course{
     img?:string
     img_name?:string
     created_date_seconds?:number
-    status?:number
+    status?:number,
+    author?:string
 }

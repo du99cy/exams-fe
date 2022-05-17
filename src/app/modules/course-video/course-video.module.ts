@@ -8,12 +8,14 @@ import { CommonModule } from '@angular/common';
 import { CourseVideoService } from './services/course-video.service';
 import { ContentIconPipe } from './pipes/content-icon.pipe';
 import { CommentComponent } from './components/comment/comment.component';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   imports: [
     CourseVideoRoutingModule,
     MatTabsModule,
     MatCardModule,
     CommonModule,
+    MatInputModule
   ],
   declarations: [CourseVideoComponent,ContentIconPipe, CommentComponent],
   providers: [CurriculumService,CourseVideoService],
