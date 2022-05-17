@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { CourseVideoService } from './services/course-video.service';
 import { ContentIconPipe } from './pipes/content-icon.pipe';
 import { CommentComponent } from './components/comment/comment.component';
-import { RatingComponent } from './components/rating/rating.component';
 @NgModule({
   imports: [
     CourseVideoRoutingModule,
@@ -16,7 +15,7 @@ import { RatingComponent } from './components/rating/rating.component';
     MatCardModule,
     CommonModule,
   ],
-  declarations: [CourseVideoComponent,ContentIconPipe, CommentComponent, RatingComponent],
+  declarations: [CourseVideoComponent,ContentIconPipe, CommentComponent],
   providers: [CurriculumService,CourseVideoService],
 })
 export class CourseVideoModule {}

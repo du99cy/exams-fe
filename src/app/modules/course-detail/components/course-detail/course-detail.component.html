@@ -62,10 +62,12 @@
       <!-- <span class="cost">$84.99</span> -->
     </div>
     <div class="course-review">
-      <img src="{{ link }}/{{ this.course?.img }}" />
-      <span class="number-people"> Số người tham gia</span>
-      <button class="join" (click)="this.button_dis.event()">
-        <!-- {{ this.button_dis.name }} -->
+      <img src="{{ link }}/{{ this.course?.img }}" class="img-response" />
+      <button class="sub" (click)="openDialogRating()">
+         Đánh giá khóa học
+      </button>
+      <button class="join" (click)="publicThisCourse()">
+        {{ this.button_dis}}
       </button>
     </div>
   </div>
@@ -190,7 +192,7 @@
     </h3>
 
     <p style="padding: 0px 30px">
-      Founder of RahulShettyAcademy.com|350k+ QA Students
+      {{ this.instructor?.headline }}
     </p>
 
     <div class="row" style="padding: 30px">
@@ -202,13 +204,7 @@
         />
       </div>
       <div class="col-lg-10">
-        <p><i class="ti-star"> 4.6 Instrctor Rating</i></p>
-        <p><i class="ti-ticket"> 197,726 Reviews</i></p>
-        <p>
-          <img src="" alt="" style="max-width: 20px" />
-          492,106 Students
-        </p>
-        <p><i class="ti-control-play"> 26 Courses</i></p>
+        <p [innerHTML]="this.instructor?.biography"></p>
       </div>
     </div>
 

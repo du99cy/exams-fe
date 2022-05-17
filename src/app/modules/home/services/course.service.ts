@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { api_urls } from '@shared/configs/api_url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  url = `${environment.apiUrl}/class`;
+  url = `${api_urls.LOCAL_API_URL}/course/all`;
   Course: any;
   constructor(private http: HttpClient) {}
   private _refresh$ = new Subject<void>();
@@ -15,7 +16,7 @@ export class CourseService {
   get refresh$() {
     return this._refresh$;
   }
-  getClassList():Observable<any>{
-    return this.http.get<any>(`${this.url}/ListMon`);
+  getCourseList():Observable<any>{
+    return this.http.get<any>(`${this.url}/published`);
   }
 }
