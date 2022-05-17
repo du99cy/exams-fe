@@ -13,11 +13,11 @@
           <th>Thời gian</th>
         </tr>
         <tr *ngFor="let tran of trans">
-          <td>{{tran.transaction_id}}</td>
+          <td>{{tran.id}}</td>
           <td>{{tran.isRecharge ? 'Nạp tiền' : 'Thanh toán'}}</td>
-          <td>{{tran.desc}}</td>
-          <td [class]="tran.isRecharge ? 'recharge' : 'checkout'">{{tran.isRecharge ? "+" : "-"}} {{tran.amount | number:'1.0-0'}}</td>
-          <td>{{tran.time | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+          <td>{{tran.vnp_OrderInfo}}</td>
+          <td class="recharge">+ {{tran.vnp_Amount | number:'1.0-0'}}</td>
+          <td>{{getDate(tran.vnp_PayDate)}}</td>
         </tr>
       </table>
     </div>

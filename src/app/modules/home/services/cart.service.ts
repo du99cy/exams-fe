@@ -22,7 +22,7 @@ export class CartService {
   addToCart(item: Course) {
     let cart = this.Cart;
     if (cart?.length > 0) {
-      cart = _.filter(cart, (c) => c._id !== item.id);
+      cart = _.filter(cart, (c) => c.id !== item.id);
       cart.push(item);
       this.Cart = cart;
     } else this.Cart = [item];

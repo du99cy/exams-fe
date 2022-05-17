@@ -8,6 +8,7 @@ import {MatStepperModule} from '@angular/material/stepper'
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { CourseService } from '@modules/course/services/course.service';
 @NgModule({
   imports: [
     NewCourseCreationRoutingModule,
@@ -20,5 +21,6 @@ import {MatSelectModule} from '@angular/material/select';
     MatSelectModule
   ],
   declarations: [LayoutComponent],
+  providers: [CourseService]
 })
 export class NewCourseCreationModule {}

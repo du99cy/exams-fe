@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CourseService } from '@modules/course/services/course.service';
 import { Course } from '@modules/new-course-creation/models/course';
 
 import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
@@ -25,19 +26,13 @@ export class LayoutComponent implements OnInit {
     title: new FormControl('', [Validators.required]),
     category: new FormControl(''),
   };
-  course_categories = [
-    'Front End',
-    'Back End',
-    'NLP',
-    'CV',
-    'Full Stack',
-    'Dev OPs',
-  ];
+  course_categories = [];
 
   constructor(
     formBuilder: FormBuilder,
     private courseService: CourseCreationService,
     private route: ActivatedRoute,
+    private coursesService: CourseService,
     private router: Router
   ) {
     this.courseFormGroup = formBuilder.group(this.courseFormAttributes);
@@ -65,6 +60,8 @@ export class LayoutComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       this.course_id = params['newCourseId'];
     });
-
+    this.coursesService.getCategories().subscribe(res=> {
+      this.course_categories =res
+    })
   }
 }
