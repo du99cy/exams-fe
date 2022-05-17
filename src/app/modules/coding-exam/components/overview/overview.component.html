@@ -1,5 +1,5 @@
 <div class="overview-wrapper">
-  <div class="title">
+  <div class="title" style="padding-bottom:10px">
     Bài tập: {{ content.title }}
   </div>
   <div>
@@ -10,9 +10,9 @@
 
   <div class="input-container">
     <div>Input</div>
-    <div class="input">
-      <div *ngFor="let input of function.inputs">
-        <div>Tên tham số: {{ input.name }}</div>
+    <div class="input" style="padding-left:10px">
+      <div *ngFor="let input of function.inputs" style="padding:5px 0px;">
+        <div style="padding-bottom:5px">Tên tham số: {{ input.name }}</div>
         <div>
           Kiểu dữ liệu: {{input.datatype}}
         </div>
@@ -25,7 +25,7 @@
       Output:
     </div>
     <div>
-      <div>
+      <div style="padding-left:10px; padding-top: 5px;">
         Kiểu dữ liệu: {{function.output_data_type}}
       </div>
     </div>

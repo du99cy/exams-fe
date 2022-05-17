@@ -10,13 +10,13 @@
         </as-split-area>
         <as-split-area [size]="50">
           <div class="editor">
-            <span>main.py</span>
+            <span>main{{ format }}</span>
             <div class="editor-language">
-              <span>Python</span>
+              <span>{{ editorOptions.language | titlecase }}</span>
               <div class="tip">
-                <!-- <button mat-icon-button>
+                <button mat-icon-button (click)="openDialog()">
                   <mat-icon class="editor-icon">create</mat-icon>
-                </button> -->
+                </button>
                 <span class="tooltip-text">
                   Thay đổi giao diện và ngôn ngữ
                 </span>

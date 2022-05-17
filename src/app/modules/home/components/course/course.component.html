@@ -22,7 +22,7 @@
           <div class="course-box">
             <div class="course-infor">
               <span class="course-name"> {{ course.title }}</span>
-              <span class="course-des" *ngFor="let item of course.knowleages_will_learn">{{item}}</span>
+              <span class="course-des" *ngFor="let item of course.knowleages_will_learn"><mat-icon>done</mat-icon>{{item}}</span>
               <span class="course-des">
                 Ngôn ngữ:
                 {{ course.teaching_language }}</span
