@@ -49,4 +49,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   transaction(){
     this.router.navigateByUrl('/transaction')
   }
+  order(){
+    this.router.navigateByUrl('/order')
+  }
 }

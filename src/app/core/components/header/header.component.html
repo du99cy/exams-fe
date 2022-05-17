@@ -1,25 +1,14 @@
 <div class="header-my-layout">
   <a routerLink="/">
-    <img
-      src="../../../assets/common-img/Trắng và Cam Đơn giản Ẩm thực Cao cấp Biểu trưng (Logo) (5001 × 2617 px).png"
-      alt="logo"
-      class="img-response"
-      height="66px"
-    />
+    <img src="../../../assets/common-img/Trắng và Cam Đơn giản Ẩm thực Cao cấp Biểu trưng (Logo) (5001 × 2617 px).png"
+      alt="logo" class="img-response" height="66px" />
   </a>
   <div class="search">
     <div class="search-icon">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-search"
-        viewBox="0 0 16 16"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+        viewBox="0 0 16 16">
         <path
-          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-        />
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
       </svg>
     </div>
     <div>
@@ -34,67 +23,43 @@
   <div class="user-interface">
     <ng-template [ngIf]="this.userData">
       <div class="category">
-        <a
-          class="a-blue"
-          href=""
-          style="font-weight: bolder; text-decoration: none"
-          [routerLink]="['/my-course']"
-          >Khóa học của tôi</a
-        >
+        <a class="a-blue" href="" style="font-weight: bolder; text-decoration: none" [routerLink]="['/my-course']">Khóa
+          học của tôi</a>
       </div>
 
       <div class="category">
-        <a
-          routerLink="instructor"
-          class="a-blue"
-          href=""
-          style="font-weight: bolder; text-decoration: none"
-          >Tạo khóa học</a
-        >
+        <a routerLink="instructor" class="a-blue" href="" style="font-weight: bolder; text-decoration: none">Tạo khóa
+          học</a>
       </div>
     </ng-template>
 
-    <ng-template [ngIf]="this.userData">
-      <div style="margin-right: 15px;">
-        <div [routerLink]="['/cart']">
-          <mat-icon style="color: #0d4579; cursor: pointer">shopping_cart</mat-icon
-          >
-        </div>
+    <div style="margin-right: 15px;">
+      <div [routerLink]="['/cart']">
+        <mat-icon style="color: #0d4579; cursor: pointer">shopping_cart</mat-icon>
       </div>
+    </div>
+    <ng-template [ngIf]="this.userData">
       <div class="category">
-        <mat-icon style="color: #0d4579; cursor: pointer"
-          >favorite_border</mat-icon
-        >
+        <mat-icon style="color: #0d4579; cursor: pointer">favorite_border</mat-icon>
         <div class="category-box">
           <div class="shoping">
             <div class="shopping-cart">
-              <img
-                class="img-response"
-                src="../../../../assets/common-img/355212_948a_10 (1).jpg"
-                alt=""
-              />
+              <img class="img-response" src="../../../../assets/common-img/355212_948a_10 (1).jpg" alt="" />
               <div class="shoping-cart-content">
-                <span class="name"
-                  >Web Design for Beginners: Real World Coding in HTML & CSS
-                  1</span
-                >
+                <span class="name">Web Design for Beginners: Real World Coding in HTML & CSS
+                  1</span>
                 <span class="author">Brad Schiff</span>
                 <span class="cost">$84.99</span>
               </div>
             </div>
             <div>
-              <a
-                routerLink="#"
-                role="button"
-                class="btn"
-                style="
+              <a routerLink="#" role="button" class="btn" style="
                   color: #0d4579;
                   background-color: #fff;
                   border: 1px solid #0d4579;
                   width: 100%;
                   margin: 10px 0px;
-                "
-              >
+                ">
                 Đăng kí
               </a>
             </div>
@@ -112,25 +77,15 @@
     </ng-template> -->
     <ng-template [ngIf]="this.userData" [ngIfElse]="login_signup_temp">
       <div class="category user">
-        <img
-          src="{{ link }}/{{ this.userData.avatar_pic }}"
-          alt=""
-          class="user-img"
-        />
+        <img src="{{ link }}/{{ this.userData.avatar_pic }}" alt="" class="user-img" />
         <div class="category-box">
           <a routerLink="user-infor" style="color: #111111;">
-            <div class="infor-user"  routerLink="user-infor">
+            <div class="infor-user" routerLink="user-infor">
               <div class="user-infor">
-                <img
-                  src="{{ link }}/{{ this.userData.avatar_pic }}"
-                  alt=""
-                  class="user-img-box"
-                />
+                <img src="{{ link }}/{{ this.userData.avatar_pic }}" alt="" class="user-img-box" />
                 <div class="name">
-                  <span class="full-name"
-                    >{{ this.userData.first_name }}
-                    {{ this.userData.last_name }}</span
-                  >
+                  <span class="full-name">{{ this.userData.first_name }}
+                    {{ this.userData.last_name }}</span>
                   <span class="email">{{ this.userData.email }}</span>
                   <span class="email">Số dư tài khoản:{{this.userData.amount_of_money | number:'1.0-0'}}</span>
                 </div>
@@ -139,12 +94,11 @@
           </a>
           <div class="tools">
 
-            <span>Khóa học của tôi</span>
-            <span (click)="transaction()">Danh sách giao dịch</span>
+            <!-- <span>Khóa học của tôi</span> -->
+            <span (click)="transaction()">Lịch sử nạp tiền</span>
+            <span (click)="order()">Lịch sử mua hàng</span>
 
-            <span>
-              <a routerLink="/my-course">Khóa học của tôi</a>
-            </span>
+            <span [routerLink]="['/my-course']">Khóa học của tôi</span>
             <span>Giỏ hàng</span>
 
             <span (click)="recharge()">Nạp tiền</span>
@@ -156,26 +110,16 @@
     </ng-template>
     <ng-template #login_signup_temp>
       <div>
-        <a
-          routerLink="/sign-up"
-          role="button"
-          class="btn btn-log-in"
-          style="
+        <a routerLink="/sign-up" role="button" class="btn btn-log-in" style="
             color: #0d4579;
             background-color: #fff;
             border: 1px solid #0d4579;
-          "
-        >
+          ">
           Đăng kí
         </a>
       </div>
       <div>
-        <a
-          routerLink="/login"
-          role="button"
-          class="btn btn-log-in"
-          style="color: #fff; background-color: #0d4579"
-        >
+        <a routerLink="/login" role="button" class="btn btn-log-in" style="color: #fff; background-color: #0d4579">
           Đăng Nhập
         </a>
       </div>
@@ -183,24 +127,11 @@
   </div>
 </div>
 <ng-template #icon let-height="height">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="30"
-    height="22"
-    fill="currentColor"
-    class="bi bi-person-fill"
-    viewBox="0 0 16 16"
-  >
-    <path
-      d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
-    />
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="22" fill="currentColor" class="bi bi-person-fill"
+    viewBox="0 0 16 16">
+    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
   </svg>
 </ng-template>
 <ng-template #img let-user="user" let-height="height">
-  <img
-    height="{{ height }}"
-    style="border-radius: 50%"
-    [src]="user.picture.data.url"
-    alt=""
-  />
+  <img height="{{ height }}" style="border-radius: 50%" [src]="user.picture.data.url" alt="" />
 </ng-template>

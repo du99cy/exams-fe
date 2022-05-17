@@ -34,8 +34,8 @@
             <mat-form-field appearance="fill" >
 
               <mat-select formControlName="category">
-                <mat-option *ngFor="let cate of course_categories" [value]="cate">
-                  {{cate}}
+                <mat-option *ngFor="let cate of course_categories" [value]="cate.name">
+                  {{cate.name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

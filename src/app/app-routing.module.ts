@@ -97,6 +97,11 @@ const routes: Routes = [
         (m) => m.FavouriteModule
       ),
   },
+  {
+    path: 'order',
+    loadChildren: () =>
+      import('@modules/order/order.module').then((m) => m.OrderModule),
+  },
 ];
 
 @NgModule({
