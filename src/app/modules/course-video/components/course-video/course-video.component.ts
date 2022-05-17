@@ -8,6 +8,8 @@ import { content } from '@modules/home/models/content';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ResourseFile } from '@modules/course-manage/modules/curriculum/models/ResourseFile';
+import { MatDialog } from '@angular/material/dialog';
+import { HistoryDialogComponent } from '../history-dialog/history-dialog.component';
 
 @Component({
   selector: 'app-course-video',
@@ -30,7 +32,8 @@ export class CourseVideoComponent implements OnInit, OnDestroy {
     private curriculumService: CurriculumService,
     private courseVideoService: CourseVideoService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -90,6 +93,14 @@ export class CourseVideoComponent implements OnInit, OnDestroy {
 
       window.open(fileURL)
     })
+  }
+  openDialog(content_id:any): void {
+    const dialogRef = this.dialog.open(HistoryDialogComponent, {
+      width: '500px',
+      data:content_id
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 }

@@ -9,7 +9,8 @@ const BASE_URL = api_urls.LOCAL_API_URL;
 
 const routes = {
   getVideo: `${BASE_URL}/resourse/{content_id}/video`,
-  getQuestion: `${BASE_URL}/question/{content_id}`
+  getQuestion: `${BASE_URL}/question/{content_id}`,
+  getHistory:`${BASE_URL}/multichoice-exam/{content_id}/history`,
 };
 
 @Injectable()
@@ -30,6 +31,11 @@ export class CourseVideoService {
 
     }))
   }
-
+  getHistory(content_id: string){
+    let uri = fmt(routes.getHistory, { content_id });
+    return this.httpClient.get<any>(uri).pipe(first(),map((res:any)=>{
+      return res.data
+    }))
+  }
 
 }
