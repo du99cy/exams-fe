@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ICourse } from '../models/interface';
 import * as _ from 'lodash';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Course } from '@modules/new-course-creation/models/course';

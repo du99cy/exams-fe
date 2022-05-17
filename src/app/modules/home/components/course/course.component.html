@@ -4,10 +4,10 @@
 >
   <h1>{{ category }}</h1>
   <div class="row">
-    <div *ngFor="let course of dataSource[category]" class="col-3" (click)="goToDetail(course.id)">
+    <div *ngFor="let course of dataSource[category]" class="col-3">
       <div class="course-container">
         <div class="course-content">
-          <div style="display: flex; flex-direction: column">
+          <div class="d-flex flex-column" (click)="goToDetail(course.id)">
             <img
               src="{{ link }}/{{ course.img }}"
               alt=""

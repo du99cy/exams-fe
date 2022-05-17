@@ -132,16 +132,21 @@
                     {{ this.userData.last_name }}</span
                   >
                   <span class="email">{{ this.userData.email }}</span>
-                  <span class="email">Số dư tài khoản:{{this.userData.amount_of_money}}</span>
+                  <span class="email">Số dư tài khoản:{{this.userData.amount_of_money | number:'1.0-0'}}</span>
                 </div>
               </div>
             </div>
           </a>
           <div class="tools">
+
+            <span>Khóa học của tôi</span>
+            <span (click)="transaction()">Danh sách giao dịch</span>
+
             <span>
               <a routerLink="/my-course">Khóa học của tôi</a>
             </span>
             <span>Giỏ hàng</span>
+
             <span (click)="recharge()">Nạp tiền</span>
             <span>Cài đặt</span>
             <span (click)="logOutUser()">Đăng xuất</span>

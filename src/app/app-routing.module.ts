@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 
 export const routingConfiguration: ExtraOptions = {
-  paramsInheritanceStrategy: 'always'
+  paramsInheritanceStrategy: 'always',
 };
-
 
 const routes: Routes = [
   {
@@ -57,16 +56,17 @@ const routes: Routes = [
       import('@modules/test/test.module').then((m) => m.TestModule),
   },
   {
+    path: 'courses',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('@modules/course/course.module').then((m) => m.CourseModule),
+  },
+  {
     path: 'course/:course_id/contents',
     loadChildren: () =>
       import('@modules/course-video/course-video.module').then(
         (m) => m.CourseVideoModule
       ),
-  },
-  {
-    path: 'course',
-    loadChildren: () =>
-      import('@modules/course/course.module').then((m) => m.CourseModule),
   },
   {
     path: 'cart',
@@ -86,17 +86,21 @@ const routes: Routes = [
   {
     path: 'transaction',
     loadChildren: () =>
-      import('@modules/transaction/transaction.module').then((m) => m.TransactionModule),
+      import('@modules/transaction/transaction.module').then(
+        (m) => m.TransactionModule
+      ),
   },
   {
     path: 'favourite',
     loadChildren: () =>
-      import('@modules/favourite/favourite.module').then((m) => m.FavouriteModule),
+      import('@modules/favourite/favourite.module').then(
+        (m) => m.FavouriteModule
+      ),
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,routingConfiguration)],
+  imports: [RouterModule.forRoot(routes, routingConfiguration)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
