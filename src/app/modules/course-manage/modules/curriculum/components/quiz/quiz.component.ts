@@ -73,6 +73,7 @@ export class QuizComponent implements OnInit {
       this.questions.push(this.newQuestion);
     } else {
       //update
+
       let questionUpdate: Question = {
         name: this.newQuestion.name,
         description: this.newQuestion.description,

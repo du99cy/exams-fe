@@ -3670,6 +3670,11 @@ jest-worker@^27.4.5:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
+jquery@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
+  integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
+
 js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz"
@@ -4222,6 +4227,20 @@ ngx-monaco-editor@^12.0.0:
   integrity sha512-/HXTILVwWvrk4OkT1p88nb+PGEqlecQot2VMTdSLbVW7A24fNZpDAF6tNR4Bp3V/abZjShDK8LfsqLePA0tPmw==
   dependencies:
     tslib "^2.1.0"
+
+ngx-slick-carousel@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/ngx-slick-carousel/-/ngx-slick-carousel-0.6.0.tgz#c10d3b42d7ecef1b41802e2c52239dbea34f1eeb"
+  integrity sha512-UpQv7nB0sFEEpomtScsIgq4iPa8GxI6mdUA0b1Fx2GkIRXrs0Ehz1tCPO+NUcELyiUxpU/E3bgQI09LKUBzpsw==
+  dependencies:
+    tslib "^2.0.0"
+
+ngx-star-rating@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-star-rating/-/ngx-star-rating-2.1.0.tgz#234b1f504f224c4c91704c7d583b70cd99747862"
+  integrity sha512-U/5aAIByR3kZfWGunTYTfg3TM4D0Jtyb2t0jV70OWyruMczYaPviCi0FxSf1gaoEpziDMf6PWpMH/i/o7SunVQ==
+  dependencies:
+    tslib "^2.0.0"
 
 nice-napi@^1.0.2:
   version "1.0.2"
@@ -5440,6 +5459,11 @@ slash@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/slash/-/slash-4.0.0.tgz"
   integrity sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==
+
+slick-carousel@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/slick-carousel/-/slick-carousel-1.8.1.tgz#a4bfb29014887bb66ce528b90bd0cda262cc8f8d"
+  integrity sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==
 
 smart-buffer@^4.2.0:
   version "4.2.0"

@@ -13,3 +13,8 @@ export interface Question {
   created_at_seconds?: number
   is_deleted?: boolean
 }
+
+export interface QuestionPostOfUser{
+  id?: string
+  answers_of_student?:Array<string>
+}

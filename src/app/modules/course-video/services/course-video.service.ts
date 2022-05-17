@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { fmt, mapToHttpParamsQuery } from '@core/utilities/helpers';
+import { QuestionPostOfUser } from '@modules/course-manage/modules/curriculum/models/question';
 import { api_urls } from '@shared/configs/api_url';
 import { first, map, Observable } from 'rxjs';
 
@@ -29,4 +30,6 @@ export class CourseVideoService {
 
     }))
   }
+
+
 }

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CourseVideoService } from '@modules/course-video/services/course-video.service';
 import { ChangeColorPipe } from './pipes/change-color.pipe';
+import { MultipleChoiceService } from './services/multiple-choice.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { ChangeColorPipe } from './pipes/change-color.pipe';
     CommonModule,
   ],
   declarations: [MultipleChoiceComponent, ChangeColorPipe],
-  providers: [CourseVideoService],
+  providers: [CourseVideoService,MultipleChoiceService],
 })
 export class MultipleChoiceModule {}
