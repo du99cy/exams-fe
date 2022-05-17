@@ -8,18 +8,10 @@
       <div style="display: flex; flex-direction: column" (click)="goToDetail(item._id)">
         <img src="{{link}}/{{item.img}}" alt="" class="img-response" />
         <span class="course-name">{{ item.title }}</span>
-        <span class="teacher-name">{{ item.price }}</span>
+        <span class="teacher-name">{{ item.price |number:'1.0-0'}} VND</span>
       </div>
       <div class="star">
-        <span class="star-number">5</span>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <span class="date"
-          ></span
-        >
+        
       </div>
     </div>
   </div>

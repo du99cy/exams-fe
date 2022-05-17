@@ -11,9 +11,8 @@ import {
   styleUrls: ['./option-coding-editor.component.scss']
 })
 export class OptionCodingEditorComponent implements OnInit {
-
   fg: any;
-  list_language = ['python', 'cpp', 'java'];
+  list_language = ['python', 'java'];
   list_theme = ['vs-light', 'vs-dark'];
   constructor(
     private fb: FormBuilder,
