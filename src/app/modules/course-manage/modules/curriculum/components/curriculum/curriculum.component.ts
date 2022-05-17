@@ -99,7 +99,7 @@ export class CurriculumComponent implements OnInit, OnDestroy {
       this.course_id = params['newCourseId'];
       //get all content via course id
       this.ContentListObservable =
-        this.curriculumService.getAllContentViaCourseId(this.course_id);
+        this.curriculumService.getAllContentViaCourseId(this.course_id,"preview");
     });
   }
   ngOnDestroy() {

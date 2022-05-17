@@ -1,7 +1,7 @@
 import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@core/authentication/user';
 import { scrollToTopPage } from '@core/utilities/helpers';
 import { CourseDetailService } from '@modules/course-detail/services/course-detail.service';
@@ -20,7 +20,6 @@ import { RatingDialogComponent } from '../rating-dialog/rating-dialog.component'
   providers: [CourseCreationService],
 })
 export class CourseDetailComponent implements OnInit {
-  router: any;
   courses: any;
   courseId: string;
   course: Course;
@@ -34,21 +33,24 @@ export class CourseDetailComponent implements OnInit {
   paramMode: string;
   button_dis: any;
   is_published: boolean;
-  rating:any
+  rating: any;
 
-  // buttons_data:any = {
-  //   no_registration: {
-  //     name: 'Đăng kí',
-  //     event: () => {
-  //       this.register();
-  //     },
-  //   },
-  //   registrated: {
-  //     name: 'Tham gia',
-  //     event: () => {
-  //       alert("chức năng hoàn thiện sau !!!")
-  //     },
-  //   },
+  buttons_data: any = {
+    published: {
+      name: 'Xuất bản',
+      event: () => {
+        this.publicThisCourse();
+      },
+    },
+    join: {
+      name: 'Tham gia',
+      event: () => {
+        this.router.navigate(['./contents'], {
+          relativeTo: this.activateRoute,
+        });
+      },
+    },
+  };
   //   not_accept: {
   //     name: 'Chờ phê duyệt',
   //     event: () => {},
@@ -60,7 +62,8 @@ export class CourseDetailComponent implements OnInit {
     private registerCourse: RegisterCourseService,
     private courseDetailService: CourseDetailService,
     private courseCreationService: CourseCreationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -88,18 +91,17 @@ export class CourseDetailComponent implements OnInit {
     });
     this.activateRoute.queryParams.subscribe((params) => {
       let paramMode = params['mode'];
-      console.log('param', paramMode);
-      if ((paramMode = 'preview')) {
-        this.button_dis = 'Xuất bản khóa học';
-      }
-      if ((paramMode = 'detail')) {
-        this.button_dis = 'Tham gia khóa học';
+
+      if (paramMode == 'preview') {
+        this.button_dis = this.buttons_data.published;
+      } else {
+        this.button_dis = this.buttons_data.join;
       }
     });
-    this.courseDetailService.getRating(this.courseId).subscribe(res=>{
-      this.rating =res
-      console.log(this.rating)
-    })
+    this.courseDetailService.getRating(this.courseId).subscribe((res) => {
+      this.rating = res;
+      console.log(this.rating);
+    });
   }
 
   convertHttps(str_: any) {
@@ -164,12 +166,16 @@ export class CourseDetailComponent implements OnInit {
     });
     console.log(course_id);
     dialogRef.afterClosed().subscribe((result) => {
-      if(result)
-      this.courseDetailService
-        .courseRating({ course_id: course_id, comment: result, star_number: 5 })
-        .subscribe((res) => {
-          console.log(res);
-        });
+      if (result)
+        this.courseDetailService
+          .courseRating({
+            course_id: course_id,
+            comment: result,
+            star_number: 5,
+          })
+          .subscribe((res) => {
+            console.log(res);
+          });
     });
   }
 }

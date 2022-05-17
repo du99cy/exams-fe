@@ -25,7 +25,7 @@ export class CourseVideoComponent implements OnInit, OnDestroy {
   course_id: string;
   //whether preview or real studying
   mode: string;
-  fileResourses:Array<ResourseFile>=[]
+  fileResourses: Array<ResourseFile> = [];
   ContentsObservable: Observable<Array<Content>>;
   constructor(
     private route: ActivatedRoute,
@@ -44,12 +44,13 @@ export class CourseVideoComponent implements OnInit, OnDestroy {
       //get model
       this.route.queryParams.subscribe((queryParams) => {
         this.mode = queryParams['mode'];
+        //get all content of this course
+        this.ContentsObservable =
+          this.curriculumService.getAllContentViaCourseId(
+            this.course_id,
+            this.mode
+          );
       });
-
-      //get all content of this course
-      this.ContentsObservable = this.curriculumService.getAllContentViaCourseId(
-        this.course_id
-      );
     });
   }
 
@@ -70,37 +71,45 @@ export class CourseVideoComponent implements OnInit, OnDestroy {
         });
 
       //get file resourse
-      this.curriculumService.getAllResourseViaContentIdAndResourseType(content.id,"file",this.mode).subscribe(res=>{
-        this.fileResourses = res
-      })
-
+      this.curriculumService
+        .getAllResourseViaContentIdAndResourseType(
+          content.id,
+          'file',
+          this.mode
+        )
+        .subscribe((res) => {
+          this.fileResourses = res;
+        });
     }
     //if quiz
-    if(content.type_status == 1){
-      this.router.navigate([`./${content.id}/quiz`],{relativeTo:this.route})
+    if (content.type_status == 1) {
+      this.router.navigate([`./${content.id}/quiz`], {
+        relativeTo: this.route,
+      });
     }
     //if coding
-    if(content.type_status == 2)
-      this.router.navigate([`./${content.id}/coding`],{relativeTo:this.route})
+    if (content.type_status == 2)
+      this.router.navigate([`./${content.id}/coding`], {
+        relativeTo: this.route,
+      });
   }
   ngOnDestroy() {
     URL.revokeObjectURL(this.urlObject);
   }
-  downloadFile(resourse_id:string){
-    this.curriculumService.getDownloadFile(resourse_id,this.mode).subscribe(file=>{
+  downloadFile(resourse_id: string) {
+    this.curriculumService
+      .getDownloadFile(resourse_id, this.mode)
+      .subscribe((file) => {
+        let fileURL = URL.createObjectURL(file);
 
-      let fileURL = URL.createObjectURL(file);
-
-      window.open(fileURL)
-    })
+        window.open(fileURL);
+      });
   }
-  openDialog(content_id:any): void {
+  openDialog(content_id: any): void {
     const dialogRef = this.dialog.open(HistoryDialogComponent, {
       width: '500px',
-      data:content_id
+      data: content_id,
     });
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
-
 }

@@ -66,15 +66,15 @@
       <button class="sub" (click)="openDialogRating(this.course?.id)">
          Đánh giá khóa học
       </button>
-      <button class="join" (click)="publicThisCourse()">
-        {{ this.button_dis}}
+      <button class="join" (click)="this.button_dis.event()">
+        {{ this.button_dis.name}}
       </button>
     </div>
   </div>
 </div>
 
 <div class="container" style="margin-top: 40px">
-  
+
   <div class="will-learn">
     <h2>Bạn học được gì từ khóa học này?</h2>
     <div

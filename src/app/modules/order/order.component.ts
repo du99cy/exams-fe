@@ -12,7 +12,7 @@ import { OrderService } from './services/order.service';
 export class OrderComponent extends BaseComponent implements OnInit {
   readonly title = 'Lịch sử mua hàng';
   readonly noRecordMessage = 'Bạn chưa thực hiện giao dịch nào!';
-  orders;
+  orders:any =[];
 
   link = api_urls.LOCAL_API_URL;
   constructor(private orderService: OrderService) {
