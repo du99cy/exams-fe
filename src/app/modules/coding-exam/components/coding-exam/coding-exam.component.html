@@ -10,7 +10,7 @@
         </as-split-area>
         <as-split-area [size]="50">
           <div class="editor">
-            <span>main{{ format }}</span>
+            <!-- <span>main{{ format }}</span> -->
             <div class="editor-language">
               <span>{{ editorOptions.language | titlecase }}</span>
               <div class="tip">
@@ -37,14 +37,37 @@
           <!-- title -->
           <div class="content-test">
             <span>Test</span>
-            <button mat-raised-button color="primary" (click)="runTest(codeEditor,data)">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="runTest(codeEditor, data)"
+            >
               <mat-icon>play_circle_outline</mat-icon>RUN TESTS
             </button>
           </div>
           <!-- content -->
-
-          <app-testcast-list-coding [testcases]="data.testcase_list"></app-testcast-list-coding>
-
+          <ng-template
+            [ngIf]="!this.compile_error"
+            [ngIfElse]="compilErrorTemp"
+          >
+            <app-testcast-list-coding
+              [testcases]="data.testcase_list"
+            ></app-testcast-list-coding>
+          </ng-template>
+          <ng-template #compilErrorTemp>
+            <div style="color:red">
+              {{ this.compile_err_mes }}
+              <div class="text-center">
+                <button
+                  (click)="compile_error = false"
+                  mat-raised-button
+                  color="primary"
+                >
+                  Trở lại
+                </button>
+              </div>
+            </div>
+          </ng-template>
           <button mat-raised-button color="primary" class="btn-submit">
             Hoàn thành bài thi
           </button>

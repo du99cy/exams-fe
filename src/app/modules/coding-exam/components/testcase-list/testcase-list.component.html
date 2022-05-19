@@ -8,7 +8,12 @@
       >
         <mat-expansion-panel-header>
           <ng-template [ngIf]="testcase.user_output">
-            <span class="mr-2" [innerHTML]="testcase.passed | iconCodingExam"></span>
+            <ng-template [ngIf]="testcase.passed" [ngIfElse]="cancelIconTemp">
+              <span class="mr-2" style="color:greenyellow"><i class="material-icons">check</i></span>
+            </ng-template>
+            <ng-template #cancelIconTemp>
+              <span class="mr-2" style="color:red"><i class="material-icons">cancel</i></span>
+            </ng-template>
           </ng-template>
 
           Testcase {{ i + 1 }}
