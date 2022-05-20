@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, tap } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { api_urls } from '@shared/configs/api_url';
 
 @Injectable({
@@ -21,6 +21,6 @@ export class CourseDetailService {
     return this.http.post(this.url,body)
   }
   getRating(course_id:string){
-    return this.http.get(`${this.url}/course/${course_id}/rating-all`)
+    return this.http.get(`${this.url}/course/${course_id}/rating-all`).pipe(map((res:any)=>res.data))
   }
 }

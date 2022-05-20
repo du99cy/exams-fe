@@ -2,11 +2,13 @@ import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '@core/authentication/auth.service';
 import { User } from '@core/authentication/user';
 import { scrollToTopPage } from '@core/utilities/helpers';
 import { CourseDetailService } from '@modules/course-detail/services/course-detail.service';
 import { RegisterCourseService } from '@modules/course-detail/services/register-course.service';
 import { Content } from '@modules/course-manage/modules/curriculum/models/content';
+import { CartService } from '@modules/home/services/cart.service';
 import { CourseService } from '@modules/home/services/course.service';
 import { Course } from '@modules/new-course-creation/models/course';
 import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
@@ -31,9 +33,11 @@ export class CourseDetailComponent implements OnInit {
   link = api_urls.LOCAL_API_URL;
   openRegister = true;
   paramMode: string;
-  button_dis: any;
+  button_sub:boolean
+  isPreview: boolean;
   is_published: boolean;
-  rating: any;
+  ratingList = [];
+  user:any
 
   buttons_data: any = {
     published: {
@@ -50,6 +54,12 @@ export class CourseDetailComponent implements OnInit {
         });
       },
     },
+    sub: {
+      name: 'Đăng kí',
+      event: () => {
+        this.addToCart(this.course)
+      },
+    },
   };
   //   not_accept: {
   //     name: 'Chờ phê duyệt',
@@ -63,12 +73,15 @@ export class CourseDetailComponent implements OnInit {
     private courseDetailService: CourseDetailService,
     private courseCreationService: CourseCreationService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private AuthService:AuthService,
+    private cartService: CartService,
   ) {}
 
   ngOnInit(): void {
     //scroll to top page
     scrollToTopPage();
+    this.user =  this.AuthService.User
     this.activateRoute.params.subscribe((queryParams) => {
       this.courseId = queryParams['class_id'];
       this.getCourseDetailsSSE(this.courseId);
@@ -91,16 +104,12 @@ export class CourseDetailComponent implements OnInit {
     });
     this.activateRoute.queryParams.subscribe((params) => {
       let paramMode = params['mode'];
-
       if (paramMode == 'preview') {
-        this.button_dis = this.buttons_data.published;
-      } else {
-        this.button_dis = this.buttons_data.join;
-      }
+        this.isPreview =true
+      }else this.isPreview = false 
     });
     this.courseDetailService.getRating(this.courseId).subscribe((res) => {
-      this.rating = res;
-      console.log(this.rating);
+      this.ratingList = res;
     });
   }
 
@@ -140,7 +149,9 @@ export class CourseDetailComponent implements OnInit {
       let res = JSON.parse(message.data);
       let data = res?.data;
       console.log(data);
-      if (res?.data_name == 'course') this.course = data;
+      if (res?.data_name == 'course'){
+        this.course = data;
+      } 
       else if (res?.data_name == 'user') this.instructor = data;
       else {
         this.contents = data;
@@ -164,18 +175,26 @@ export class CourseDetailComponent implements OnInit {
     const dialogRef = this.dialog.open(RatingDialogComponent, {
       width: '600px',
     });
-    console.log(course_id);
     dialogRef.afterClosed().subscribe((result) => {
-      if (result)
+      if (result) {
+        let data_inserted = {
+          course_id: course_id,
+          comment: result,
+          star_number: 5,
+          learner_img:this.user.avatar_pic,
+          learner_name:`${this.user.first_name} ${this.user.last_name}`,
+          rating_date_epoch_time_seconds: Date.now()/1000
+        };
         this.courseDetailService
-          .courseRating({
-            course_id: course_id,
-            comment: result,
-            star_number: 5,
-          })
+          .courseRating(data_inserted)
           .subscribe((res) => {
-            console.log(res);
+            this.ratingList.push(data_inserted);
           });
+      }
     });
+  }
+  addToCart(course: Course) {
+    this.cartService.addToCart(course);
+    // this.createComponent();
   }
 }

@@ -54,7 +54,7 @@ export class CourseComponent implements OnInit {
   }
 
   goToDetail(id: string) {
-    this.router.navigateByUrl(`/course/${id}?mode=detail`);
+    this.router.navigateByUrl(`/course/${id}`);
   }
 
   addToCart(course: Course) {

@@ -63,23 +63,28 @@
     </div>
     <div class="course-review">
       <img src="{{ link }}/{{ this.course?.img }}" class="img-response" />
-      <button class="sub" (click)="openDialogRating(this.course?.id)">
-         Đánh giá khóa học
+      <ng-template [ngIf]="this.isPreview" [ngIfElse]="btn">
+        <button class="join">Xuất bản</button>
+      </ng-template>
+      <ng-template #btn>
+        <button
+        class="sub"
+        (click)="openDialogRating(this.course?.id)"
+        *ngIf="this.course.user_in_course"
+      >
+        Đánh giá khóa học
       </button>
-      <button class="join" (click)="this.button_dis.event()">
-        {{ this.button_dis.name}}
-      </button>
+      <button class="join" *ngIf="!this.course.user_in_course">Đăng kí</button>
+      <button class="join" *ngIf="this.course.user_in_course">Tham gia</button>
+      </ng-template>
     </div>
   </div>
 </div>
 
 <div class="container" style="margin-top: 40px">
-
   <div class="will-learn">
     <h2>Bạn học được gì từ khóa học này?</h2>
-    <div
-      class="course-result"
-    >
+    <div class="course-result">
       <span *ngFor="let item of this.course?.knowleages_will_learn">
         <mat-icon>done</mat-icon>
         {{ item }}
@@ -110,9 +115,12 @@
         (closed)="panelOpenState = false"
       >
         <mat-expansion-panel-header>
-          <mat-panel-title><i class="material-icons mr-2">{{
-            content.type_status | content_icon
-          }}</i> {{ content.title }} </mat-panel-title>
+          <mat-panel-title
+            ><i class="material-icons mr-2">{{
+              content.type_status | content_icon
+            }}</i>
+            {{ content.title }}
+          </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="file">
           <p [innerHTML]="content.description"></p>
@@ -123,13 +131,21 @@
 </div>
 <div class="container">
   <div class="start-rate" style="min-height: 250px">
-    <h1 class="display1" style="margin-left:40px ;">Đánh giá của người học</h1>
-    <div class="feedback" *ngFor="let feedback of this.rating.data">
-      <img src="{{link}}/{{feedback.learner_img}}" alt="" class="img-response" width="40px" height="40px">
+    <h1 class="display1" style="margin-left: 40px">Đánh giá của người học</h1>
+    <div class="feedback" *ngFor="let feedback of this.ratingList">
+      <img
+        src="{{ link }}/{{ feedback.learner_img }}"
+        alt=""
+        class="img-response"
+        width="40px"
+        height="40px"
+      />
       <div class="user">
-        <span class="name">{{feedback.learner_name}}</span>
-        <span class="time">{{feedback.rating_date_epoch_time_seconds*1000|date}}</span>
-        <span class="comment">{{feedback.comment}}</span>
+        <span class="name">{{ feedback.learner_name }}</span>
+        <span class="time">{{
+          feedback.rating_date_epoch_time_seconds * 1000 | date
+        }}</span>
+        <span class="comment">{{ feedback.comment }}</span>
       </div>
     </div>
   </div>
@@ -139,7 +155,9 @@
     </h3>
 
     <h3 style="font-size: 20px; font-weight: bold; padding: 0px 30px">
-      <a href="#" style="text-decoration: underline">{{ this.instructor?.first_name }} {{ this.instructor?.last_name }}</a>
+      <a href="#" style="text-decoration: underline"
+        >{{ this.instructor?.first_name }} {{ this.instructor?.last_name }}</a
+      >
     </h3>
 
     <p style="padding: 0px 30px">
