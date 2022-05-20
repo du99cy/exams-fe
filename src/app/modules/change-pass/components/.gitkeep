@@ -1,0 +1,56 @@
+<div class="login_page_wrapper">
+  <div class="login-wrapper">
+    <div class="login-header">Đăng nhập vào hệ thống EduVN</div>
+
+    <div class="login-content">
+      <div class="login-social__container">
+        <div class="social-btn" *ngFor="let btn of social_btns" (click)="btn.click()">
+          <div class="icon"><img [src]="btn.icon_path" /></div>
+          <span> {{ btn.title }} </span>
+        </div>
+      </div>
+      <ng-template [ngIf]="loginError">
+        <div class="alert-danger">
+          Có một vấn đề khi bạn đăng nhập .Hãy xem lại email hoặc mật khẩu hoặc
+          tạo tài khoản mới .
+        </div>
+      </ng-template>
+      <form action="" [formGroup]="loginForm">
+        <div class="form-container">
+          <div class="form-input-wrapper">
+            <div class="icon">
+              <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            </div>
+            <span>
+              <input type="email" placeholder="Email"  formControlName='username'/>
+            </span>
+          </div>
+
+          <div class="form-input-wrapper">
+            <div class="icon">
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            </div>
+            <span>
+              <input type="password" formControlName='password'/>
+            </span>
+          </div>
+
+          <ng-template [ngIf]="isLoading" [ngIfElse]="loadingBtn">
+            <button disabled class="loading">Loading ...</button>
+          </ng-template>
+          <ng-template #loadingBtn>
+            <button type="submit" (click)="login()">Đăng nhập</button>
+          </ng-template>
+        </div>
+      </form>
+
+      <div class="forgot-password">
+        <a routerLink="#" (click)="forgotPassword()">Quên mật khẩu</a>
+      </div>
+
+      <div class="sign-up">
+        <span>Bạn có tài khoản chưa ?</span> <a routerLink="/sign-up"> Đăng kí</a>
+      </div>
+    </div>
+  </div>
+</div>

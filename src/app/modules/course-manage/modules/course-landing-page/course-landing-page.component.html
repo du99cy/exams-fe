@@ -24,9 +24,9 @@
           <option
             value=""
             *ngFor="let category of this.course_categories"
-            [value]="category"
+            [value]="category.name"
           >
-            {{ category }}
+            {{ category.name }}
           </option>
         </select>
       </div>

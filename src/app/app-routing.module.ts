@@ -102,6 +102,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('@modules/order/order.module').then((m) => m.OrderModule),
   },
+  {
+    path: 'change-pass',
+    loadChildren: () =>
+      import('@modules/change-pass/change-pass.module').then((m) => m.ChangePassModule),
+  },
 ];
 
 @NgModule({
