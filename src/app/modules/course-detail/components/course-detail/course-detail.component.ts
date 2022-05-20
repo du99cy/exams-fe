@@ -77,7 +77,7 @@ export class CourseDetailComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
 
-    private AuthService:AuthService,
+    private authService:AuthService,
     private cartService: CartService,
 
   ) {}
@@ -88,7 +88,7 @@ export class CourseDetailComponent implements OnInit {
     this.user = this.authService.User
     //scroll to top page
     scrollToTopPage();
-    this.user =  this.AuthService.User
+
     this.activateRoute.params.subscribe((queryParams) => {
       this.courseId = queryParams['class_id'];
       this.getCourseDetailsSSE(this.courseId);
@@ -113,7 +113,7 @@ export class CourseDetailComponent implements OnInit {
       let paramMode = params['mode'];
       if (paramMode == 'preview') {
         this.isPreview =true
-      }else this.isPreview = false 
+      }else this.isPreview = false
     });
     this.courseDetailService.getRating(this.courseId).subscribe((res) => {
       this.ratingList = res;
