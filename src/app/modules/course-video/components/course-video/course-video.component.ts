@@ -41,16 +41,9 @@ export class CourseVideoComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       this.course_id = params['course_id'];
 
-      //get model
-      this.route.queryParams.subscribe((queryParams) => {
-        this.mode = queryParams['mode'];
-        //get all content of this course
-        this.ContentsObservable =
-          this.curriculumService.getAllContentViaCourseId(
-            this.course_id,
-            this.mode
-          );
-      });
+       //get all content of this course
+       this.ContentsObservable =
+       this.curriculumService.getAllContentViaCourseId(this.course_id);
     });
   }
 

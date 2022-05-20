@@ -36,8 +36,10 @@ export class CourseDetailComponent implements OnInit {
   button_sub:boolean
   isPreview: boolean;
   is_published: boolean;
+
   ratingList = [];
-  user:any
+
+  user:User
 
   buttons_data: any = {
     published: {
@@ -74,11 +76,16 @@ export class CourseDetailComponent implements OnInit {
     private courseCreationService: CourseCreationService,
     public dialog: MatDialog,
     private router: Router,
+
     private AuthService:AuthService,
     private cartService: CartService,
+
   ) {}
 
   ngOnInit(): void {
+
+    //get user information
+    this.user = this.authService.User
     //scroll to top page
     scrollToTopPage();
     this.user =  this.AuthService.User
@@ -142,24 +149,21 @@ export class CourseDetailComponent implements OnInit {
   // }
 
   getCourseDetailsSSE(courseId: string) {
+   let query = this.user?.id?`?user_id=${this.user.id}`: ``
     let source = new EventSource(
-      `${api_urls.LOCAL_API_URL}/course/${this.courseId}/data-stream`
-    );
+      `${api_urls.LOCAL_API_URL}/course/${courseId}/data-stream${query}`);
     source.addEventListener('message', (message) => {
       let res = JSON.parse(message.data);
+      console.log(res);
       let data = res?.data;
-      console.log(data);
-      if (res?.data_name == 'course'){
-        this.course = data;
-      } 
+      if (res?.data_name == 'course') this.course = data;
+
       else if (res?.data_name == 'user') this.instructor = data;
-      else {
-        this.contents = data;
-        source.close();
-      }
+      else if (res?.data_name == 'contents') this.contents = data;
+      else source.close();
     });
     source.addEventListener('end', function (event) {
-      console.log('Handling end....');
+      //console.log('Handling end....');
       source.close();
     });
   }
@@ -168,13 +172,14 @@ export class CourseDetailComponent implements OnInit {
     this.courseCreationService
       .updateCourse(this.courseId, courseUpdate)
       .subscribe((publish) => {
-        alert('xuất bản thành công');
+        alert('Xuất bản thành công');
       });
   }
   openDialogRating(course_id: any): void {
     const dialogRef = this.dialog.open(RatingDialogComponent, {
       width: '600px',
     });
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         let data_inserted = {
@@ -186,11 +191,13 @@ export class CourseDetailComponent implements OnInit {
           rating_date_epoch_time_seconds: Date.now()/1000
         };
         this.courseDetailService
+
           .courseRating(data_inserted)
           .subscribe((res) => {
             this.ratingList.push(data_inserted);
           });
       }
+
     });
   }
   addToCart(course: Course) {

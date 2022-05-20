@@ -38,10 +38,10 @@ export class CurriculumService {
     );
   }
 
-  getAllContentViaCourseId(course_id: string,mode:string): Observable<Array<Content>> {
+  getAllContentViaCourseId(course_id: string): Observable<Array<Content>> {
     let uri = fmt(routes.getAllContentViaCourse, { course_id });
-    let params = mapToHttpParamsQuery({mode:mode})
-    return this.httpClient.get<Content>(uri,{ params: params}).pipe(
+
+    return this.httpClient.get<Content>(uri,).pipe(
       map((res: any) => {
         return res.status_code == 200 ? res.data : [];
       })
