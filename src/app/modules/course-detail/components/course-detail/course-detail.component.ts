@@ -2,6 +2,7 @@ import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '@core/authentication/auth.service';
 import { User } from '@core/authentication/user';
 import { scrollToTopPage } from '@core/utilities/helpers';
 import { CourseDetailService } from '@modules/course-detail/services/course-detail.service';
@@ -34,7 +35,7 @@ export class CourseDetailComponent implements OnInit {
   button_dis: any;
   is_published: boolean;
   rating: any;
-
+  user:User
   buttons_data: any = {
     published: {
       name: 'Xuất bản',
@@ -63,10 +64,14 @@ export class CourseDetailComponent implements OnInit {
     private courseDetailService: CourseDetailService,
     private courseCreationService: CourseCreationService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+
+    //get user information
+    this.user = this.authService.User
     //scroll to top page
     scrollToTopPage();
     this.activateRoute.params.subscribe((queryParams) => {
@@ -133,22 +138,21 @@ export class CourseDetailComponent implements OnInit {
   // }
 
   getCourseDetailsSSE(courseId: string) {
+   let query = this.user?.id?`?user_id=${this.user.id}`: ``
     let source = new EventSource(
-      `${api_urls.LOCAL_API_URL}/course/${this.courseId}/data-stream`
-    );
+      `${api_urls.LOCAL_API_URL}/course/${courseId}/data-stream${query}`);
     source.addEventListener('message', (message) => {
       let res = JSON.parse(message.data);
+      console.log(res);
       let data = res?.data;
-      console.log(data);
+
       if (res?.data_name == 'course') this.course = data;
       else if (res?.data_name == 'user') this.instructor = data;
-      else {
-        this.contents = data;
-        source.close();
-      }
+      else if (res?.data_name == 'contents') this.contents = data;
+      else source.close();
     });
     source.addEventListener('end', function (event) {
-      console.log('Handling end....');
+      //console.log('Handling end....');
       source.close();
     });
   }
@@ -157,14 +161,14 @@ export class CourseDetailComponent implements OnInit {
     this.courseCreationService
       .updateCourse(this.courseId, courseUpdate)
       .subscribe((publish) => {
-        alert('xuất bản thành công');
+        alert('Xuất bản thành công');
       });
   }
   openDialogRating(course_id: any): void {
     const dialogRef = this.dialog.open(RatingDialogComponent, {
       width: '600px',
     });
-    console.log(course_id);
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result)
         this.courseDetailService
@@ -173,9 +177,7 @@ export class CourseDetailComponent implements OnInit {
             comment: result,
             star_number: 5,
           })
-          .subscribe((res) => {
-            console.log(res);
-          });
+          .subscribe((res) => {});
     });
   }
 }
