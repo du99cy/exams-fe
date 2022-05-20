@@ -8,6 +8,7 @@ import { scrollToTopPage } from '@core/utilities/helpers';
 import { CourseDetailService } from '@modules/course-detail/services/course-detail.service';
 import { RegisterCourseService } from '@modules/course-detail/services/register-course.service';
 import { Content } from '@modules/course-manage/modules/curriculum/models/content';
+import { CartService } from '@modules/home/services/cart.service';
 import { CourseService } from '@modules/home/services/course.service';
 import { Course } from '@modules/new-course-creation/models/course';
 import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
@@ -32,10 +33,14 @@ export class CourseDetailComponent implements OnInit {
   link = api_urls.LOCAL_API_URL;
   openRegister = true;
   paramMode: string;
-  button_dis: any;
+  button_sub:boolean
+  isPreview: boolean;
   is_published: boolean;
-  rating: any;
+
+  ratingList = [];
+
   user:User
+
   buttons_data: any = {
     published: {
       name: 'Xuất bản',
@@ -49,6 +54,12 @@ export class CourseDetailComponent implements OnInit {
         this.router.navigate(['./contents'], {
           relativeTo: this.activateRoute,
         });
+      },
+    },
+    sub: {
+      name: 'Đăng kí',
+      event: () => {
+        this.addToCart(this.course)
       },
     },
   };
@@ -65,7 +76,10 @@ export class CourseDetailComponent implements OnInit {
     private courseCreationService: CourseCreationService,
     public dialog: MatDialog,
     private router: Router,
-    private authService: AuthService
+
+    private AuthService:AuthService,
+    private cartService: CartService,
+
   ) {}
 
   ngOnInit(): void {
@@ -74,6 +88,7 @@ export class CourseDetailComponent implements OnInit {
     this.user = this.authService.User
     //scroll to top page
     scrollToTopPage();
+    this.user =  this.AuthService.User
     this.activateRoute.params.subscribe((queryParams) => {
       this.courseId = queryParams['class_id'];
       this.getCourseDetailsSSE(this.courseId);
@@ -96,16 +111,12 @@ export class CourseDetailComponent implements OnInit {
     });
     this.activateRoute.queryParams.subscribe((params) => {
       let paramMode = params['mode'];
-
       if (paramMode == 'preview') {
-        this.button_dis = this.buttons_data.published;
-      } else {
-        this.button_dis = this.buttons_data.join;
-      }
+        this.isPreview =true
+      }else this.isPreview = false 
     });
     this.courseDetailService.getRating(this.courseId).subscribe((res) => {
-      this.rating = res;
-      console.log(this.rating);
+      this.ratingList = res;
     });
   }
 
@@ -145,8 +156,8 @@ export class CourseDetailComponent implements OnInit {
       let res = JSON.parse(message.data);
       console.log(res);
       let data = res?.data;
-
       if (res?.data_name == 'course') this.course = data;
+
       else if (res?.data_name == 'user') this.instructor = data;
       else if (res?.data_name == 'contents') this.contents = data;
       else source.close();
@@ -170,14 +181,27 @@ export class CourseDetailComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result)
+      if (result) {
+        let data_inserted = {
+          course_id: course_id,
+          comment: result,
+          star_number: 5,
+          learner_img:this.user.avatar_pic,
+          learner_name:`${this.user.first_name} ${this.user.last_name}`,
+          rating_date_epoch_time_seconds: Date.now()/1000
+        };
         this.courseDetailService
-          .courseRating({
-            course_id: course_id,
-            comment: result,
-            star_number: 5,
-          })
-          .subscribe((res) => {});
+
+          .courseRating(data_inserted)
+          .subscribe((res) => {
+            this.ratingList.push(data_inserted);
+          });
+      }
+
     });
+  }
+  addToCart(course: Course) {
+    this.cartService.addToCart(course);
+    // this.createComponent();
   }
 }

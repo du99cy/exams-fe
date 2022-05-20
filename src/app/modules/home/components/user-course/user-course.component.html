@@ -5,7 +5,7 @@
       class="course-content col-12 col-md-4"
       *ngFor="let item of listCourseUser; index as i; let f = first"
     >
-      <div style="display: flex; flex-direction: column" (click)="goToDetail(item._id)">
+      <div style="display: flex; flex-direction: column" (click)="goToDetail(item.id)">
         <img src="{{link}}/{{item.img}}" alt="" class="img-response" />
         <span class="course-name">{{ item.title }}</span>
         <span class="teacher-name">{{ item.price |number:'1.0-0'}} VND</span>

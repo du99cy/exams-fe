@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+                                                                                                                                                                                                               import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '@core/authentication/auth.service';
 import { User } from '@core/authentication/user';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   constructor(private authService: AuthService,private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.cartItem = this.cartService.Cart?.length || 0;
+    this.cartItem = this.cartService.Cart?.length || 0; 
     this.cartService.refresh$.subscribe((res)=> {
      console.log('eee',res)
       this.cartItem = this.cartService.Cart?.length || 0;
@@ -51,5 +51,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
   order(){
     this.router.navigateByUrl('/order')
+  }
+  changePass(){
+    this.router.navigateByUrl('/change-pass')
   }
 }
