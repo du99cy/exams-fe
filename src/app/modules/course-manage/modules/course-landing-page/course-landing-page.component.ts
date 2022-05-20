@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/authentication/auth.service';
 import { User } from '@core/authentication/user';
 import { routeParamFactory } from '@core/utilities/activated-route.factories';
+import { CourseService } from '@modules/course/services/course.service';
+
 import { Course } from '@modules/new-course-creation/models/course';
 import { CourseCreationService } from '@modules/new-course-creation/services/course-creation.service';
 import { api_urls } from '@shared/configs/api_url';
@@ -29,6 +31,7 @@ const APP_SOME_ID = new InjectionToken<Observable<string>>('stream id');
     },
     CourseCreationService,
     CurriculumService,
+    CourseService
   ],
 })
 export class CourseLandingPageComponent implements OnInit, OnDestroy {
@@ -54,19 +57,15 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
 
   teachingLanguage: Array<string> = ['tiếng anh', 'tiếng việt', 'khác'];
   course_categories = [
-    'Front End',
-    'Back End',
-    'NLP',
-    'CV',
-    'Full Stack',
-    'Dev OPs',
+    
   ];
   constructor(
     @Inject(APP_SOME_ID) private id$: Observable<string>,
     private fb: FormBuilder,
     private courseService: CourseCreationService,
     private curriculumService: CurriculumService,
-    private authService: AuthService
+    private authService: AuthService,
+    private coursesService: CourseService,
   ) {}
 
   ngOnInit(): void {
@@ -96,6 +95,10 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
         this.error = true;
       }
     });
+    this.coursesService.getCategories().subscribe(res=> {
+      this.course_categories =res
+      console.log(this.course_categories)
+    })
   }
   ngOnDestroy() {
     //save status of data into database

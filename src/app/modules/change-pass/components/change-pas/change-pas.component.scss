@@ -1,0 +1,81 @@
+.signup_page_wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  
+    justify-content: center;
+    padding-top: 30px;
+  
+    .signup-wrapper {
+      display: block;
+      width: 380px;
+  
+  
+      .signup-header {
+  
+        border-bottom: solid 1px #d1d7dc;
+        color: #1c1d1f;
+        display: block;
+        font-weight: 700;
+        font-size: 15px;
+        padding: 24px 64px 24px 24px;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+  
+      .signup-content {
+        margin: 10px;
+  
+        form {
+          margin-bottom: 50px;
+  
+          button {
+            width: 100%;
+            height: 50px;
+            font-size: initial;
+            font-weight: 500;
+  
+          }
+          button.loading {
+            cursor:not-allowed;
+          }
+  
+        }
+  
+        .login{
+          border-top: 1px solid #d1d7dc;
+          padding-top: 20px;
+  
+          text-align: center;
+          font-size:initial;
+          a
+          {
+            text-decoration: none;
+          }
+        }
+  
+        .error,.send_email_success
+        {
+          width: 100%;
+  
+  
+          border-color: transparent;
+          color: #000;
+          margin: 8px 0;
+          text-align: center;
+        }
+        .error
+        {
+          height: 50px;
+          line-height: 50px;
+          background-color: #fcaea0;
+        }
+        .send_email_success
+        {
+          background-color: greenyellow;
+          padding: 20px;
+        }
+      }
+    }
+  }
+  

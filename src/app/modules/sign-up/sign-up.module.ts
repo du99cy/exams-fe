@@ -19,8 +19,6 @@ const modules = [
   MatInputModule,
   MatSlideToggleModule,
   MatButtonModule,
-
-
 ];
 const components = [SignUpComponent];
 @NgModule({
